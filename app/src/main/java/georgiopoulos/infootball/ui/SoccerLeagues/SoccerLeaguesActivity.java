@@ -52,7 +52,7 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter>{
         setContentView(R.layout.soccer_leagues_activity);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) getSupportActionBar().setTitle(R.string.action_bar_title_soccer_leagues);
+        if (getSupportActionBar()!=null) getSupportActionBar().setTitle(R.string.action_bar_title_soccer_leagues);
         Picasso.with(this).load("https://cdn.pixabay.com/photo/2014/12/02/21/53/grass-554616_960_720.jpg").into(headerImageView);
 
         adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Country.class,R.layout.soccer_league_card,v -> new SoccerLeagueViewHolder<>(v,this::onItemClick)));

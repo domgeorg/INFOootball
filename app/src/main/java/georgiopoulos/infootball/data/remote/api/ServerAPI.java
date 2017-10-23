@@ -15,6 +15,7 @@
  */
 package georgiopoulos.infootball.data.remote.api;
 
+import georgiopoulos.infootball.data.remote.dto.Events;
 import georgiopoulos.infootball.data.remote.dto.LeagueTable;
 import georgiopoulos.infootball.data.remote.dto.Leagues;
 import georgiopoulos.infootball.data.remote.dto.TeamsDetails;
@@ -32,4 +33,7 @@ public interface ServerAPI{
 
     @GET("lookuptable.php")
     Observable<LeagueTable>getLeagueTable(@Query("l") String leagueId, @Query("s") String season);
+
+    @GET("eventspastleague.php")
+    Observable<Events>getEvents(@Query("id") String leagueId);
 }
