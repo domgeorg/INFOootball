@@ -2,6 +2,8 @@
     <dimen name="badge">68dp</dimen>
     <dimen name="toastTextSize">18sp</dimen>
 
+    <dimen name="app_bar_height_image_view">220dp</dimen>
+
     <dimen name="card_margin_horizontal">8dp</dimen>
     <dimen name="card_margin_vertical">8dp</dimen>
     <dimen name="card_margin_horizontal_big_activity">8dp</dimen>
@@ -22,4 +24,15 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="text_margin_small">8dp</dimen>
     <dimen name="text_margin_very_small">4dp</dimen>
+
+    <dimen name="team_card_margin_horizontal">8dp</dimen>
+    <dimen name="team_card_margin_vertical">8dp</dimen>
+    <dimen name="team_card_margin_horizontal_big_activity">8dp</dimen>
+    <dimen name="card_title_margin">16dp</dimen>
+    <dimen name="card_button_margin">8dp</dimen>
+
+    <dimen name="shadow">160dp</dimen>
+
+    <dimen name="recycler_view_margin_land">24dp</dimen>
+
 </resources>

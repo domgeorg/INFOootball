@@ -15,7 +15,12 @@
  */
 package georgiopoulos.infootball.ui.LeagueTable;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,6 +30,8 @@ import android.view.ViewGroup;
 import com.github.johnpersano.supertoasts.library.Style;
 import com.github.johnpersano.supertoasts.library.SuperToast;
 import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import butterknife.BindView;
 import georgiopoulos.infootball.R;
@@ -39,29 +46,47 @@ import nucleus.factory.RequiresPresenter;
 @RequiresPresenter(LeagueTablePresenter.class)
 public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
 
-    @BindView(R.id.recyclerView) RecyclerView recyclerView;
-    private String leagueId="4328";
-    private String season="1718";
+    private final String season="1718";
+    @BindView(R.id.main_recycler_view) RecyclerView recyclerView;
     private SimpleListAdapter<Table> adapter;
+
+    public static LeagueTableFragment create(String leagueId, String league, String trophy){
+        Bundle bundle = new Bundle();
+        bundle.putString("leagueId", leagueId);
+        bundle.putString("league", league);
+        bundle.putString("trophy", trophy);
+        LeagueTableFragment fragment = new LeagueTableFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override public void onCreate(Bundle bundle){
         super.onCreate(bundle);
-        if (bundle == null){
-            adapter.showProgress();
-            getPresenter().request(leagueId,season);
-        }
+        if (bundle == null) getPresenter().request(getArguments().getString("leagueId"),season);
     }
 
     @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-        return inflater.inflate(R.layout.fragment_league_table,container,false);
+        return inflater.inflate(R.layout.recycler_view,container,false);
     }
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
+
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        Picasso.with(getContext()).load(getArguments().getString("trophy")).into(new Target(){
+            @Override public void onBitmapLoaded(Bitmap bitmap,Picasso.LoadedFrom from){
+                Drawable drawable = new BitmapDrawable(getResources(),bitmap);
+                actionBar.setIcon(drawable);
+            }
+            @Override public void onBitmapFailed(Drawable errorDrawable){}
+            @Override public void onPrepareLoad(Drawable placeHolderDrawable){}
+        });
+
         adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Table.class,R.layout.league_table_card,v -> new LeagueTableTeamViewHolder<>(v, this::onItemClick)));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        adapter.showProgress();
     }
 
     void onTable(LeagueTable leagueTable){
@@ -74,9 +99,7 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
         new SuperToast(getActivity()).setText(throwable.getMessage()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
     }
 
-    private void onItemClick(Table team) {
-        //((MainActivity) getActivity()).push(ItemFragment.create(item.id, itemsName));
-        new SuperToast(getActivity()).setText("BOOM").setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
-
+    private void onItemClick(Table team){
+        new SuperToast(getActivity()).setText(team.getTeamid()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
     }
 }

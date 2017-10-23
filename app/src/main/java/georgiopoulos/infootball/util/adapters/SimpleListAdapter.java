@@ -30,7 +30,7 @@ public class SimpleListAdapter<T> extends BaseProgressAdapter {
         notifyItemRangeInserted(prevSize, items.size());
     }
 
-    public void clear() {
+    public void clear(){
         items = Collections.emptyList();
         notifyDataSetChanged();
     }

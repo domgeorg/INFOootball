@@ -25,7 +25,7 @@ import rx.schedulers.Schedulers;
 
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
-public class SoccerLeaguesPresenter extends BasePresenter<SoccerLeaguesFragment>{
+public class SoccerLeaguesPresenter extends BasePresenter<SoccerLeaguesActivity>{
 
     private static final int REQUEST_SOCCER_LEAGUES = 1;
     @Inject ServerAPI api;
@@ -36,8 +36,8 @@ public class SoccerLeaguesPresenter extends BasePresenter<SoccerLeaguesFragment>
                               () -> api.getLeagues()
                                             .subscribeOn(Schedulers.io())
                                             .observeOn(mainThread()),
-                              SoccerLeaguesFragment::onLeagues,
-                              SoccerLeaguesFragment::onNetworkError);
+                              SoccerLeaguesActivity::onLeagues,
+                              SoccerLeaguesActivity::onNetworkError);
         start(REQUEST_SOCCER_LEAGUES);
     }
 

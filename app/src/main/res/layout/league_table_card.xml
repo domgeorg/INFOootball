@@ -25,7 +25,7 @@
             android:layout_height="@dimen/badge"
             android:layout_marginRight="@dimen/text_margin"
             android:contentDescription="@string/todo"
-            android:src="@drawable/premier_league_logo"
+            android:src="@mipmap/ic_launcher_round"
             tools:srcCompat="@drawable/liverpool_badge" />
 
         <LinearLayout
@@ -39,7 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Liverpool"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/primary_text" />
 
             <LinearLayout
                 android:layout_width="match_parent"
