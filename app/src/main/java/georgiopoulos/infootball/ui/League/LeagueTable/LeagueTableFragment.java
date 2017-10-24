@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package georgiopoulos.infootball.ui.LeagueTable;
+package georgiopoulos.infootball.ui.League.LeagueTable;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -46,8 +46,7 @@ import nucleus.factory.RequiresPresenter;
 @RequiresPresenter(LeagueTablePresenter.class)
 public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
 
-    private final String season="1718";
-    @BindView(R.id.main_recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.league_recycler_view) RecyclerView recyclerView;
     private SimpleListAdapter<Table> adapter;
 
     public static LeagueTableFragment create(String leagueId, String league, String trophy){
@@ -62,7 +61,7 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
 
     @Override public void onCreate(Bundle bundle){
         super.onCreate(bundle);
-        if (bundle == null) getPresenter().request(getArguments().getString("leagueId"),season);
+
     }
 
     @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
@@ -71,16 +70,6 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        Picasso.with(getContext()).load(getArguments().getString("trophy")).into(new Target(){
-            @Override public void onBitmapLoaded(Bitmap bitmap,Picasso.LoadedFrom from){
-                Drawable drawable = new BitmapDrawable(getResources(),bitmap);
-                actionBar.setIcon(drawable);
-            }
-            @Override public void onBitmapFailed(Drawable errorDrawable){}
-            @Override public void onPrepareLoad(Drawable placeHolderDrawable){}
-        });
 
         adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Table.class,R.layout.league_table_card,v -> new LeagueTableTeamViewHolder<>(v, this::onItemClick)));
         recyclerView.setHasFixedSize(true);

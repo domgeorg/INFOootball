@@ -47,6 +47,5 @@ public class SoccerLeagueViewHolder<T extends Country> extends BaseViewHolder<T>
         leagueNameTextView.setText(league.getStrLeague());
         leagueCountryTextView.setText(league.getStrCountry());
         Picasso.with(view.getContext()).load(league.getStrBadge()).into(leagueBadgeImageView);
-
     }
 }

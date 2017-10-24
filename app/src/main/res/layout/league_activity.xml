@@ -9,6 +9,7 @@
     tools:context="georgiopoulos.infootball.ui.League.LeagueActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_league"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height_image_view"
         android:fitsSystemWindows="true"
@@ -26,17 +27,13 @@
                 android:id="@+id/header_image_league_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/icons"
+                android:contentDescription="@string/league_logo"
                 android:fitsSystemWindows="true"
+                android:padding="@dimen/loading_view_padding"
+                android:scaleType="fitCenter"
                 android:src="@drawable/premier_league_logo"
-                android:background="@color/activity_background"
-                android:scaleType="fitStart"
                 app:layout_collapseMode="parallax" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/shadow"
-                android:layout_gravity="bottom"
-                android:background="@drawable/shadow"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar_league"
@@ -60,6 +57,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
+<!--
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/teams_recyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:clipToPadding="false"
+        android:paddingLeft="183dp"
+        android:paddingRight="183dp" />-->
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView android:id="@+id/teamBadge"
+    android:layout_width="@dimen/badge"
+    android:layout_height="@dimen/badge"
+    android:layout_marginRight="@dimen/text_margin"
+    android:contentDescription="@string/todo"
+    tools:srcCompat="@drawable/liverpool_badge"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" />

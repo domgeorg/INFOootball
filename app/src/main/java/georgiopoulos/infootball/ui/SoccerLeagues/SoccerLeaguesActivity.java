@@ -15,6 +15,7 @@
  */
 package georgiopoulos.infootball.ui.SoccerLeagues;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,6 +35,7 @@ import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.Country;
 import georgiopoulos.infootball.data.remote.dto.Leagues;
 import georgiopoulos.infootball.ui.Base.BaseActivity;
+import georgiopoulos.infootball.ui.League.LeagueActivity;
 import georgiopoulos.infootball.util.adapters.ClassViewHolderType;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import georgiopoulos.infootball.util.adapters.SoccerLeagueViewHolder;
@@ -73,8 +75,7 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter>{
     }
 
     private void onItemClick(Country country){
-        new SuperToast(this).setText(country.getIdLeague()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
-
+        startActivity(new Intent(this, LeagueActivity.class).putExtra("leagueId",country.getIdLeague()).putExtra("leagueLogo",country.getStrLogo()).putExtra("league",country.getStrLeague()));
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu){
@@ -84,7 +85,6 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter>{
 
     @Override public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        if(id == R.id.action_settings) return true;
-        return super.onOptionsItemSelected(item);
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 }

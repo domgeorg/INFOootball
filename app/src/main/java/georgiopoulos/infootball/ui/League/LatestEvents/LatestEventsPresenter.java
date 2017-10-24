@@ -12,11 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * DeliverLatestCache keeps the latest onNext value and emits it each time a new view gets attached.
- * If a new onNext value appears while a view is attached, it will be delivered immediately.
  */
-package georgiopoulos.infootball.ui.LeagueTable;
+package georgiopoulos.infootball.ui.League.LatestEvents;
 
 import android.os.Bundle;
 
@@ -29,27 +26,25 @@ import rx.schedulers.Schedulers;
 
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
-public class LeagueTablePresenter extends BasePresenter<LeagueTableFragment>{
+public class LatestEventsPresenter extends BasePresenter<LatestEventsFragment>{
 
-    private static final int REQUEST_LEAGUE_TABLE = 1;
+    private static final int REQUEST_LATEST_EVENTS = 1;
     @Inject ServerAPI api;
     @State String leagueId;
-    @State String season;
 
     @Override public void onCreate(Bundle savedState){
         super.onCreate(savedState);
 
-        restartableLatestCache(REQUEST_LEAGUE_TABLE,
-                 () -> api.getLeagueTable(leagueId,season)
-                               .subscribeOn(Schedulers.io())
-                               .observeOn(mainThread()),
-                               LeagueTableFragment::onTable,
-                               LeagueTableFragment::onNetworkError);
+        restartableLatestCache(REQUEST_LATEST_EVENTS,
+                               () -> api.getLatestEvents(leagueId)
+                                             .subscribeOn(Schedulers.io())
+                                             .observeOn(mainThread()),
+                               LatestEventsFragment::onEvents,
+                               LatestEventsFragment::onNetworkError);
     }
 
-    public void request(String leagueId, String season){
+    public void request(String leagueId){
         this.leagueId = leagueId;
-        this.season = season;
-        start(REQUEST_LEAGUE_TABLE);
+        start(REQUEST_LATEST_EVENTS);
     }
 }

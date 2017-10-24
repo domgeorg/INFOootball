@@ -18,12 +18,16 @@ package georgiopoulos.infootball.data.remote.api;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import georgiopoulos.infootball.ui.LeagueTable.LeagueTablePresenter;
+import georgiopoulos.infootball.ui.League.LatestEvents.LatestEventsPresenter;
+import georgiopoulos.infootball.ui.League.LeaguePresenter;
+import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTablePresenter;
 import georgiopoulos.infootball.ui.SoccerLeagues.SoccerLeaguesPresenter;
 
 @Singleton
 @Component(modules = NetworkModule.class)
 public interface NetworkComponent{
-    void inject(LeagueTablePresenter p);
-    void inject(SoccerLeaguesPresenter s);
+    void inject(LeagueTablePresenter leagueTablePresenter);
+    void inject(SoccerLeaguesPresenter soccerLeaguesPresenter);
+    void inject(LeaguePresenter leaguePresenter);
+    void inject(LatestEventsPresenter latestEventsPresenter);
 }

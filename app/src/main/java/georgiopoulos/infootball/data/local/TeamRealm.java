@@ -16,6 +16,7 @@
 package georgiopoulos.infootball.data.local;
 
 import io.realm.RealmObject;
+import io.realm.RealmQuery;
 import io.realm.annotations.PrimaryKey;
 
 public class TeamRealm extends RealmObject{
@@ -33,6 +34,7 @@ public class TeamRealm extends RealmObject{
     private String strTeamBadge;
     private String strTeamJersey;
     private String strTeamLogo;
+
 
 
     /**

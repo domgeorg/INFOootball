@@ -29,11 +29,11 @@ public interface ServerAPI{
     Observable<Leagues>getLeagues();
 
     @GET("lookup_all_teams.php")
-    Observable<TeamsDetails>getLeagueTeamsDetails(@Query("id") String id);
+    Observable<TeamsDetails>getLeagueTeams(@Query("id") String id);
 
     @GET("lookuptable.php")
     Observable<LeagueTable>getLeagueTable(@Query("l") String leagueId, @Query("s") String season);
 
     @GET("eventspastleague.php")
-    Observable<Events>getEvents(@Query("id") String leagueId);
+    Observable<Events>getLatestEvents(@Query("id") String leagueId);
 }

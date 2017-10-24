@@ -21,6 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.League.LeagueActivity"
+            android:theme="@style/AppTheme.NoActionBar_StatusBar"/>
     </application>
 
 </manifest>
