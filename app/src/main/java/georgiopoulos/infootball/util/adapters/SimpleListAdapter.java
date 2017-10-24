@@ -16,7 +16,7 @@ public class SimpleListAdapter<T> extends BaseProgressAdapter {
         super(progressViewId, types);
     }
 
-    public void set(List<T> items) {
+    public void set(List<T> items){
         this.items = Collections.unmodifiableList(new ArrayList<>(items));
         notifyDataSetChanged();
     }

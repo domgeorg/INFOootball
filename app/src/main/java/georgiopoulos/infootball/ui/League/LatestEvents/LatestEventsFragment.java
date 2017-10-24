@@ -16,6 +16,7 @@
 package georgiopoulos.infootball.ui.League.LatestEvents;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -68,11 +69,10 @@ public class LatestEventsFragment extends BaseFragment<LatestEventsPresenter>{
         adapter.showProgress();
     }
 
-    void onEvents(Events events){
+    void onEvents(@Nullable Events events){
         adapter.hideProgress();
-        if (events!=null) adapter.set(events.getEvents());
-        else new SuperToast(getActivity()).setText("Server does not provide info about league").setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
-
+        if (events.getEvents()==null) new SuperToast(getActivity()).setText("Server does not provide info about latest events").setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+        else adapter.set(events.getEvents());
     }
 
     void onNetworkError(Throwable throwable){

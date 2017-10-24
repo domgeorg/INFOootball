@@ -3,6 +3,7 @@
     <dimen name="toastTextSize">18sp</dimen>
 
     <dimen name="app_bar_height_image_view">220dp</dimen>
+    <dimen name="shadow_league">8dp</dimen>
 
     <dimen name="card_margin_horizontal">8dp</dimen>
     <dimen name="card_margin_vertical">8dp</dimen>

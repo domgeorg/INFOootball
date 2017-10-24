@@ -57,12 +57,14 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         super.onCreate(savedInstanceState);
         setContentView(R.layout.league_activity);
         ButterKnife.bind(this);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
         leagueId=getIntent().getStringExtra("leagueId");
         league=getIntent().getStringExtra("league");
+
         setSupportActionBar(toolbar);
         appBarLayout.addOnOffsetChangedListener(this);
         if (getSupportActionBar()!=null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        collapsingToolbarLayout.setTitle(" ");
 
         Picasso.with(this).load(getIntent().getStringExtra("leagueLogo")).into(headerImageView);
         getPresenter().request(leagueId);
@@ -95,13 +97,13 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
     }
 
     @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout,int verticalOffset){
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset){
         if (scrollRange == -1) scrollRange = appBarLayout.getTotalScrollRange();
-        if (scrollRange + verticalOffset == 0){
+        if (Math.abs(scrollRange + verticalOffset) < 10){
             collapsingToolbarLayout.setTitle(league);
             isShow = true;
-        }else if(isShow){
-            collapsingToolbarLayout.setTitle(" ");
+        }else if (isShow){
+            collapsingToolbarLayout.setTitle("");
             isShow = false;
         }
     }
