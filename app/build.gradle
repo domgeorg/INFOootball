@@ -100,7 +100,11 @@ dependencies {
     //Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
 
-    compile 'com.github.adityagohad:HorizontalPicker:1.0.1'
+    //diagonal-imageview
+    compile 'com.github.santalu:diagonal-imageview:1.0.2'
+
+    //RecyclerViewHeader
+    compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
 
     compile 'com.android.support:multidex:1.0.0'
 

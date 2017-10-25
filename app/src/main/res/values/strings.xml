@@ -4,5 +4,6 @@
     <string name="todo">TODO</string>
     <string name="action_bar_title_soccer_leagues">Soccer Leagues</string>
     <string name="league_logo">league logo</string>
+    <string name="team_logo">team logo</string>
     <string name="league_badge">league badge</string>
 </resources>

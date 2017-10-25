@@ -19,6 +19,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -49,11 +50,9 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
     @BindView(R.id.league_recycler_view) RecyclerView recyclerView;
     private SimpleListAdapter<Table> adapter;
 
-    public static LeagueTableFragment create(String leagueId, String league, String trophy){
+    public static LeagueTableFragment create(String leagueId){
         Bundle bundle = new Bundle();
         bundle.putString("leagueId", leagueId);
-        bundle.putString("league", league);
-        bundle.putString("trophy", trophy);
         LeagueTableFragment fragment = new LeagueTableFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -61,7 +60,7 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
 
     @Override public void onCreate(Bundle bundle){
         super.onCreate(bundle);
-
+        getPresenter().request(getArguments().getString("leagueId"));
     }
 
     @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
@@ -70,7 +69,6 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-
         adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Table.class,R.layout.league_table_card,v -> new LeagueTableTeamViewHolder<>(v, this::onItemClick)));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -78,9 +76,10 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
         adapter.showProgress();
     }
 
-    void onTable(LeagueTable leagueTable){
+    void onTable(@Nullable LeagueTable leagueTable){
         adapter.hideProgress();
-        adapter.set(leagueTable.getTable());
+        if (leagueTable.getTable()==null) new SuperToast(getActivity()).setText("Server does not provide info about latest events").setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+        else adapter.set(leagueTable.getTable());
     }
 
     void onNetworkError(Throwable throwable){

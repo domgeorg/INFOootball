@@ -20,6 +20,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import georgiopoulos.infootball.ui.League.LatestEvents.LatestEventsFragment;
+import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTableFragment;
 
 public class LeagueViewPagerAdapter extends FragmentPagerAdapter{
 
@@ -32,19 +33,21 @@ public class LeagueViewPagerAdapter extends FragmentPagerAdapter{
 
     @Override public Fragment getItem(int position){
         switch(position){
-            case 1: return LatestEventsFragment.create(leagueId);
+            case 0: return LatestEventsFragment.create(leagueId);
+            case 1: return LeagueTableFragment.create(leagueId);
             default: return LatestEventsFragment.create(leagueId);
         }
     }
 
     @Override public CharSequence getPageTitle(int position){
         switch(position){
-            case 1: return "Last Events";
+            case 0: return "Last Events";
+            case 1: return "Standings";
             default: return "Last Events";
         }
     }
 
     @Override public int getCount(){
-        return 1;
+        return 2;
     }
 }

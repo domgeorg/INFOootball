@@ -34,7 +34,7 @@ public class LeagueTablePresenter extends BasePresenter<LeagueTableFragment>{
     private static final int REQUEST_LEAGUE_TABLE = 1;
     @Inject ServerAPI api;
     @State String leagueId;
-    @State String season;
+    @State String season="1718";
 
     @Override public void onCreate(Bundle savedState){
         super.onCreate(savedState);
@@ -47,9 +47,8 @@ public class LeagueTablePresenter extends BasePresenter<LeagueTableFragment>{
                                LeagueTableFragment::onNetworkError);
     }
 
-    public void request(String leagueId, String season){
+    public void request(String leagueId){
         this.leagueId = leagueId;
-        this.season = season;
         start(REQUEST_LEAGUE_TABLE);
     }
 }

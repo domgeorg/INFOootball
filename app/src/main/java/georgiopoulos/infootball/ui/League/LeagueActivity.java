@@ -70,9 +70,12 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         getPresenter().request(leagueId);
     }
 
+    @SuppressWarnings("deprecation")
     void onTeams(TeamsDetails teamsDetails){
         LeagueViewPagerAdapter adapter = new LeagueViewPagerAdapter(getSupportFragmentManager(),leagueId);
         viewPager.setAdapter(adapter);
+        tabLayout.addTab(tabLayout.newTab().setText("Last Events"));
+        tabLayout.addTab(tabLayout.newTab().setText("Standings"));
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabsFromPagerAdapter(adapter);
     }
@@ -99,12 +102,12 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset){
         if (scrollRange == -1) scrollRange = appBarLayout.getTotalScrollRange();
-        if (Math.abs(scrollRange + verticalOffset) < 10){
+        if (Math.abs(scrollRange+verticalOffset)<10){
             collapsingToolbarLayout.setTitle(league);
-            isShow = true;
+            isShow=true;
         }else if (isShow){
             collapsingToolbarLayout.setTitle("");
-            isShow = false;
+            isShow=false;
         }
     }
 
