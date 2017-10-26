@@ -16,6 +16,8 @@
 10. [Nucleus](https://github.com/konmik/nucleus)
 11. [Icepick](https://github.com/frankiesardo/icepick)
 12. [Picasso](http://square.github.io/picasso/)
+13. [diagonal-imageview](https://github.com/santalu/diagonal-imageview)
+14. [SpaceTabLayout]()
 
 ## Free APIs
 1. [TheSportsDB](http://www.thesportsdb.com)
