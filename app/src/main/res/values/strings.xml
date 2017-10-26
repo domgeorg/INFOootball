@@ -6,4 +6,7 @@
     <string name="league_logo">league logo</string>
     <string name="team_logo">team logo</string>
     <string name="league_badge">league badge</string>
+    <string name="tab1_league">Last</string>
+    <string name="tab2_league">Table</string>
+    <string name="tab3_league">Next</string>
 </resources>

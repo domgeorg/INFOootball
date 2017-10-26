@@ -62,7 +62,7 @@ public class LatestEventViewHolder<T extends Event> extends BaseViewHolder<T>{
         String badge="http://www.thesportsdb.com/images/team-icon.png";
         try(Realm realm = Realm.getDefaultInstance()){
             TeamRealm teamRealm = realm.where(TeamRealm.class).equalTo("idTeam",idTeam).findFirst();
-            if (teamRealm!=null && teamRealm.getStrTeamBadge()!=null)badge=teamRealm.getStrTeamBadge();
+            if (teamRealm!=null && teamRealm.getStrTeamBadge()!=null&&!teamRealm.getStrTeamBadge().isEmpty())badge=teamRealm.getStrTeamBadge();
         }
         return badge;
     }

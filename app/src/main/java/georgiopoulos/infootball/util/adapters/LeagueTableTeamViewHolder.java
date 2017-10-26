@@ -64,7 +64,7 @@ public class LeagueTableTeamViewHolder<T extends Table> extends BaseViewHolder<T
         String badge="http://www.thesportsdb.com/images/team-icon.png";
         try(Realm realm = Realm.getDefaultInstance()){
             TeamRealm teamRealm = realm.where(TeamRealm.class).equalTo("idTeam",idTeam).findFirst();
-            if (teamRealm!=null && teamRealm.getStrTeamBadge()!=null)badge=teamRealm.getStrTeamBadge();
+            if (teamRealm!=null && teamRealm.getStrTeamBadge()!=null && !teamRealm.getStrTeamBadge().isEmpty())badge=teamRealm.getStrTeamBadge();
         }
         return badge;
     }
@@ -73,7 +73,7 @@ public class LeagueTableTeamViewHolder<T extends Table> extends BaseViewHolder<T
         String jersey="https://fm-view.net/forum/uploads/monthly_2017_09/NO-BRAND-73.png.cf70c74cd066c59d9ce14992f0bdedfc.png";
         try(Realm realm = Realm.getDefaultInstance()){
             TeamRealm teamRealm = realm.where(TeamRealm.class).equalTo("idTeam",idTeam).findFirst();
-            if (teamRealm!=null && teamRealm.getStrTeamJersey()!=null)jersey=teamRealm.getStrTeamJersey();
+            if (teamRealm!=null && teamRealm.getStrTeamJersey()!=null && !teamRealm.getStrTeamJersey().isEmpty())jersey=teamRealm.getStrTeamJersey();
         }
         return jersey;
     }

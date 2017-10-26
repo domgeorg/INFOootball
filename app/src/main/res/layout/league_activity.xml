@@ -34,13 +34,14 @@
                 android:fitsSystemWindows="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/premier_league_logo"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/shadow_league"
-                android:layout_gravity="bottom"
-                android:background="@drawable/shadow" />
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="top"
+                android:background="@drawable/shadow_league_header"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar_league"
@@ -49,20 +50,36 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/shadow_league"
+                android:layout_gravity="bottom"
+                android:background="@drawable/shadow_league_divider"/>
+
         </android.support.design.widget.CollapsingToolbarLayout>
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout_league"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/colorAccent" />
-
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager_league"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <eu.long1.spacetablayout.SpaceTabLayout
+        android:id="@+id/tab_layout_league"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:number_of_tabs="three"
+        app:starting_position="one"
+        app:icon_one="@drawable/ic_league_tab_main"
+        app:icon_two="@drawable/ic_tab2_league"
+        app:icon_three="@drawable/ic_tab3_league"
+        app:text_one="@string/tab1_league"
+        app:text_two="@string/tab2_league"
+        app:text_three="@string/tab3_league"
+        app:tab_color="@color/colorPrimary"
+        app:button_color="@color/colorAccent"
+        app:layout_behavior="eu.long1.spacetablayout.SpaceTabLayoutBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

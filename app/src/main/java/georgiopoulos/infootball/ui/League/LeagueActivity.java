@@ -18,12 +18,11 @@ package georgiopoulos.infootball.ui.League;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.github.johnpersano.supertoasts.library.Style;
@@ -31,12 +30,18 @@ import com.github.johnpersano.supertoasts.library.SuperToast;
 import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.long1.spacetablayout.SpaceTabLayout;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.TeamsDetails;
 import georgiopoulos.infootball.ui.Base.BaseActivity;
-import georgiopoulos.infootball.util.adapters.LeagueViewPagerAdapter;
+import georgiopoulos.infootball.ui.League.LatestEvents.LatestEventsFragment;
+import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTableFragment;
+import icepick.State;
 import nucleus.factory.RequiresPresenter;
 
 @RequiresPresenter(LeaguePresenter.class)
@@ -51,7 +56,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
     @BindView(R.id.toolbar_league) Toolbar toolbar;
     @BindView(R.id.header_image_league_logo) ImageView headerImageView;
     @BindView(R.id.view_pager_league) ViewPager viewPager;
-    @BindView(R.id.tab_layout_league) TabLayout tabLayout;
+    @BindView(R.id.tab_layout_league) SpaceTabLayout tabLayout;
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -66,18 +71,19 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         if (getSupportActionBar()!=null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         collapsingToolbarLayout.setTitle(" ");
 
+        tabLayout.setTabColor(getResources().getColor(R.color.colorPrimary));
+
         Picasso.with(this).load(getIntent().getStringExtra("leagueLogo")).into(headerImageView);
         getPresenter().request(leagueId);
     }
 
     @SuppressWarnings("deprecation")
     void onTeams(TeamsDetails teamsDetails){
-        LeagueViewPagerAdapter adapter = new LeagueViewPagerAdapter(getSupportFragmentManager(),leagueId);
-        viewPager.setAdapter(adapter);
-        tabLayout.addTab(tabLayout.newTab().setText("Last Events"));
-        tabLayout.addTab(tabLayout.newTab().setText("Standings"));
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabsFromPagerAdapter(adapter);
+        List<Fragment> fragmentList = new ArrayList<>();
+        fragmentList.add(LatestEventsFragment.create(teamsDetails.getTeams().get(0).getIdLeague()));
+        fragmentList.add(LeagueTableFragment.create(teamsDetails.getTeams().get(0).getIdLeague()));
+        fragmentList.add(LeagueTableFragment.create(teamsDetails.getTeams().get(0).getIdLeague()));
+        tabLayout.initialize(viewPager,getSupportFragmentManager(),fragmentList,null);
     }
 
     void onNetworkError(Throwable throwable){
@@ -91,7 +97,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
 
     @Override public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        switch (id){
+        switch(id){
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -110,5 +116,4 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
             isShow=false;
         }
     }
-
 }

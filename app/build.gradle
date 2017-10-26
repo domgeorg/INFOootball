@@ -106,6 +106,9 @@ dependencies {
     //RecyclerViewHeader
     compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
 
+    //SpaceTabLayout
+    compile 'eu.long1:spacetablayout:1.0.4'
+
     compile 'com.android.support:multidex:1.0.0'
 
     testImplementation 'junit:junit:4.12'
