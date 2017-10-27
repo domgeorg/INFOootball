@@ -36,4 +36,7 @@ public interface ServerAPI{
 
     @GET("eventspastleague.php")
     Observable<Events>getLatestEvents(@Query("id") String leagueId);
+
+    @GET("eventsnextleague.php")
+    Observable<Events>getNextEvents(@Query("id") String leagueId, @Query("r") String round);
 }
