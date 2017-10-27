@@ -16,6 +16,8 @@
 10. [Nucleus](https://github.com/konmik/nucleus)
 11. [Icepick](https://github.com/frankiesardo/icepick)
 12. [Picasso](http://square.github.io/picasso/)
+13. [diagonal-imageview](https://github.com/santalu/diagonal-imageview)
+14. [SpaceTabLayout]()
 
 ## Free APIs
 1. [TheSportsDB](http://www.thesportsdb.com)
@@ -23,10 +25,17 @@
 
 ## Under Construction football info app
 
-![](https://github.com/domgeorg/INFOotball/blob/master/ifootball/Screenshot_20171024-183300.png)
-![](https://github.com/domgeorg/INFOotball/blob/master/ifootball/Screenshot_20171024-183320.png)
-![](https://github.com/domgeorg/INFOotball/blob/master/ifootball/Screenshot_20171024-183344.png)
-![](https://github.com/domgeorg/INFOotball/blob/master/ifootball/Screenshot_20171024-183454.png)
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171024-183300.png)
+
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171024-183320.png)
+
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155204.jpg)
+
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155238.png)
+
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155252.png)
+
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155318.png)
 
 ![](http://labs.slynk.com/files/2010/02/under-construction.gif)
 
