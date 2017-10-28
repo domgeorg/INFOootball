@@ -21,9 +21,12 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
+import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.local.TeamRealm;
 import georgiopoulos.infootball.data.remote.dto.Event;
 import io.realm.Realm;
@@ -31,6 +34,7 @@ import rx.functions.Action1;
 
 public class LatestEventViewHolder<T extends Event> extends BaseViewHolder<T>{
 
+    @Inject LocalData localData;
     private T event;
     private View view;
     @BindView(R.id.homeTeamBadge) ImageView homeTeamBadgeImageView;
@@ -54,8 +58,8 @@ public class LatestEventViewHolder<T extends Event> extends BaseViewHolder<T>{
         homeScoreTextView.setText(event.getIntHomeScore());
         awayScoreTextView.setText(event.getIntAwayScore());
         dateTextView.setText(event.getStrDate());
-        Picasso.with(view.getContext()).load(getBadgeUrl(event.getIdHomeTeam())).into(homeTeamBadgeImageView);
-        Picasso.with(view.getContext()).load(getBadgeUrl(event.getIdAwayTeam())).into(awayTeamBadgeImageView);
+        Picasso.with(view.getContext()).load(localData.getBadgeUrl(event.getIdHomeTeam())).into(homeTeamBadgeImageView);
+        Picasso.with(view.getContext()).load(localData.getBadgeUrl(event.getIdAwayTeam())).into(awayTeamBadgeImageView);
     }
 
     private String getBadgeUrl(String idTeam){

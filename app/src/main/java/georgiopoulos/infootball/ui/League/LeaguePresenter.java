@@ -25,13 +25,10 @@ package georgiopoulos.infootball.ui.League;
 import android.os.Bundle;
 import javax.inject.Inject;
 
-import georgiopoulos.infootball.data.local.TeamRealm;
+import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
-import georgiopoulos.infootball.data.remote.dto.Team;
-import georgiopoulos.infootball.data.remote.dto.TeamsDetails;
 import georgiopoulos.infootball.ui.Base.BasePresenter;
 import icepick.State;
-import io.realm.Realm;
 import rx.schedulers.Schedulers;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
@@ -39,6 +36,7 @@ public class LeaguePresenter extends BasePresenter<LeagueActivity>{
 
     private static final int REQUEST_TEAMS = 1;
     @Inject ServerAPI api;
+    @Inject LocalData localData;
     @State String leagueId;
 
     @Override public void onCreate(Bundle savedState){
@@ -46,7 +44,8 @@ public class LeaguePresenter extends BasePresenter<LeagueActivity>{
 
         restartableLatestCache(REQUEST_TEAMS,
                                ()->api.getLeagueTeams(leagueId).subscribeOn(Schedulers.io())
-                                           .observeOn(Schedulers.computation()).map(this::writeToRealm)
+                                           .observeOn(Schedulers.computation())
+                                           .map(teamsDetails -> localData.writeTeamDetailsToRealm(teamsDetails))
                                            .observeOn(mainThread()),
                                LeagueActivity::onTeams,
                                LeagueActivity::onNetworkError);
@@ -56,20 +55,6 @@ public class LeaguePresenter extends BasePresenter<LeagueActivity>{
     public void request(String leagueId){
         this.leagueId = leagueId;
         start(REQUEST_TEAMS);
-    }
-
-    private Boolean foundInRealm(Realm realm,String idTeam){
-        return (realm.where(TeamRealm.class).equalTo("idTeam",idTeam).findFirst()!=null);
-    }
-
-    private TeamsDetails writeToRealm(TeamsDetails teamsDetails){
-        try(Realm realm = Realm.getDefaultInstance()){
-            realm.executeTransaction(t -> {
-                for(Team team : teamsDetails.getTeams())
-                    if(! foundInRealm(realm,team.getIdTeam()))
-                        t.insertOrUpdate(new TeamRealm(team.getIdTeam(),team.getStrTeam(),team.getStrLeague(),team.getIdLeague(),team.getStrManager(),team.getStrStadium(),team.getStrStadiumThumb(),team.getStrStadiumDescription(),team.getStrStadiumLocation(),team.getStrWebsite(),team.getStrDescriptionEN(),team.getStrTeamBadge(),team.getStrTeamJersey(),team.getStrTeamLogo()));});
-        }
-        return (teamsDetails);
     }
 
 }

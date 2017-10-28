@@ -19,6 +19,7 @@ import android.os.Bundle;
 
 import javax.inject.Inject;
 
+import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
 import georgiopoulos.infootball.ui.Base.BasePresenter;
 import rx.schedulers.Schedulers;
@@ -29,12 +30,15 @@ public class SoccerLeaguesPresenter extends BasePresenter<SoccerLeaguesActivity>
 
     private static final int REQUEST_SOCCER_LEAGUES = 1;
     @Inject ServerAPI api;
+    @Inject LocalData localData;
 
     @Override public void onCreate(Bundle savedState){
         super.onCreate(savedState);
         restartableLatestCache(REQUEST_SOCCER_LEAGUES,
                               () -> api.getLeagues()
                                             .subscribeOn(Schedulers.io())
+                                            .observeOn(Schedulers.computation())
+                                            .map(leagues -> localData.writeLeaguesToRealm(leagues))
                                             .observeOn(mainThread()),
                               SoccerLeaguesActivity::onLeagues,
                               SoccerLeaguesActivity::onNetworkError);

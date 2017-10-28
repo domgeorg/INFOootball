@@ -13,38 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package georgiopoulos.infootball;
+package georgiopoulos.infootball.application;
 
 import android.app.Application;
+import android.content.res.Resources;
 
-import georgiopoulos.infootball.data.remote.api.NetworkComponent;
-import georgiopoulos.infootball.data.remote.api.DaggerNetworkComponent;
-import georgiopoulos.infootball.data.remote.api.NetworkModule;
+import georgiopoulos.infootball.application.DaggerAppComponent;
 import georgiopoulos.infootball.util.ComponentReflectionInjector;
 import georgiopoulos.infootball.util.Injector;
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 public class App extends Application implements Injector{
 
-    private ComponentReflectionInjector<NetworkComponent> injector;
+    private ComponentReflectionInjector<AppComponent> injector;
+    private static App sInstance = null;
+    private static AppComponent component = null;
 
     @Override
     public void onCreate(){
         super.onCreate();
-
-        Realm.init(getApplicationContext());
-        RealmConfiguration config = new RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build();
-        Realm.setDefaultConfiguration(config);
-
-        NetworkComponent component = DaggerNetworkComponent.builder()
-                                         .networkModule(new NetworkModule())
-                                         .build();
-        injector = new ComponentReflectionInjector<>(NetworkComponent.class,component);
+        Realm.init(this);
+        sInstance = this;
+        component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+        injector = new ComponentReflectionInjector<>(AppComponent.class,component);
     }
 
     @Override
     public void inject(Object target){
         injector.inject(target);
     }
+
+    public static App getInstance() { return sInstance; }
+
+    public static AppComponent getAppComponent() { return component; }
+
+    public static Realm getRealm() { return component.realm(); }
+
+    public static Resources getRes() { return sInstance.getResources();}
 }

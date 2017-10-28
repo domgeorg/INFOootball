@@ -20,6 +20,7 @@ import android.os.Bundle;
 import javax.inject.Inject;
 
 import georgiopoulos.infootball.data.local.LeagueRoundRealm;
+import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.local.TeamRealm;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
 import georgiopoulos.infootball.ui.Base.BasePresenter;
@@ -33,6 +34,7 @@ public class NextEventsPresenter extends BasePresenter<NextEventsFragment>{
 
     private static final int REQUEST_NEXT_EVENTS = 1;
     @Inject ServerAPI api;
+    @Inject LocalData localData;
     @State String leagueId;
     @State String round;
 
@@ -49,17 +51,8 @@ public class NextEventsPresenter extends BasePresenter<NextEventsFragment>{
 
     public void request(String leagueId){
         this.leagueId = leagueId;
-        this.round=getRound();
+        this.round=localData.getRoundFromRealm(leagueId);
         start(REQUEST_NEXT_EVENTS);
-    }
-
-    String getRound(){
-        try(Realm realm = Realm.getDefaultInstance()){
-            if(realm.where(LeagueRoundRealm.class).equalTo("leagueId",leagueId).findFirst().getRound()!=null)
-                this.round=realm.where(LeagueRoundRealm.class).equalTo("leagueId",leagueId).findFirst().getRound();
-            int r = Integer.valueOf(round)+1;
-            return String.valueOf(r);
-        }
     }
 
 }

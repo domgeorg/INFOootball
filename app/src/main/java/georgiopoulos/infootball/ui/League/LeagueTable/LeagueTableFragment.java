@@ -71,10 +71,9 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
 
     void onTable(@Nullable LeagueTable leagueTable){
         adapter.hideProgress();
-        if (leagueTable.getTable()==null) new SuperToast(getActivity()).setText("Server does not provide info about latest events").setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+        if (leagueTable.getTable()==null) new SuperToast(getActivity()).setText("Server does not provide info about standings").setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
         else adapter.set(leagueTable.getTable());
     }
-
 
     void onNetworkError(Throwable throwable){
         adapter.hideProgress();

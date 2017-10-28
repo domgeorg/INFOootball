@@ -15,10 +15,19 @@
  */
 package georgiopoulos.infootball.data.local;
 
-import dagger.Binds;
-import dagger.Module;
-import georgiopoulos.infootball.util.adapters.LatestEventViewHolder;
+import georgiopoulos.infootball.data.remote.dto.Leagues;
+import georgiopoulos.infootball.data.remote.dto.TeamsDetails;
+import io.realm.Realm;
 
-@Module public abstract class LocalDataModule{
-    @Binds abstract LocalData localData(RealmManager realmManager);
+public interface LocalData{
+
+    String getJerseyUrl(String idTeam);
+    String getBadgeUrl(String idTeam);
+    String getStadium(String idTeam);
+    Boolean findTeamInRealm(Realm realm,String idTeam);
+    TeamsDetails writeTeamDetailsToRealm(TeamsDetails teamsDetails);
+    String getRoundFromRealm(String leagueId);
+    Boolean findLeagueInRealm(Realm realm, String leagueId);
+    Leagues writeLeaguesToRealm(Leagues leagues);
+
 }
