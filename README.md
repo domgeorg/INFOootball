@@ -39,6 +39,10 @@
 
 ![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155318.png)
 
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171028-144339.png)
+
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171028-144409.png)
+
 ![](http://labs.slynk.com/files/2010/02/under-construction.gif)
 
 ### LICENSE
