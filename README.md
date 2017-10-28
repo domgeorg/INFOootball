@@ -1,4 +1,5 @@
 # INFOotball
+[ ![License](http://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square) ](http://www.apache.org/licenses/LICENSE-2.0)
 
 ![](https://github.com/domgeorg/INFOotball/blob/master/ifootball/ic_launcher_round-web.png)
 
@@ -10,14 +11,15 @@
 4. [Rxandroid](https://github.com/ReactiveX/RxAndroid)
 5. [Realm](https://blog.realm.io/realm-for-android/)
 6. [Butter Knife](http://jakewharton.github.io/butterknife/)
-7. [Dagger2](https://google.github.io/dagger/)
+7. [Dagger](https://google.github.io/dagger/)
 8. [SuperToasts](https://github.com/JohnPersano/SuperToasts)
 9. [Project Lombok](https://projectlombok.org/)
 10. [Nucleus](https://github.com/konmik/nucleus)
 11. [Icepick](https://github.com/frankiesardo/icepick)
 12. [Picasso](http://square.github.io/picasso/)
 13. [diagonal-imageview](https://github.com/santalu/diagonal-imageview)
-14. [SpaceTabLayout]()
+14. [SpaceTabLayout](https://github.com/long1eu/SpaceTabLayout)
+15. [RecyclerViewHeader](https://github.com/blipinsk/RecyclerViewHeader)
 
 ## Free APIs
 1. [TheSportsDB](http://www.thesportsdb.com)
@@ -36,6 +38,10 @@
 ![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155252.png)
 
 ![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155318.png)
+
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171028-144339.png)
+
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171028-144409.png)
 
 ![](http://labs.slynk.com/files/2010/02/under-construction.gif)
 
