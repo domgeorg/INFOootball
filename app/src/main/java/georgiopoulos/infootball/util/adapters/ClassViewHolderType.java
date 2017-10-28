@@ -28,7 +28,6 @@ public class ClassViewHolderType<T> implements ViewHolderType<T> {
     @Override
     public BaseViewHolder<T> create(ViewGroup parent) {
         return holderFactory.call(
-            LayoutInflater.from(parent.getContext())
-                .inflate(layoutId, parent, false));
+            LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false));
     }
 }

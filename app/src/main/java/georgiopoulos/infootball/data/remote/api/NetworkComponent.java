@@ -21,6 +21,7 @@ import dagger.Component;
 import georgiopoulos.infootball.ui.League.LatestEvents.LatestEventsPresenter;
 import georgiopoulos.infootball.ui.League.LeaguePresenter;
 import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTablePresenter;
+import georgiopoulos.infootball.ui.League.NextEvents.NextEventsPresenter;
 import georgiopoulos.infootball.ui.SoccerLeagues.SoccerLeaguesPresenter;
 
 @Singleton
@@ -30,4 +31,5 @@ public interface NetworkComponent{
     void inject(SoccerLeaguesPresenter soccerLeaguesPresenter);
     void inject(LeaguePresenter leaguePresenter);
     void inject(LatestEventsPresenter latestEventsPresenter);
+    void inject(NextEventsPresenter nextEventsPresenter);
 }

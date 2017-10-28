@@ -61,20 +61,31 @@ public class LeagueTableTeamViewHolder<T extends Table> extends BaseViewHolder<T
     }
 
     private String getBadgeUrl(String idTeam){
-        String badge="http://www.thesportsdb.com/images/team-icon.png";
         try(Realm realm = Realm.getDefaultInstance()){
             TeamRealm teamRealm = realm.where(TeamRealm.class).equalTo("idTeam",idTeam).findFirst();
-            if (teamRealm!=null && teamRealm.getStrTeamBadge()!=null && !teamRealm.getStrTeamBadge().isEmpty())badge=teamRealm.getStrTeamBadge();
+            if(teamRealm!=null){
+                if(teamRealm.getStrTeamBadge() != null && ! teamRealm.getStrTeamBadge().isEmpty())
+                   return teamRealm.getStrTeamBadge();
+                else if(teamRealm.getStrTeamLogo() != null && ! teamRealm.getStrTeamLogo().isEmpty())
+                    return teamRealm.getStrTeamLogo();
+                else if(teamRealm.getStrTeamJersey() != null && ! teamRealm.getStrTeamJersey().isEmpty())
+                    return teamRealm.getStrTeamJersey();
+            }return "http://www.thesportsdb.com/images/team-icon.png";
         }
-        return badge;
+
     }
 
     private String getJerseyUrl(String idTeam){
-        String jersey="https://fm-view.net/forum/uploads/monthly_2017_09/NO-BRAND-73.png.cf70c74cd066c59d9ce14992f0bdedfc.png";
         try(Realm realm = Realm.getDefaultInstance()){
             TeamRealm teamRealm = realm.where(TeamRealm.class).equalTo("idTeam",idTeam).findFirst();
-            if (teamRealm!=null && teamRealm.getStrTeamJersey()!=null && !teamRealm.getStrTeamJersey().isEmpty())jersey=teamRealm.getStrTeamJersey();
-        }
-        return jersey;
+            if(teamRealm!=null){
+                if(teamRealm.getStrTeamJersey() != null && ! teamRealm.getStrTeamJersey().isEmpty())
+                    return teamRealm.getStrTeamJersey();
+                else if(teamRealm.getStrTeamBadge() != null && ! teamRealm.getStrTeamBadge().isEmpty())
+                    return teamRealm.getStrTeamBadge();
+                else if(teamRealm.getStrTeamLogo() != null && ! teamRealm.getStrTeamLogo().isEmpty())
+                    return teamRealm.getStrTeamLogo();
+            }
+        } return "https://fm-view.net/forum/uploads/monthly_2017_09/NO-BRAND-73.png.cf70c74cd066c59d9ce14992f0bdedfc.png";
     }
 }

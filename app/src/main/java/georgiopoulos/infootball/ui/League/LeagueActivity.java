@@ -41,14 +41,18 @@ import georgiopoulos.infootball.data.remote.dto.TeamsDetails;
 import georgiopoulos.infootball.ui.Base.BaseActivity;
 import georgiopoulos.infootball.ui.League.LatestEvents.LatestEventsFragment;
 import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTableFragment;
+import georgiopoulos.infootball.ui.League.NextEvents.NextEventsFragment;
+import icepick.Icepick;
 import icepick.State;
 import nucleus.factory.RequiresPresenter;
 
 @RequiresPresenter(LeaguePresenter.class)
 public class LeagueActivity extends BaseActivity<LeaguePresenter> implements AppBarLayout.OnOffsetChangedListener{
 
-    private String leagueId;
+    private String callbackId;
     private String league;
+    private String trophy;
+    private Bundle bundle;
     private boolean isShow = false;
     private int scrollRange = -1;
     @BindView(R.id.app_bar_league) AppBarLayout appBarLayout;
@@ -62,9 +66,10 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         super.onCreate(savedInstanceState);
         setContentView(R.layout.league_activity);
         ButterKnife.bind(this);
+        this.bundle=bundle;
 
-        leagueId=getIntent().getStringExtra("leagueId");
         league=getIntent().getStringExtra("league");
+        trophy=getIntent().getStringExtra("trophy");
 
         setSupportActionBar(toolbar);
         appBarLayout.addOnOffsetChangedListener(this);
@@ -74,16 +79,16 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         tabLayout.setTabColor(getResources().getColor(R.color.colorPrimary));
 
         Picasso.with(this).load(getIntent().getStringExtra("leagueLogo")).into(headerImageView);
-        getPresenter().request(leagueId);
+        getPresenter().request(getIntent().getStringExtra("leagueId"));
     }
 
-    @SuppressWarnings("deprecation")
     void onTeams(TeamsDetails teamsDetails){
+        callbackId = teamsDetails.getTeams().get(0).getIdLeague();
         List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(LatestEventsFragment.create(teamsDetails.getTeams().get(0).getIdLeague()));
-        fragmentList.add(LeagueTableFragment.create(teamsDetails.getTeams().get(0).getIdLeague()));
-        fragmentList.add(LeagueTableFragment.create(teamsDetails.getTeams().get(0).getIdLeague()));
-        tabLayout.initialize(viewPager,getSupportFragmentManager(),fragmentList,null);
+        fragmentList.add(LatestEventsFragment.create(callbackId));
+        fragmentList.add(LeagueTableFragment.create(callbackId));
+        fragmentList.add(NextEventsFragment.create(callbackId,trophy));
+        tabLayout.initialize(viewPager,getSupportFragmentManager(),fragmentList,bundle);
     }
 
     void onNetworkError(Throwable throwable){
@@ -105,8 +110,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset){
+    @Override public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset){
         if (scrollRange == -1) scrollRange = appBarLayout.getTotalScrollRange();
         if (Math.abs(scrollRange+verticalOffset)<10){
             collapsingToolbarLayout.setTitle(league);
@@ -116,4 +120,10 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
             isShow=false;
         }
     }
+
+    @Override public void onSaveInstanceState(Bundle bundle){
+        tabLayout.saveState(bundle);
+        super.onSaveInstanceState(bundle);
+    }
+
 }

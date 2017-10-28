@@ -55,7 +55,7 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter>{
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         if (getSupportActionBar()!=null) getSupportActionBar().setTitle(R.string.action_bar_title_soccer_leagues);
-        Picasso.with(this).load("https://cdn.pixabay.com/photo/2014/latest_events_card/02/21/53/grass-554616_960_720.jpg").into(headerImageView);
+        Picasso.with(this).load(R.drawable.grass).into(headerImageView);
 
         adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Country.class,R.layout.soccer_league_card,v -> new SoccerLeagueViewHolder<>(v,this::onItemClick)));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -75,7 +75,7 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter>{
     }
 
     private void onItemClick(Country country){
-        startActivity(new Intent(this, LeagueActivity.class).putExtra("leagueId",country.getIdLeague()).putExtra("leagueLogo",country.getStrLogo()).putExtra("league",country.getStrLeague()));
+        startActivity(new Intent(this, LeagueActivity.class).putExtra("leagueId",country.getIdLeague()).putExtra("leagueLogo",country.getStrLogo()).putExtra("league",country.getStrLeague()).putExtra("trophy",country.getStrTrophy()));
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu){

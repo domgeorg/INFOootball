@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package georgiopoulos.infootball.ui.League.LatestEvents;
+package georgiopoulos.infootball.ui.League.NextEvents;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import javax.inject.Inject;
 
 import georgiopoulos.infootball.data.local.LeagueRoundRealm;
+import georgiopoulos.infootball.data.local.TeamRealm;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
-import georgiopoulos.infootball.data.remote.dto.Event;
-import georgiopoulos.infootball.data.remote.dto.Events;
 import georgiopoulos.infootball.ui.Base.BasePresenter;
 import icepick.State;
 import io.realm.Realm;
@@ -31,41 +29,37 @@ import rx.schedulers.Schedulers;
 
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
-public class LatestEventsPresenter extends BasePresenter<LatestEventsFragment>{
+public class NextEventsPresenter extends BasePresenter<NextEventsFragment>{
 
-    private static final int REQUEST_LATEST_EVENTS = 1;
-    @Inject
-    ServerAPI api;
-    @State
-    String leagueId;
+    private static final int REQUEST_NEXT_EVENTS = 1;
+    @Inject ServerAPI api;
+    @State String leagueId;
+    @State String round;
 
-    @Override
-    public void onCreate(Bundle savedState){
+    @Override public void onCreate(Bundle savedState){
         super.onCreate(savedState);
 
-        restartableLatestCache(REQUEST_LATEST_EVENTS,
-                               () -> api.getLatestEvents(leagueId)
+        restartableLatestCache(REQUEST_NEXT_EVENTS,
+                               () -> api.getNextEvents(leagueId,round)
                                              .subscribeOn(Schedulers.io())
-                                             .observeOn(Schedulers.computation())
-                                             .map(this::writeToRealm)
                                              .observeOn(mainThread()),
-                               LatestEventsFragment::onEvents,LatestEventsFragment::onNetworkError);
+                               NextEventsFragment::onEvents,
+                               NextEventsFragment::onNetworkError);
     }
 
     public void request(String leagueId){
         this.leagueId = leagueId;
-        start(REQUEST_LATEST_EVENTS);
+        this.round=getRound();
+        start(REQUEST_NEXT_EVENTS);
     }
 
-    private Events writeToRealm(Events events){
-        if (events!=null){
+    String getRound(){
         try(Realm realm = Realm.getDefaultInstance()){
-            realm.executeTransaction(t -> {
-                Event event = events.getEvents().get(1);
-                Log.e("REQUEST_LATEST_EVENTS",event.getIdLeague()+" "+event.getIntRound());
-                t.insertOrUpdate(new LeagueRoundRealm(event.getIdLeague(),event.getIntRound()));
-            });
-        }}
-        return (events);
+            if(realm.where(LeagueRoundRealm.class).equalTo("leagueId",leagueId).findFirst().getRound()!=null)
+                this.round=realm.where(LeagueRoundRealm.class).equalTo("leagueId",leagueId).findFirst().getRound();
+            int r = Integer.valueOf(round)+1;
+            return String.valueOf(r);
+        }
     }
+
 }

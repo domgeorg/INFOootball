@@ -37,7 +37,7 @@ public class NetworkModule{
     @Provides
     @Singleton
     public Gson provideGson(){
-        return new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+        return new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setLenient().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
     }
 
     @Provides

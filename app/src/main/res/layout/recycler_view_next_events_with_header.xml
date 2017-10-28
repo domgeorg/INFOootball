@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/zero_horizontal_margin_big_activity"
+    android:paddingEnd="@dimen/zero_horizontal_margin_big_activity"
+    android:background="@color/activity_background">
+
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/next_event_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|top"/>
+
+    <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+        android:id="@+id/recycler_view_header"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/recycler_header_height">
+
+      <include layout="@layout/next_events_header"/>
+
+    </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
+
+
+</FrameLayout>

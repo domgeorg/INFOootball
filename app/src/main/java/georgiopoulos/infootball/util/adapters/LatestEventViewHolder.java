@@ -50,20 +50,26 @@ public class LatestEventViewHolder<T extends Event> extends BaseViewHolder<T>{
     @Override
     public void bind(T item){
         this.event=item;
-        Picasso.with(view.getContext()).load(getBadgeUrl(event.getIdHomeTeam())).into(homeTeamBadgeImageView);
-        Picasso.with(view.getContext()).load(getBadgeUrl(event.getIdAwayTeam())).into(awayTeamBadgeImageView);
         eventTextView.setText(event.getStrEvent());
         homeScoreTextView.setText(event.getIntHomeScore());
         awayScoreTextView.setText(event.getIntAwayScore());
         dateTextView.setText(event.getStrDate());
+        Picasso.with(view.getContext()).load(getBadgeUrl(event.getIdHomeTeam())).into(homeTeamBadgeImageView);
+        Picasso.with(view.getContext()).load(getBadgeUrl(event.getIdAwayTeam())).into(awayTeamBadgeImageView);
     }
 
     private String getBadgeUrl(String idTeam){
-        String badge="http://www.thesportsdb.com/images/team-icon.png";
         try(Realm realm = Realm.getDefaultInstance()){
             TeamRealm teamRealm = realm.where(TeamRealm.class).equalTo("idTeam",idTeam).findFirst();
-            if (teamRealm!=null && teamRealm.getStrTeamBadge()!=null&&!teamRealm.getStrTeamBadge().isEmpty())badge=teamRealm.getStrTeamBadge();
+            if(teamRealm!=null){
+                if(teamRealm.getStrTeamBadge() != null && ! teamRealm.getStrTeamBadge().isEmpty())
+                    return teamRealm.getStrTeamBadge();
+                else if(teamRealm.getStrTeamLogo() != null && ! teamRealm.getStrTeamLogo().isEmpty())
+                    return teamRealm.getStrTeamLogo();
+                else if(teamRealm.getStrTeamJersey() != null && ! teamRealm.getStrTeamJersey().isEmpty())
+                    return teamRealm.getStrTeamJersey();
+            }return "http://www.thesportsdb.com/images/team-icon.png";
         }
-        return badge;
+
     }
 }
