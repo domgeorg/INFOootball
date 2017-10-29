@@ -23,8 +23,7 @@
             android:id="@+id/homeTeamBadge"
             android:layout_width="@dimen/badge"
             android:layout_height="@dimen/badge"
-            android:layout_marginRight="@dimen/text_margin"
-            android:src="@drawable/liverpool_badge" />
+            android:layout_marginRight="@dimen/text_margin" />
 
         <LinearLayout
             android:id="@+id/card_contents"
@@ -97,8 +96,7 @@
             android:layout_height="@dimen/badge"
             android:layout_alignParentEnd="false"
             android:layout_marginLeft="@dimen/text_margin"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/liverpool_badge" />
+            android:layout_alignParentRight="true" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

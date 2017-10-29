@@ -38,7 +38,6 @@
             android:layout_height="@dimen/badge"
             android:layout_marginRight="@dimen/text_margin"
             android:contentDescription="@string/todo"
-            tools:srcCompat="@drawable/liverpool_jersey"
             app:di_borderEnabled="false"
             app:di_direction="bottom"
             app:di_overlap="68dp"

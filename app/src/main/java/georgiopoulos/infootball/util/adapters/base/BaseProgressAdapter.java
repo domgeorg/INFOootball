@@ -1,4 +1,4 @@
-package georgiopoulos.infootball.util.adapters;
+package georgiopoulos.infootball.util.adapters.base;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

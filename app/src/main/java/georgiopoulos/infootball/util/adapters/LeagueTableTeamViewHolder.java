@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.remote.dto.Table;
+import georgiopoulos.infootball.util.adapters.base.BaseViewHolder;
 import rx.functions.Action1;
 
 public class LeagueTableTeamViewHolder<T extends Table> extends BaseViewHolder<T>{

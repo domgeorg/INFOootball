@@ -32,7 +32,7 @@ import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.Event;
 import georgiopoulos.infootball.data.remote.dto.Events;
 import georgiopoulos.infootball.ui.Base.BaseFragment;
-import georgiopoulos.infootball.util.adapters.ClassViewHolderType;
+import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import georgiopoulos.infootball.util.adapters.LatestEventViewHolder;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import nucleus.factory.RequiresPresenter;

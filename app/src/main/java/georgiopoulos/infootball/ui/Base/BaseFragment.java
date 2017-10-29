@@ -21,7 +21,7 @@ import android.view.View;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import georgiopoulos.infootball.util.Injector;
+import georgiopoulos.infootball.util.injection.Injector;
 import icepick.Icepick;
 import nucleus.factory.PresenterFactory;
 import nucleus.presenter.Presenter;

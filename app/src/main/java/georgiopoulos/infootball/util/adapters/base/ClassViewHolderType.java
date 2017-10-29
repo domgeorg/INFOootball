@@ -1,10 +1,10 @@
-package georgiopoulos.infootball.util.adapters;
+package georgiopoulos.infootball.util.adapters.base;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ClassViewHolderType<T> implements ViewHolderType<T> {
+public class ClassViewHolderType<T> implements ViewHolderType<T>{
 
     public interface ViewHolderFactory<T> {
         BaseViewHolder<T> call(View view);

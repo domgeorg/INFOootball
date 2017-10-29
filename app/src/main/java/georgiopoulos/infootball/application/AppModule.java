@@ -53,7 +53,7 @@ public class AppModule{
 
     @Provides
     static Realm provideRealm(RealmConfiguration realmConfiguration){
-        return Realm.getInstance(realmConfiguration);
+        return Realm.getDefaultInstance();
     }
 
 }

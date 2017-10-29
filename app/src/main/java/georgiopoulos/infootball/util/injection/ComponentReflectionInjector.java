@@ -1,4 +1,4 @@
-package georgiopoulos.infootball.util;
+package georgiopoulos.infootball.util.injection;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -38,7 +38,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @param <T> a type of dagger 2 component.
  */
-public final class ComponentReflectionInjector<T> implements Injector {
+public final class ComponentReflectionInjector<T> implements Injector{
 
     private final Class<T> componentClass;
     private final T component;

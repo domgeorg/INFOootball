@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SimpleListAdapter<T> extends BaseProgressAdapter {
+import georgiopoulos.infootball.util.adapters.base.BaseProgressAdapter;
+import georgiopoulos.infootball.util.adapters.base.ViewHolderType;
+
+public class SimpleListAdapter<T> extends BaseProgressAdapter{
 
     private List<T> items = Collections.emptyList();
 

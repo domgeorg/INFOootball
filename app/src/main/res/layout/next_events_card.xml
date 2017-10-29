@@ -36,8 +36,7 @@
             android:layout_below="@+id/next_event"
             android:layout_alignParentStart="true"
             android:layout_marginTop="@dimen/text_margin"
-            android:layout_height="@dimen/teamLogoHeight"
-            android:src="@drawable/liverpool_jersey" />
+            android:layout_height="@dimen/teamLogoHeight" />
 
         <TextView
             android:id="@+id/next_event_date"
@@ -67,8 +66,7 @@
             android:layout_height="@dimen/teamLogoHeight"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/next_event"
-            android:layout_alignTop="@+id/homeTeamJersey"
-            android:src="@drawable/liverpool_jersey" />
+            android:layout_alignTop="@+id/homeTeamJersey" />
 
         <TextView
             android:id="@+id/next_event_stadium"

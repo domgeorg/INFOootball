@@ -18,9 +18,8 @@ package georgiopoulos.infootball.application;
 import android.app.Application;
 import android.content.res.Resources;
 
-import georgiopoulos.infootball.application.DaggerAppComponent;
-import georgiopoulos.infootball.util.ComponentReflectionInjector;
-import georgiopoulos.infootball.util.Injector;
+import georgiopoulos.infootball.util.injection.ComponentReflectionInjector;
+import georgiopoulos.infootball.util.injection.Injector;
 import io.realm.Realm;
 
 public class App extends Application implements Injector{

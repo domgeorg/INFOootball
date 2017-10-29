@@ -17,7 +17,7 @@ package georgiopoulos.infootball.ui.Base;
 
 import android.os.Bundle;
 
-import georgiopoulos.infootball.util.Injector;
+import georgiopoulos.infootball.util.injection.Injector;
 import icepick.Icepick;
 import nucleus.factory.PresenterFactory;
 import nucleus.presenter.Presenter;
@@ -31,6 +31,7 @@ public class BaseActivity <P extends Presenter> extends NucleusAppCompatActivity
         setPresenterFactory(superFactory == null ? null : (PresenterFactory<P>) () -> {
             P presenter = superFactory.createPresenter();
             ((Injector)getApplication()).inject(presenter);
+
             return presenter;
         });
         super.onCreate(savedInstanceState);

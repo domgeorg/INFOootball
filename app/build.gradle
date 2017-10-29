@@ -45,7 +45,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation "com.android.support:appcompat-v7:$support_version"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
     compile "com.android.support:recyclerview-v7:$support_version"
@@ -108,6 +108,9 @@ dependencies {
 
     //SpaceTabLayout
     compile 'eu.long1:spacetablayout:1.0.4'
+
+    // Required if generating equals, hashCode, or toString methods
+    compile 'commons-lang:commons-lang:2.6'
 
     compile 'com.android.support:multidex:1.0.0'
 

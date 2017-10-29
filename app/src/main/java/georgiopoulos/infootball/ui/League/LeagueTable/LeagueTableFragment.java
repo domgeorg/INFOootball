@@ -15,6 +15,9 @@
  */
 package georgiopoulos.infootball.ui.League.LeagueTable;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +25,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.github.johnpersano.supertoasts.library.Style;
 import com.github.johnpersano.supertoasts.library.SuperToast;
@@ -32,7 +36,9 @@ import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.LeagueTable;
 import georgiopoulos.infootball.data.remote.dto.Table;
 import georgiopoulos.infootball.ui.Base.BaseFragment;
-import georgiopoulos.infootball.util.adapters.ClassViewHolderType;
+import georgiopoulos.infootball.ui.League.LeagueActivity;
+import georgiopoulos.infootball.ui.Team.TeamRosterActivity;
+import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import georgiopoulos.infootball.util.adapters.LeagueTableTeamViewHolder;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import nucleus.factory.RequiresPresenter;
@@ -81,7 +87,7 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
     }
 
     private void onItemClick(Table team){
-        new SuperToast(getActivity()).setText(team.getTeamid()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+       startActivity(new Intent(getActivity(),TeamRosterActivity.class).putExtra("teamId",team.getTeamid()).putExtra("team", team.getName()));
     }
 
 }

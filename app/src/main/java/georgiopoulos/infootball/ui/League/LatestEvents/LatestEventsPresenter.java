@@ -20,7 +20,7 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
-import georgiopoulos.infootball.data.local.LeagueRoundRealm;
+import georgiopoulos.infootball.data.local.realmObjects.LeagueRoundRealm;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
 import georgiopoulos.infootball.data.remote.dto.Event;
 import georgiopoulos.infootball.data.remote.dto.Events;

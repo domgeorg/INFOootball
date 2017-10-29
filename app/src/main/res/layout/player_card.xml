@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_item_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/card_margin_vertical_big_activity"
+    android:layout_marginEnd="@dimen/card_margin_horizontal_big_activity"
+    android:layout_marginStart="@dimen/card_margin_horizontal_big_activity"
+    android:layout_marginTop="@dimen/card_margin_vertical_big_activity"
+    android:background="@color/icons"
+    android:foreground="?attr/selectableItemBackground"
+    card_view:cardCornerRadius="@dimen/card_recycler_corner_radius"
+    card_view:cardElevation="@dimen/card_recycler_elevation">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/text_margin">
+
+        <ImageView
+            android:id="@+id/PlayerCutout"
+            android:layout_width="@dimen/badge"
+            android:layout_height="@dimen/badge"
+            android:layout_marginEnd="@dimen/text_margin"
+            android:contentDescription="@string/league_badge"
+            tools:srcCompat="@drawable/player" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/PlayerCutout"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/playerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cristiano Ronaldo"
+                android:textColor="@color/primary_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/playerNationality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin_small"
+                android:text="Nationality: Portugal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/secondary_text" />
+
+            <TextView
+                android:id="@+id/playerPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin_small"
+                android:text="Position: Forward"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/secondary_text" />
+
+            <TextView
+                android:id="@+id/playerHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin_small"
+                android:text="Height: 1,85"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/secondary_text" />
+
+            <TextView
+                android:id="@+id/playerWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin_small"
+                android:text="Weight: 83,9"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/secondary_text" />
+
+            <TextView
+                android:id="@+id/playerDateBorn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin_small"
+                android:text="Birthday: 1992-02-23"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/secondary_text" />
+            </LinearLayout>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

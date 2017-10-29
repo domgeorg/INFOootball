@@ -22,6 +22,9 @@ import android.support.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import georgiopoulos.infootball.data.local.realmObjects.LeagueRealm;
+import georgiopoulos.infootball.data.local.realmObjects.LeagueRoundRealm;
+import georgiopoulos.infootball.data.local.realmObjects.TeamRealm;
 import georgiopoulos.infootball.data.remote.dto.Country;
 import georgiopoulos.infootball.data.remote.dto.Leagues;
 import georgiopoulos.infootball.data.remote.dto.Team;
@@ -95,7 +98,7 @@ public class RealmManager implements LocalData{
     public String getRoundFromRealm(String leagueId){
         String round=null;
         try(Realm realm = realmProvider.get()){
-            if(realm.where(LeagueRoundRealm.class).equalTo("leagueId",leagueId).findFirst().getRound()!=null)
+            if(realm.where(LeagueRoundRealm.class).equalTo("leagueId",leagueId).findFirst().getRound() != null)
                 round = realm.where(LeagueRoundRealm.class).equalTo("leagueId",leagueId).findFirst().getRound();
             int r = Integer.valueOf(round)+1;
             return String.valueOf(r);
@@ -113,8 +116,8 @@ public class RealmManager implements LocalData{
             realm.executeTransaction(t -> {
                 for(Country league : leagues.getCountrys())
                     if(! findLeagueInRealm(realm,league.getIdLeague()))
-                        t.insertOrUpdate(new LeagueRealm(league.getIdLeague(),league.getStrLeague(), league.getStrCountry(), league.getStrWebsite(), league.getStrFacebook(), league.getStrTwitter(),league.getStrYoutube(), league.getStrRSS(), league.getStrDescriptionEN(),
-                                                       league.getStrBanner(), league.getStrBadge(), league.getStrLogo(), league.getStrPoster(), league.getStrTrophy()));});
+                        t.insertOrUpdate(new LeagueRealm(league.getIdLeague(),league.getStrLeague(),league.getStrCountry(),league.getStrWebsite(),league.getStrFacebook(),league.getStrTwitter(),league.getStrYoutube(),league.getStrRSS(),league.getStrDescriptionEN(),
+                                                         league.getStrBanner(),league.getStrBadge(),league.getStrLogo(),league.getStrPoster(),league.getStrTrophy()));});
         }return (leagues);
     }
 }

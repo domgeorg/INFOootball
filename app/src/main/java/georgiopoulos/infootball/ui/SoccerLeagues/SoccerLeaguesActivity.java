@@ -36,7 +36,7 @@ import georgiopoulos.infootball.data.remote.dto.Country;
 import georgiopoulos.infootball.data.remote.dto.Leagues;
 import georgiopoulos.infootball.ui.Base.BaseActivity;
 import georgiopoulos.infootball.ui.League.LeagueActivity;
-import georgiopoulos.infootball.util.adapters.ClassViewHolderType;
+import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import georgiopoulos.infootball.util.adapters.SoccerLeagueViewHolder;
 import nucleus.factory.RequiresPresenter;

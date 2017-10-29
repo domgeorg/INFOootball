@@ -1,6 +1,8 @@
-package georgiopoulos.infootball.util.adapters;
+package georgiopoulos.infootball.util.adapters.base;
 
 import android.view.ViewGroup;
+
+import georgiopoulos.infootball.util.adapters.base.BaseViewHolder;
 
 public interface ViewHolderType<T>{
     boolean isOfItem(Object item);

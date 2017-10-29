@@ -23,10 +23,8 @@
             android:id="@+id/leagueBadge"
             android:layout_width="@dimen/badge"
             android:layout_height="@dimen/badge"
-            android:layout_marginRight="@dimen/text_margin"
-            android:contentDescription="@string/league_badge"
-            android:src="@drawable/premier_league_logo"
-            tools:srcCompat="@drawable/premier_league_badge" />
+            android:layout_marginEnd="@dimen/text_margin"
+            android:contentDescription="@string/league_badge" />
 
         <LinearLayout
             android:layout_width="match_parent"

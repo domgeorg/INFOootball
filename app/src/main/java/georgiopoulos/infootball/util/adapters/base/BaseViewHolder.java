@@ -1,9 +1,9 @@
-package georgiopoulos.infootball.util.adapters;
+package georgiopoulos.infootball.util.adapters.base;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import georgiopoulos.infootball.util.Injector;
+import georgiopoulos.infootball.util.injection.Injector;
 
 public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 

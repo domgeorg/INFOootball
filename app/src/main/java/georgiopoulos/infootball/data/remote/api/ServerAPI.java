@@ -18,6 +18,7 @@ package georgiopoulos.infootball.data.remote.api;
 import georgiopoulos.infootball.data.remote.dto.Events;
 import georgiopoulos.infootball.data.remote.dto.LeagueTable;
 import georgiopoulos.infootball.data.remote.dto.Leagues;
+import georgiopoulos.infootball.data.remote.dto.TeamPlayers;
 import georgiopoulos.infootball.data.remote.dto.TeamsDetails;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -39,4 +40,7 @@ public interface ServerAPI{
 
     @GET("eventsnextleague.php")
     Observable<Events>getNextEvents(@Query("id") String leagueId, @Query("r") String round);
+
+    @GET("lookup_all_players.php")
+    Observable<TeamPlayers>getTeamPlayers(@Query("id") String teamId);
 }

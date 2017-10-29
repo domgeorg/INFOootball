@@ -27,9 +27,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.local.LocalData;
-import georgiopoulos.infootball.data.local.TeamRealm;
 import georgiopoulos.infootball.data.remote.dto.Event;
-import io.realm.Realm;
+import georgiopoulos.infootball.util.adapters.base.BaseViewHolder;
 import rx.functions.Action1;
 
 public class NextEventViewHolder<T extends Event> extends BaseViewHolder<T>{

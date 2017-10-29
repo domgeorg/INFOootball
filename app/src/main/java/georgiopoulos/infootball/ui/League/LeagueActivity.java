@@ -52,7 +52,6 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
     private String callbackId;
     private String league;
     private String trophy;
-    private Bundle bundle;
     private boolean isShow = false;
     private int scrollRange = -1;
     @BindView(R.id.app_bar_league) AppBarLayout appBarLayout;
@@ -66,7 +65,6 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         super.onCreate(savedInstanceState);
         setContentView(R.layout.league_activity);
         ButterKnife.bind(this);
-        this.bundle=bundle;
 
         league=getIntent().getStringExtra("league");
         trophy=getIntent().getStringExtra("trophy");
@@ -76,19 +74,20 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         if (getSupportActionBar()!=null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         collapsingToolbarLayout.setTitle(" ");
 
-        tabLayout.setTabColor(getResources().getColor(R.color.colorPrimary));
-
         Picasso.with(this).load(getIntent().getStringExtra("leagueLogo")).into(headerImageView);
+
         getPresenter().request(getIntent().getStringExtra("leagueId"));
+
+        tabLayout.setTabColor(getResources().getColor(R.color.colorPrimary));
+        List<Fragment> fragmentList = new ArrayList<>();
+        fragmentList.add(LatestEventsFragment.create(getIntent().getStringExtra("leagueId")));
+        fragmentList.add(LeagueTableFragment.create(getIntent().getStringExtra("leagueId")));
+        fragmentList.add(NextEventsFragment.create(getIntent().getStringExtra("leagueId"),trophy));
+        tabLayout.initialize(viewPager,getSupportFragmentManager(),fragmentList,savedInstanceState);
     }
 
     void onTeams(TeamsDetails teamsDetails){
         callbackId = teamsDetails.getTeams().get(0).getIdLeague();
-        List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(LatestEventsFragment.create(callbackId));
-        fragmentList.add(LeagueTableFragment.create(callbackId));
-        fragmentList.add(NextEventsFragment.create(callbackId,trophy));
-        tabLayout.initialize(viewPager,getSupportFragmentManager(),fragmentList,bundle);
     }
 
     void onNetworkError(Throwable throwable){

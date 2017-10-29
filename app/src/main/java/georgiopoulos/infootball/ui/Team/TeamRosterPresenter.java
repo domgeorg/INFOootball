@@ -13,43 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package georgiopoulos.infootball.ui.League.NextEvents;
+package georgiopoulos.infootball.ui.Team;
 
 import android.os.Bundle;
 
 import javax.inject.Inject;
 
-import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
 import georgiopoulos.infootball.ui.Base.BasePresenter;
+import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTableFragment;
 import icepick.State;
 import rx.schedulers.Schedulers;
 
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
-public class NextEventsPresenter extends BasePresenter<NextEventsFragment>{
+public class TeamRosterPresenter extends BasePresenter<TeamRosterActivity>{
 
-    private static final int REQUEST_NEXT_EVENTS = 1;
-    @Inject ServerAPI api;
-    @Inject LocalData localData;
-    @State String leagueId;
-    @State String round;
+    private static final int REQUEST_PLAYERS = 1;
+    @Inject
+    ServerAPI api;
+    @State String teamId;
 
     @Override public void onCreate(Bundle savedState){
         super.onCreate(savedState);
 
-        restartableLatestCache(REQUEST_NEXT_EVENTS,
-                               () -> api.getNextEvents(leagueId,round)
+        restartableLatestCache(REQUEST_PLAYERS,
+                               () -> api.getTeamPlayers(teamId)
                                              .subscribeOn(Schedulers.io())
                                              .observeOn(mainThread()),
-                               NextEventsFragment::onEvents,
-                               NextEventsFragment::onNetworkError);
+                               TeamRosterActivity::onPlayers,
+                               TeamRosterActivity::onNetworkError);
     }
 
-    public void request(String leagueId){
-        this.leagueId = leagueId;
-        this.round=localData.getRoundFromRealm(leagueId);
-        start(REQUEST_NEXT_EVENTS);
+    public void request(String teamId){
+        this.teamId=teamId;
+        start(REQUEST_PLAYERS);
     }
-
 }

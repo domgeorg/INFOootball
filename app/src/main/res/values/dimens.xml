@@ -5,6 +5,8 @@
     <dimen name="app_bar_height_image_view">220dp</dimen>
     <dimen name="shadow_league">8dp</dimen>
 
+    <dimen name="team_activity_logo">106dp</dimen>
+
     <dimen name="teamLogoWidth">100dp</dimen>
     <dimen name="teamLogoHeight">68dp</dimen>
     <dimen name="teamLogoPadding">34dp</dimen>
