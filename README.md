@@ -43,7 +43,12 @@
 
 ![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171028-144409.png)
 
-![](http://labs.slynk.com/files/2010/02/under-construction.gif)
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171029-212102.png)
+
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171029-211906.png)
+
+
+![](http://www.ptiwebtech.com.au/images/slider-snap.png)
 
 ### LICENSE
 ```
