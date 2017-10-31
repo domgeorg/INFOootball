@@ -15,6 +15,7 @@
  */
 package georgiopoulos.infootball.ui.SoccerLeagues;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 
 import com.github.johnpersano.supertoasts.library.Style;
@@ -66,13 +70,18 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter>{
 
     void onLeagues(Leagues leagues){
         adapter.hideProgress();
-        adapter.set(leagues.getCountrys());
+
+        if(leagues!=null){
+            runLayoutAnimation(recyclerView);
+            adapter.set(leagues.getCountrys());
+        }
+        else toaster("Server does not provide data right now...try again later");
     }
 
     void onNetworkError(Throwable throwable){
         adapter.hideProgress();
-        new SuperToast(this).setText(throwable.getMessage()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
-    }
+        toaster(throwable.getMessage());
+      }
 
     private void onItemClick(Country country){
         startActivity(new Intent(this, LeagueActivity.class).putExtra("leagueId",country.getIdLeague()).putExtra("leagueLogo",country.getStrLogo()).putExtra("league",country.getStrLeague()).putExtra("trophy",country.getStrTrophy()));
@@ -86,5 +95,17 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter>{
     @Override public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
+    }
+
+    private void runLayoutAnimation(final RecyclerView recyclerView){
+        final Context context = recyclerView.getContext();
+        final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_from_right);
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.scheduleLayoutAnimation();
+    }
+
+    private void toaster(String message){
+        new SuperToast(this).setText(message).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+
     }
 }

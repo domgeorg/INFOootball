@@ -18,15 +18,13 @@ package georgiopoulos.infootball.ui.Team;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import com.github.johnpersano.supertoasts.library.Style;
-import com.github.johnpersano.supertoasts.library.SuperToast;
-import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -36,27 +34,22 @@ import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.remote.dto.Player;
-import georgiopoulos.infootball.data.remote.dto.TeamPlayers;
 import georgiopoulos.infootball.ui.Base.BaseActivity;
 import georgiopoulos.infootball.util.injection.Injector;
 import georgiopoulos.infootball.util.adapters.PlayerViewHolder;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
-import nucleus.factory.RequiresPresenter;
 
-@RequiresPresenter(TeamRosterPresenter.class)
 public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implements AppBarLayout.OnOffsetChangedListener{
 
     private String teamId;
     private String teamName;
     @Inject LocalData localData;
-    private SimpleListAdapter<Player> adapter;
     private boolean isShow = false;
     private int scrollRange = -1;
     @BindView(R.id.app_bar_team_details) AppBarLayout appBarLayout;
     @BindView(R.id.collapsing_toolbar_layout_team_details) CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.toolbar_team) Toolbar toolbar;
-    @BindView(R.id.team_recycler_view) RecyclerView recyclerView;
     @BindView(R.id.teamBadge) ImageView teamBadgeImageView;
 
     @Override public void onCreate(Bundle bundle){
@@ -72,28 +65,18 @@ public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implem
         collapsingToolbarLayout.setTitle(" ");
         Picasso.with(this).load(localData.getBadgeUrl(teamId)).into(teamBadgeImageView);
 
-        adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Player.class,R.layout.player_card,v -> new PlayerViewHolder<>(v,this::onItemClick)));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
-        adapter.showProgress();
-        getPresenter().request(teamId);
+        if (bundle == null) getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, TeamRosterFragment.create(teamId)).commit();
     }
 
-    void onPlayers(TeamPlayers teamPlayers){
-        adapter.hideProgress();
-        if (teamPlayers.getPlayer()==null) new SuperToast(this).setText("Server does not provide info about players").setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
-        else adapter.set(teamPlayers.getPlayer());
+    public void push(Fragment fragment){
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_container, fragment).commit();
     }
 
-    void onNetworkError(Throwable throwable){
-        adapter.hideProgress();
-        new SuperToast(this).setText(throwable.getMessage()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+    public void replace(Fragment fragment){
+        getSupportFragmentManager().popBackStackImmediate(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
     }
 
-    private void onItemClick(Player player){
-        new SuperToast(this).setText(player.getStrPlayer()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
-    }
 
     @Override public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();

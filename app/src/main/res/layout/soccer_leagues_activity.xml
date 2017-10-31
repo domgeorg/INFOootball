@@ -54,6 +54,7 @@
         android:paddingStart="@dimen/zero_horizontal_margin_big_activity"
         android:paddingEnd="@dimen/zero_horizontal_margin_big_activity"
         android:background="@color/activity_background"
+        android:layoutAnimation="@anim/layout_animation_from_right"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

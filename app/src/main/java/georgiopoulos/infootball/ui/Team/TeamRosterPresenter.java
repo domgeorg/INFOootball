@@ -21,17 +21,15 @@ import javax.inject.Inject;
 
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
 import georgiopoulos.infootball.ui.Base.BasePresenter;
-import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTableFragment;
 import icepick.State;
 import rx.schedulers.Schedulers;
 
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
-public class TeamRosterPresenter extends BasePresenter<TeamRosterActivity>{
+public class TeamRosterPresenter extends BasePresenter<TeamRosterFragment>{
 
     private static final int REQUEST_PLAYERS = 1;
-    @Inject
-    ServerAPI api;
+    @Inject ServerAPI api;
     @State String teamId;
 
     @Override public void onCreate(Bundle savedState){
@@ -41,8 +39,8 @@ public class TeamRosterPresenter extends BasePresenter<TeamRosterActivity>{
                                () -> api.getTeamPlayers(teamId)
                                              .subscribeOn(Schedulers.io())
                                              .observeOn(mainThread()),
-                               TeamRosterActivity::onPlayers,
-                               TeamRosterActivity::onNetworkError);
+                               TeamRosterFragment::onPlayers,
+                               TeamRosterFragment::onNetworkError);
     }
 
     public void request(String teamId){

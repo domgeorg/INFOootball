@@ -94,9 +94,9 @@ public class RealmManager implements LocalData{
         }return (teamsDetails);
     }
 
-    @Nullable
+    @NonNull
     public String getRoundFromRealm(String leagueId){
-        String round=null;
+        String round="-1";
         try(Realm realm = realmProvider.get()){
             if(realm.where(LeagueRoundRealm.class).equalTo("leagueId",leagueId).findFirst().getRound() != null)
                 round = realm.where(LeagueRoundRealm.class).equalTo("leagueId",leagueId).findFirst().getRound();

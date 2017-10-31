@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="georgiopoulos.infootball.ui.League.LeagueActivity">
+    tools:context="georgiopoulos.infootball.ui.Team.TeamRosterActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_team_details"
@@ -53,14 +53,10 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/team_recycler_view"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="@dimen/zero_horizontal_margin_big_activity"
-        android:paddingEnd="@dimen/zero_horizontal_margin_big_activity"
-        android:background="@color/activity_background"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </android.support.design.widget.CoordinatorLayout>
