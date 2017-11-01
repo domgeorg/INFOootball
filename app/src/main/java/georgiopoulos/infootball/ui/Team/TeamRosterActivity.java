@@ -39,6 +39,7 @@ import georgiopoulos.infootball.util.injection.Injector;
 import georgiopoulos.infootball.util.adapters.PlayerViewHolder;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
+import icepick.State;
 
 public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implements AppBarLayout.OnOffsetChangedListener{
 
@@ -46,7 +47,7 @@ public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implem
     private String teamName;
     @Inject LocalData localData;
     private boolean isShow = false;
-    private int scrollRange = -1;
+    @State int scrollRange = -1;
     @BindView(R.id.app_bar_team_details) AppBarLayout appBarLayout;
     @BindView(R.id.collapsing_toolbar_layout_team_details) CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.toolbar_team) Toolbar toolbar;
@@ -75,6 +76,11 @@ public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implem
     public void replace(Fragment fragment){
         getSupportFragmentManager().popBackStackImmediate(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        appBarLayout.setExpanded(!isShow);
     }
 
 

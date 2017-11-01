@@ -52,7 +52,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
     private String callbackId;
     private String league;
     private String trophy;
-    private boolean isShow = false;
+    @State boolean isShow = false;
     private int scrollRange = -1;
     @BindView(R.id.app_bar_league) AppBarLayout appBarLayout;
     @BindView(R.id.collapsing_toolbar_layout_league) CollapsingToolbarLayout collapsingToolbarLayout;
@@ -91,7 +91,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
     }
 
     void onNetworkError(Throwable throwable){
-        new SuperToast(this).setText(throwable.getMessage()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+        toaster(throwable.getMessage());
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu){
@@ -118,6 +118,11 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
             collapsingToolbarLayout.setTitle("");
             isShow=false;
         }
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        appBarLayout.setExpanded(!isShow);
     }
 
     @Override public void onSaveInstanceState(Bundle bundle){

@@ -69,16 +69,10 @@ public class TeamRosterFragment extends BaseFragment<TeamRosterPresenter>{
 
     void onPlayers(TeamPlayers teamPlayers){
         adapter.hideProgress();
-        if (teamPlayers.getPlayer()==null) new SuperToast(getActivity()).setText("Server does not provide info about players").setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+        if (teamPlayers.getPlayer()==null) toaster("Server does not provide info about players");
         else adapter.set(teamPlayers.getPlayer());
     }
 
-    void onNetworkError(Throwable throwable){
-        adapter.hideProgress();
-        new SuperToast(getActivity()).setText(throwable.getMessage()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
-    }
-
     private void onItemClick(Player player){
-        new SuperToast(getActivity()).setText(player.getStrPlayer()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
-    }
+        toaster(player.getStrPlayer());}
 }

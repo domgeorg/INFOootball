@@ -17,10 +17,18 @@ package georgiopoulos.infootball.ui.Base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+
+import com.github.johnpersano.supertoasts.library.Style;
+import com.github.johnpersano.supertoasts.library.SuperToast;
+import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.util.injection.Injector;
 import icepick.Icepick;
 import nucleus.factory.PresenterFactory;
@@ -55,5 +63,19 @@ public class BaseFragment<P extends Presenter> extends NucleusSupportFragment<P>
     @Override public void onDestroyView(){
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    public void toaster(final String message){
+        new SuperToast(getActivity()).setText(message).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+    }
+
+    public void runLayoutAnimation(final RecyclerView recyclerView,final int layoutAnimator){
+        final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getActivity(),layoutAnimator);
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.scheduleLayoutAnimation();
+    }
+
+    public void onNetworkError(Throwable throwable){
+        toaster(throwable.getMessage());
     }
 }

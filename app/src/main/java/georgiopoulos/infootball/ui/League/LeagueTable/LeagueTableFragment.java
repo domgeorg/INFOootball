@@ -57,17 +57,13 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
         return fragment;
     }
 
-    @Override public void onCreate(Bundle bundle){
-        super.onCreate(bundle);
-        getPresenter().request(getArguments().getString("leagueId"));
-    }
-
     @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
         return inflater.inflate(R.layout.recycler_view,container,false);
     }
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
+        getPresenter().request(getArguments().getString("leagueId"));
         adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Table.class,R.layout.league_table_card,v -> new LeagueTableTeamViewHolder<>(v, this::onItemClick)));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -77,13 +73,8 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
 
     void onTable(@Nullable LeagueTable leagueTable){
         adapter.hideProgress();
-        if (leagueTable.getTable()==null) new SuperToast(getActivity()).setText("Server does not provide info about standings").setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+        if (leagueTable.getTable()==null) toaster("Server does not provide info about standings");
         else adapter.set(leagueTable.getTable());
-    }
-
-    void onNetworkError(Throwable throwable){
-        adapter.hideProgress();
-        new SuperToast(getActivity()).setText(throwable.getMessage()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
     }
 
     private void onItemClick(Table team){

@@ -9,6 +9,7 @@
     tools:context="georgiopoulos.infootball.ui.SoccerLeagues.SoccerLeaguesActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_soccer_leagues"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height_image_view"
         android:fitsSystemWindows="true"

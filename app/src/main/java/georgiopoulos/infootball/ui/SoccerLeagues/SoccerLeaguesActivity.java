@@ -18,19 +18,17 @@ package georgiopoulos.infootball.ui.SoccerLeagues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 
-import com.github.johnpersano.supertoasts.library.Style;
-import com.github.johnpersano.supertoasts.library.SuperToast;
-import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -43,15 +41,18 @@ import georgiopoulos.infootball.ui.League.LeagueActivity;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import georgiopoulos.infootball.util.adapters.SoccerLeagueViewHolder;
+import icepick.State;
 import nucleus.factory.RequiresPresenter;
 
 @RequiresPresenter(SoccerLeaguesPresenter.class)
-public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter>{
+public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> implements AppBarLayout.OnOffsetChangedListener{
 
     @BindView(R.id.main_recycler_view) RecyclerView recyclerView;
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.header_image) ImageView headerImageView;
+    @BindView(R.id.app_bar_soccer_leagues) AppBarLayout appBarLayout;
     private SimpleListAdapter<Country> adapter;
+    @State boolean isCollapsed = false;
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -61,6 +62,7 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter>{
         if (getSupportActionBar()!=null) getSupportActionBar().setTitle(R.string.action_bar_title_soccer_leagues);
         Picasso.with(this).load(R.drawable.grass).into(headerImageView);
 
+        appBarLayout.addOnOffsetChangedListener(this);
         adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Country.class,R.layout.soccer_league_card,v -> new SoccerLeagueViewHolder<>(v,this::onItemClick)));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -68,11 +70,16 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter>{
         adapter.showProgress();
     }
 
+    @Override protected void onResume() {
+        super.onResume();
+        appBarLayout.setExpanded(isCollapsed);
+    }
+
     void onLeagues(Leagues leagues){
         adapter.hideProgress();
 
         if(leagues!=null){
-            runLayoutAnimation(recyclerView);
+            runLayoutAnimation(recyclerView,R.anim.layout_animation_from_right);
             adapter.set(leagues.getCountrys());
         }
         else toaster("Server does not provide data right now...try again later");
@@ -97,15 +104,8 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter>{
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
-    private void runLayoutAnimation(final RecyclerView recyclerView){
-        final Context context = recyclerView.getContext();
-        final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_from_right);
-        recyclerView.setLayoutAnimation(controller);
-        recyclerView.scheduleLayoutAnimation();
-    }
-
-    private void toaster(String message){
-        new SuperToast(this).setText(message).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
-
+    @Override public void onOffsetChanged(AppBarLayout appBarLayout,int verticalOffset){
+        if (verticalOffset == 0) isCollapsed = true;
+        else isCollapsed = false;
     }
 }

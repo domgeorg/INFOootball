@@ -57,17 +57,13 @@ public class NextEventsFragment extends BaseFragment<NextEventsPresenter>{
         return fragment;
     }
 
-    @Override public void onCreate(Bundle savedState){
-        super.onCreate(savedState);
-        getPresenter().request(getArguments().getString("leagueId"));
-    }
-
     @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
         return inflater.inflate(R.layout.recycler_view_next_events_with_header,container,false);
     }
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
+        getPresenter().request(getArguments().getString("leagueId"));
         adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Event.class,R.layout.next_events_card,v -> new NextEventViewHolder<>(v,this::onItemClick)));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -79,15 +75,10 @@ public class NextEventsFragment extends BaseFragment<NextEventsPresenter>{
 
     void onEvents(@Nullable Events events){
         adapter.hideProgress();
-        if (events.getEvents()==null) new SuperToast(getActivity()).setText("Server does not provide info about next events").setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+        if (events.getEvents()==null) toaster("Server does not provide info about next events");
         else adapter.set(events.getEvents());
     }
 
-    void onNetworkError(Throwable throwable){
-        new SuperToast(getActivity()).setText(throwable.getMessage()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
-    }
-
     void onItemClick(Event event){
-        new SuperToast(getActivity()).setText(event.getStrFilename()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
-    }
+       toaster(event.getStrFilename());}
 }
