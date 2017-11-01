@@ -15,15 +15,11 @@
  */
 package georgiopoulos.infootball.ui.League.LatestEvents;
 
-import android.os.Bundle;
-import android.util.Log;
 
 import javax.inject.Inject;
 
-import georgiopoulos.infootball.data.local.realmObjects.LeagueRoundRealm;
+import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
-import georgiopoulos.infootball.data.remote.dto.Event;
-import georgiopoulos.infootball.data.remote.dto.Events;
 import georgiopoulos.infootball.ui.Base.BasePresenter;
 import icepick.State;
 import io.realm.Realm;
@@ -34,38 +30,22 @@ import static rx.android.schedulers.AndroidSchedulers.mainThread;
 public class LatestEventsPresenter extends BasePresenter<LatestEventsFragment>{
 
     private static final int REQUEST_LATEST_EVENTS = 1;
-    @Inject
-    ServerAPI api;
-    @State
-    String leagueId;
+    @Inject ServerAPI api;
+    @State String leagueId;
+    @Inject LocalData localData;
 
-    @Override
-    public void onCreate(Bundle savedState){
-        super.onCreate(savedState);
+    public void request(String leagueId){
+        this.leagueId = leagueId;
 
         restartableLatestCache(REQUEST_LATEST_EVENTS,
                                () -> api.getLatestEvents(leagueId)
                                              .subscribeOn(Schedulers.io())
                                              .observeOn(Schedulers.computation())
-                                             .map(this::writeToRealm)
+                                             .map(events -> localData.writeRoundToRealm(events))
                                              .observeOn(mainThread()),
                                LatestEventsFragment::onEvents,LatestEventsFragment::onNetworkError);
-    }
 
-    public void request(String leagueId){
-        this.leagueId = leagueId;
         start(REQUEST_LATEST_EVENTS);
     }
 
-    private Events writeToRealm(Events events){
-        if (events!=null){
-        try(Realm realm = Realm.getDefaultInstance()){
-            realm.executeTransaction(t -> {
-                Event event = events.getEvents().get(1);
-                Log.e("REQUEST_LATEST_EVENTS",event.getIdLeague()+" "+event.getIntRound());
-                t.insertOrUpdate(new LeagueRoundRealm(event.getIdLeague(),event.getIntRound()));
-            });
-        }}
-        return (events);
-    }
 }

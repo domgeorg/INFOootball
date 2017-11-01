@@ -17,7 +17,6 @@ package georgiopoulos.infootball.data.local;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -26,6 +25,8 @@ import georgiopoulos.infootball.data.local.realmObjects.LeagueRealm;
 import georgiopoulos.infootball.data.local.realmObjects.LeagueRoundRealm;
 import georgiopoulos.infootball.data.local.realmObjects.TeamRealm;
 import georgiopoulos.infootball.data.remote.dto.Country;
+import georgiopoulos.infootball.data.remote.dto.Event;
+import georgiopoulos.infootball.data.remote.dto.Events;
 import georgiopoulos.infootball.data.remote.dto.Leagues;
 import georgiopoulos.infootball.data.remote.dto.Team;
 import georgiopoulos.infootball.data.remote.dto.TeamsDetails;
@@ -119,5 +120,16 @@ public class RealmManager implements LocalData{
                         t.insertOrUpdate(new LeagueRealm(league.getIdLeague(),league.getStrLeague(),league.getStrCountry(),league.getStrWebsite(),league.getStrFacebook(),league.getStrTwitter(),league.getStrYoutube(),league.getStrRSS(),league.getStrDescriptionEN(),
                                                          league.getStrBanner(),league.getStrBadge(),league.getStrLogo(),league.getStrPoster(),league.getStrTrophy()));});
         }return (leagues);
+    }
+
+    public Events writeRoundToRealm(Events events){
+        if (events!=null){
+            try(Realm realm = Realm.getDefaultInstance()){
+                realm.executeTransaction(t -> {
+                    Event event = events.getEvents().get(1);
+                    t.insertOrUpdate(new LeagueRoundRealm(event.getIdLeague(),event.getIntRound()));
+                });
+            }}
+        return (events);
     }
 }

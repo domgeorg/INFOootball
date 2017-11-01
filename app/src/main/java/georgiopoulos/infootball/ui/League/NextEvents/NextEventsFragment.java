@@ -25,9 +25,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
-import com.github.johnpersano.supertoasts.library.Style;
-import com.github.johnpersano.supertoasts.library.SuperToast;
-import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -63,20 +60,20 @@ public class NextEventsFragment extends BaseFragment<NextEventsPresenter>{
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        getPresenter().request(getArguments().getString("leagueId"));
         adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Event.class,R.layout.next_events_card,v -> new NextEventViewHolder<>(v,this::onItemClick)));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         recyclerViewHeader.attachTo(recyclerView);
         Picasso.with(getContext()).load(getArguments().getString("trophy")).into(trophyImageView);
+        getPresenter().request(getArguments().getString("leagueId"));
         adapter.showProgress();
     }
 
     void onEvents(@Nullable Events events){
         adapter.hideProgress();
-        if (events.getEvents()==null) toaster("Server does not provide info about next events");
-        else adapter.set(events.getEvents());
+        if(events.getEvents() != null) adapter.set(events.getEvents());
+        else toaster("Server does not provide info about next events");
     }
 
     void onItemClick(Event event){

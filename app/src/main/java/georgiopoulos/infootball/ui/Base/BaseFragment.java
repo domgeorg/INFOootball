@@ -35,7 +35,7 @@ import nucleus.factory.PresenterFactory;
 import nucleus.presenter.Presenter;
 import nucleus.view.NucleusSupportFragment;
 
-public class BaseFragment<P extends Presenter> extends NucleusSupportFragment<P>{
+public abstract class BaseFragment<P extends Presenter> extends NucleusSupportFragment<P>{
 
     private Unbinder unbinder;
 

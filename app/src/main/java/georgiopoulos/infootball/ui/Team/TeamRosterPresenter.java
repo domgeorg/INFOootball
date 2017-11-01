@@ -32,19 +32,14 @@ public class TeamRosterPresenter extends BasePresenter<TeamRosterFragment>{
     @Inject ServerAPI api;
     @State String teamId;
 
-    @Override public void onCreate(Bundle savedState){
-        super.onCreate(savedState);
-
+    public void request(String teamId){
+        this.teamId=teamId;
         restartableLatestCache(REQUEST_PLAYERS,
                                () -> api.getTeamPlayers(teamId)
                                              .subscribeOn(Schedulers.io())
                                              .observeOn(mainThread()),
                                TeamRosterFragment::onPlayers,
                                TeamRosterFragment::onNetworkError);
-    }
-
-    public void request(String teamId){
-        this.teamId=teamId;
         start(REQUEST_PLAYERS);
     }
 }

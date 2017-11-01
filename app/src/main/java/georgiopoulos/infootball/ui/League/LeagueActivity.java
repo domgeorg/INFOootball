@@ -25,9 +25,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import com.github.johnpersano.supertoasts.library.Style;
-import com.github.johnpersano.supertoasts.library.SuperToast;
-import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -42,7 +39,6 @@ import georgiopoulos.infootball.ui.Base.BaseActivity;
 import georgiopoulos.infootball.ui.League.LatestEvents.LatestEventsFragment;
 import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTableFragment;
 import georgiopoulos.infootball.ui.League.NextEvents.NextEventsFragment;
-import icepick.Icepick;
 import icepick.State;
 import nucleus.factory.RequiresPresenter;
 

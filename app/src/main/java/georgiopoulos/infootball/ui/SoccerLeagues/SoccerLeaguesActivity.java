@@ -15,18 +15,14 @@
  */
 package georgiopoulos.infootball.ui.SoccerLeagues;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -105,7 +101,6 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
     }
 
     @Override public void onOffsetChanged(AppBarLayout appBarLayout,int verticalOffset){
-        if (verticalOffset == 0) isCollapsed = true;
-        else isCollapsed = false;
+        isCollapsed = verticalOffset == 0;
     }
 }

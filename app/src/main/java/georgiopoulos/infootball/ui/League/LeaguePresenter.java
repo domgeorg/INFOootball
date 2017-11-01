@@ -39,8 +39,8 @@ public class LeaguePresenter extends BasePresenter<LeagueActivity>{
     @Inject LocalData localData;
     @State String leagueId;
 
-    @Override public void onCreate(Bundle savedState){
-        super.onCreate(savedState);
+    public void request(String leagueId){
+        this.leagueId = leagueId;
 
         restartableLatestCache(REQUEST_TEAMS,
                                ()->api.getLeagueTeams(leagueId).subscribeOn(Schedulers.io())
@@ -49,11 +49,7 @@ public class LeaguePresenter extends BasePresenter<LeagueActivity>{
                                            .observeOn(mainThread()),
                                LeagueActivity::onTeams,
                                LeagueActivity::onNetworkError);
-        start(REQUEST_TEAMS);
-    }
 
-    public void request(String leagueId){
-        this.leagueId = leagueId;
         start(REQUEST_TEAMS);
     }
 

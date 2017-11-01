@@ -22,10 +22,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.johnpersano.supertoasts.library.Style;
-import com.github.johnpersano.supertoasts.library.SuperToast;
-import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
-
 import butterknife.BindView;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.Player;
@@ -56,15 +52,12 @@ public class TeamRosterFragment extends BaseFragment<TeamRosterPresenter>{
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
+        getPresenter().request(getArguments().getString("teamId"));
         adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Player.class,R.layout.player_card,v -> new PlayerViewHolder<>(v,this::onItemClick)));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override public void onCreate(Bundle savedState){
-        super.onCreate(savedState);
-        getPresenter().request(getArguments().getString("teamId"));
+        adapter.showProgress();
     }
 
     void onPlayers(TeamPlayers teamPlayers){

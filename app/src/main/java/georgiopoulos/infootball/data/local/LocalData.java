@@ -15,6 +15,7 @@
  */
 package georgiopoulos.infootball.data.local;
 
+import georgiopoulos.infootball.data.remote.dto.Events;
 import georgiopoulos.infootball.data.remote.dto.Leagues;
 import georgiopoulos.infootball.data.remote.dto.TeamsDetails;
 import io.realm.Realm;
@@ -29,5 +30,5 @@ public interface LocalData{
     String getRoundFromRealm(String leagueId);
     Boolean findLeagueInRealm(Realm realm, String leagueId);
     Leagues writeLeaguesToRealm(Leagues leagues);
-
+    Events writeRoundToRealm(Events events);
 }

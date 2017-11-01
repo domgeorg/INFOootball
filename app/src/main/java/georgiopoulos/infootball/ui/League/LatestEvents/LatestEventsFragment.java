@@ -67,7 +67,7 @@ public class LatestEventsFragment extends BaseFragment<LatestEventsPresenter>{
 
     void onEvents(@Nullable Events events){
         adapter.hideProgress();
-        if (events.getEvents()==null) new SuperToast(getActivity()).setText("Server does not provide info about latest events").setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+        if (events.getEvents()==null) toaster("Server does not provide info about latest events");
         else adapter.set(events.getEvents());
     }
 
