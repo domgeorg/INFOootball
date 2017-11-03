@@ -23,9 +23,7 @@
             android:id="@+id/PlayerCutout"
             android:layout_width="@dimen/badge"
             android:layout_height="@dimen/badge"
-            android:layout_marginEnd="@dimen/text_margin"
-            android:contentDescription="@string/league_badge"
-            tools:srcCompat="@drawable/player" />
+            android:layout_marginEnd="@dimen/text_margin" />
 
         <LinearLayout
             android:layout_width="match_parent"

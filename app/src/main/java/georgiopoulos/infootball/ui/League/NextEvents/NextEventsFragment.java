@@ -72,7 +72,9 @@ public class NextEventsFragment extends BaseFragment<NextEventsPresenter>{
 
     void onEvents(@Nullable Events events){
         adapter.hideProgress();
-        if(events.getEvents() != null) adapter.set(events.getEvents());
+        if(events.getEvents() != null) {
+            runLayoutAnimation(recyclerView,R.anim.layout_animation_from_bottom);
+            adapter.set(events.getEvents());}
         else toaster("Server does not provide info about next events");
     }
 

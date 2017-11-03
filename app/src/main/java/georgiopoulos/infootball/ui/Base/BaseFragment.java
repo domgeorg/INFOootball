@@ -78,4 +78,5 @@ public abstract class BaseFragment<P extends Presenter> extends NucleusSupportFr
     public void onNetworkError(Throwable throwable){
         toaster(throwable.getMessage());
     }
+
 }

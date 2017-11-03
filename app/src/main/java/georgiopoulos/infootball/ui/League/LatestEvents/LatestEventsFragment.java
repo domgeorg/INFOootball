@@ -68,7 +68,10 @@ public class LatestEventsFragment extends BaseFragment<LatestEventsPresenter>{
     void onEvents(@Nullable Events events){
         adapter.hideProgress();
         if (events.getEvents()==null) toaster("Server does not provide info about latest events");
-        else adapter.set(events.getEvents());
+        else {
+            runLayoutAnimation(recyclerView,R.anim.layout_animation_from_bottom);
+            adapter.set(events.getEvents());
+        }
     }
 
     void onItemClick(Event event){

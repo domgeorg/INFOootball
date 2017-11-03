@@ -63,7 +63,9 @@ public class TeamRosterFragment extends BaseFragment<TeamRosterPresenter>{
     void onPlayers(TeamPlayers teamPlayers){
         adapter.hideProgress();
         if (teamPlayers.getPlayer()==null) toaster("Server does not provide info about players");
-        else adapter.set(teamPlayers.getPlayer());
+        else {
+            runLayoutAnimation(recyclerView,R.anim.layout_animation_from_bottom);
+            adapter.set(teamPlayers.getPlayer());}
     }
 
     private void onItemClick(Player player){

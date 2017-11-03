@@ -21,6 +21,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -48,7 +49,8 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
     @BindView(R.id.header_image) ImageView headerImageView;
     @BindView(R.id.app_bar_soccer_leagues) AppBarLayout appBarLayout;
     private SimpleListAdapter<Country> adapter;
-    @State boolean isCollapsed = false;
+    @State boolean isShow = false;
+    private int scrollRange;
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -59,16 +61,13 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
         Picasso.with(this).load(R.drawable.grass).into(headerImageView);
 
         appBarLayout.addOnOffsetChangedListener(this);
+        scrollRange = -1;
+        appBarLayout.setExpanded(!isShow);
         adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Country.class,R.layout.soccer_league_card,v -> new SoccerLeagueViewHolder<>(v,this::onItemClick)));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         adapter.showProgress();
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
-        appBarLayout.setExpanded(isCollapsed);
     }
 
     void onLeagues(Leagues leagues){
@@ -101,6 +100,7 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
     }
 
     @Override public void onOffsetChanged(AppBarLayout appBarLayout,int verticalOffset){
-        isCollapsed = verticalOffset == 0;
+        if (scrollRange == -1) scrollRange = appBarLayout.getTotalScrollRange();
+        isShow=(Math.abs(scrollRange+verticalOffset)<10);
     }
 }

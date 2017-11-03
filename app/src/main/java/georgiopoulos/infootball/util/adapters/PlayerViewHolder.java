@@ -64,6 +64,6 @@ public class PlayerViewHolder<T extends Player> extends BaseViewHolder<T>{
         String playerPhoto="http://freevector.co/wp-content/uploads/2013/02/22453-football-player-shape-simbolo-de-la-interfaz-de-ios-71.png";
         if(player.getStrCutout()!=null) playerPhoto=player.getStrCutout();
         else if (player.getStrThumb()!=null)playerPhoto=player.getStrThumb();
-        Picasso.with(view.getContext()).load(playerPhoto).placeholder(R.drawable.player).into(playerCutoutImageView);
+        Picasso.with(view.getContext()).load(playerPhoto).into(playerCutoutImageView);
     }
 }

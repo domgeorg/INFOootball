@@ -46,10 +46,10 @@ import nucleus.factory.RequiresPresenter;
 public class LeagueActivity extends BaseActivity<LeaguePresenter> implements AppBarLayout.OnOffsetChangedListener{
 
     private String callbackId;
-    private String league;
-    private String trophy;
+    @State String league;
+    @State String trophy;
+    private int scrollRange;
     @State boolean isShow = false;
-    private int scrollRange = -1;
     @BindView(R.id.app_bar_league) AppBarLayout appBarLayout;
     @BindView(R.id.collapsing_toolbar_layout_league) CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.toolbar_league) Toolbar toolbar;
@@ -68,7 +68,9 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         setSupportActionBar(toolbar);
         appBarLayout.addOnOffsetChangedListener(this);
         if (getSupportActionBar()!=null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        scrollRange = -1;
         collapsingToolbarLayout.setTitle(" ");
+        appBarLayout.setExpanded(!isShow);
 
         Picasso.with(this).load(getIntent().getStringExtra("leagueLogo")).into(headerImageView);
 

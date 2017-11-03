@@ -74,7 +74,9 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
     void onTable(@Nullable LeagueTable leagueTable){
         adapter.hideProgress();
         if (leagueTable.getTable()==null) toaster("Server does not provide info about standings");
-        else adapter.set(leagueTable.getTable());
+        else {
+            runLayoutAnimation(recyclerView,R.anim.layout_animation_fall_down);
+            adapter.set(leagueTable.getTable());}
     }
 
     private void onItemClick(Table team){
