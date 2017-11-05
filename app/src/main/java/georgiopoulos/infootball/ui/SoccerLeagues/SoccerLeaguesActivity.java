@@ -86,7 +86,7 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
       }
 
     private void onItemClick(Country country){
-        startActivity(new Intent(this, LeagueActivity.class).putExtra("leagueId",country.getIdLeague()).putExtra("leagueLogo",country.getStrLogo()).putExtra("league",country.getStrLeague()).putExtra("trophy",country.getStrTrophy()));
+        startActivity(new Intent(this, LeagueActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("leagueId",country.getIdLeague()).putExtra("leagueBadge",country.getStrBadge()).putExtra("league",country.getStrLeague()).putExtra("trophy",country.getStrTrophy()));
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu){

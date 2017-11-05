@@ -15,6 +15,7 @@
  */
 package georgiopoulos.infootball.ui.League;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -30,6 +31,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindColor;
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.long1.spacetablayout.SpaceTabLayout;
@@ -56,6 +59,9 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
     @BindView(R.id.header_image_league_logo) ImageView headerImageView;
     @BindView(R.id.view_pager_league) ViewPager viewPager;
     @BindView(R.id.tab_layout_league) SpaceTabLayout tabLayout;
+    @BindDrawable(R.drawable.ic_arrow_primary_color_24dp) Drawable primaryColorArrow;
+    @BindDrawable(R.drawable.ic_arrow_white_24dp) Drawable whiteColorArrow;
+    @BindColor(R.color.colorPrimary) int colorPrimary;
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -71,12 +77,13 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         scrollRange = -1;
         collapsingToolbarLayout.setTitle(" ");
         appBarLayout.setExpanded(!isShow);
-
-        Picasso.with(this).load(getIntent().getStringExtra("leagueLogo")).into(headerImageView);
+        if(!isShow)getSupportActionBar().setHomeAsUpIndicator(primaryColorArrow);
+        else getSupportActionBar().setHomeAsUpIndicator(whiteColorArrow);
+        Picasso.with(this).load(getIntent().getStringExtra("leagueBadge")).into(headerImageView);
 
         getPresenter().request(getIntent().getStringExtra("leagueId"));
 
-        tabLayout.setTabColor(getResources().getColor(R.color.colorPrimary));
+        tabLayout.setTabColor(colorPrimary);
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(LatestEventsFragment.create(getIntent().getStringExtra("leagueId")));
         fragmentList.add(LeagueTableFragment.create(getIntent().getStringExtra("leagueId")));
@@ -111,16 +118,13 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         if (scrollRange == -1) scrollRange = appBarLayout.getTotalScrollRange();
         if (Math.abs(scrollRange+verticalOffset)<10){
             collapsingToolbarLayout.setTitle(league);
+            getSupportActionBar().setHomeAsUpIndicator(whiteColorArrow);
             isShow=true;
         }else if (isShow){
             collapsingToolbarLayout.setTitle("");
+            getSupportActionBar().setHomeAsUpIndicator(primaryColorArrow);
             isShow=false;
         }
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
-        appBarLayout.setExpanded(!isShow);
     }
 
     @Override public void onSaveInstanceState(Bundle bundle){

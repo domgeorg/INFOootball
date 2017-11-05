@@ -15,13 +15,13 @@
  */
 package georgiopoulos.infootball.ui.Team;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -29,6 +29,7 @@ import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
@@ -48,6 +49,8 @@ public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implem
     @BindView(R.id.collapsing_toolbar_layout_team_details) CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.toolbar_team) Toolbar toolbar;
     @BindView(R.id.teamBadge) ImageView teamBadgeImageView;
+    @BindDrawable(R.drawable.ic_arrow_primary_color_24dp) Drawable primaryColorArrow;
+    @BindDrawable(R.drawable.ic_arrow_white_24dp) Drawable whiteColorArrow;
 
     @Override public void onCreate(Bundle bundle){
         ((Injector)getApplication()).inject(this);
@@ -57,14 +60,16 @@ public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implem
 
         teamId = getIntent().getStringExtra("teamId");
         teamName=getIntent().getStringExtra("team");
+
         setSupportActionBar(toolbar);
         appBarLayout.addOnOffsetChangedListener(this);
         if (getSupportActionBar()!=null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         Picasso.with(this).load(localData.getBadgeUrl(teamId)).into(teamBadgeImageView);
         scrollRange = -1;
         collapsingToolbarLayout.setTitle(" ");
         appBarLayout.setExpanded(!isShow);
+        if(!isShow)getSupportActionBar().setHomeAsUpIndicator(primaryColorArrow);
+        else getSupportActionBar().setHomeAsUpIndicator(whiteColorArrow);
 
         if (bundle == null) getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, TeamRosterFragment.create(teamId)).commit();
     }
@@ -92,9 +97,11 @@ public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implem
         if (scrollRange == -1) scrollRange = appBarLayout.getTotalScrollRange();
         if (Math.abs(scrollRange+verticalOffset)<10){
             collapsingToolbarLayout.setTitle(teamName);
+            getSupportActionBar().setHomeAsUpIndicator(whiteColorArrow);
             isShow=true;
         }else if (isShow){
-            collapsingToolbarLayout.setTitle("");
+            collapsingToolbarLayout.setTitle(" ");
+            getSupportActionBar().setHomeAsUpIndicator(primaryColorArrow);
             isShow=false;
         }
     }
