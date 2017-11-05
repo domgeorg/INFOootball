@@ -23,6 +23,12 @@
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/action_button_size"
+                android:layout_gravity="top"
+                android:background="@drawable/activity_soccer_leagues_shadow_header" />
+
             <ImageView
                 android:id="@+id/header_image"
                 android:layout_width="match_parent"

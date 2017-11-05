@@ -55,7 +55,7 @@ public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implem
     @Override public void onCreate(Bundle bundle){
         ((Injector)getApplication()).inject(this);
         super.onCreate(bundle);
-        setContentView(R.layout.team_roster_activity);
+        setContentView(R.layout.activity_team_roaster);
         ButterKnife.bind(this);
 
         teamId = getIntent().getStringExtra("teamId");

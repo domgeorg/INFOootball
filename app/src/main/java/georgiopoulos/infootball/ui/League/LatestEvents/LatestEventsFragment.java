@@ -52,13 +52,13 @@ public class LatestEventsFragment extends BaseFragment<LatestEventsPresenter>{
     }
 
     @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-        return inflater.inflate(R.layout.recycler_view,container,false);
+        return inflater.inflate(R.layout.view_recycler,container,false);
     }
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         getPresenter().request(getArguments().getString("leagueId"));
-        adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Event.class,R.layout.latest_events_card,v -> new LatestEventViewHolder<>(v,this::onItemClick)));
+        adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Event.class,R.layout.card_latest_events,v -> new LatestEventViewHolder<>(v,this::onItemClick)));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);

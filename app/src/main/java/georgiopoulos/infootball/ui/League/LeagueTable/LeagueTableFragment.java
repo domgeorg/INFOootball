@@ -15,8 +15,6 @@
  */
 package georgiopoulos.infootball.ui.League.LeagueTable;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,18 +23,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import com.github.johnpersano.supertoasts.library.Style;
-import com.github.johnpersano.supertoasts.library.SuperToast;
-import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 
 import butterknife.BindView;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.LeagueTable;
 import georgiopoulos.infootball.data.remote.dto.Table;
 import georgiopoulos.infootball.ui.Base.BaseFragment;
-import georgiopoulos.infootball.ui.League.LeagueActivity;
 import georgiopoulos.infootball.ui.Team.TeamRosterActivity;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import georgiopoulos.infootball.util.adapters.LeagueTableTeamViewHolder;
@@ -58,13 +50,13 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
     }
 
     @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-        return inflater.inflate(R.layout.recycler_view,container,false);
+        return inflater.inflate(R.layout.view_recycler,container,false);
     }
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         getPresenter().request(getArguments().getString("leagueId"));
-        adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Table.class,R.layout.league_table_card,v -> new LeagueTableTeamViewHolder<>(v, this::onItemClick)));
+        adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Table.class,R.layout.card_league_table,v -> new LeagueTableTeamViewHolder<>(v,this::onItemClick)));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);

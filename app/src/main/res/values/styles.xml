@@ -42,5 +42,9 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/activity_soccer_leagues_background_splash</item>
+    </style>
+
 </resources>
 

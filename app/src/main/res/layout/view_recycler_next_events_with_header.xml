@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/recycler_header_height">
 
-      <include layout="@layout/next_events_header"/>
+      <include layout="@layout/card_header_next_events"/>
 
     </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
 

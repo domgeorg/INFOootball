@@ -17,6 +17,7 @@ package georgiopoulos.infootball.data.local;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -122,6 +123,7 @@ public class RealmManager implements LocalData{
         }return (leagues);
     }
 
+    @Nullable
     public Events writeRoundToRealm(Events events){
         if (events!=null){
             try(Realm realm = Realm.getDefaultInstance()){

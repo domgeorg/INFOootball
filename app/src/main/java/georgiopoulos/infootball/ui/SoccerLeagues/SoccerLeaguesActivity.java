@@ -21,7 +21,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -54,7 +53,7 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.soccer_leagues_activity);
+        setContentView(R.layout.activity_soccer_leagues);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         if (getSupportActionBar()!=null) getSupportActionBar().setTitle(R.string.action_bar_title_soccer_leagues);
@@ -63,7 +62,7 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
         appBarLayout.addOnOffsetChangedListener(this);
         scrollRange = -1;
         appBarLayout.setExpanded(!isShow);
-        adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Country.class,R.layout.soccer_league_card,v -> new SoccerLeagueViewHolder<>(v,this::onItemClick)));
+        adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Country.class,R.layout.card_soccer_league,v -> new SoccerLeagueViewHolder<>(v,this::onItemClick)));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);

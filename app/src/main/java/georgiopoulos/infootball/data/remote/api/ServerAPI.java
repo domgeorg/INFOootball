@@ -20,6 +20,7 @@ import georgiopoulos.infootball.data.remote.dto.LeagueTable;
 import georgiopoulos.infootball.data.remote.dto.Leagues;
 import georgiopoulos.infootball.data.remote.dto.TeamPlayers;
 import georgiopoulos.infootball.data.remote.dto.TeamsDetails;
+import georgiopoulos.infootball.data.remote.dto.livescores.LiveScores;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -43,4 +44,7 @@ public interface ServerAPI{
 
     @GET("lookup_all_players.php")
     Observable<TeamPlayers>getTeamPlayers(@Query("id") String teamId);
+
+    @GET("/latestsoccer.php")
+    Observable<LiveScores>getLiveScores();
 }

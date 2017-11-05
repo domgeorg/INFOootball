@@ -65,7 +65,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.league_activity);
+        setContentView(R.layout.activity_league);
         ButterKnife.bind(this);
 
         league=getIntent().getStringExtra("league");

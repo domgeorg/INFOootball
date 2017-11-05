@@ -47,13 +47,13 @@ public class TeamRosterFragment extends BaseFragment<TeamRosterPresenter>{
     }
 
     @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-        return inflater.inflate(R.layout.recycler_view,container,false);
+        return inflater.inflate(R.layout.view_recycler,container,false);
     }
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         getPresenter().request(getArguments().getString("teamId"));
-        adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Player.class,R.layout.player_card,v -> new PlayerViewHolder<>(v,this::onItemClick)));
+        adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Player.class,R.layout.card_player,v -> new PlayerViewHolder<>(v,this::onItemClick)));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);

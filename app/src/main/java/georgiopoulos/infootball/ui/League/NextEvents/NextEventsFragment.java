@@ -55,12 +55,12 @@ public class NextEventsFragment extends BaseFragment<NextEventsPresenter>{
     }
 
     @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-        return inflater.inflate(R.layout.recycler_view_next_events_with_header,container,false);
+        return inflater.inflate(R.layout.view_recycler_next_events_with_header,container,false);
     }
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        adapter = new SimpleListAdapter<>(R.layout.loading_view, new ClassViewHolderType<>(Event.class,R.layout.next_events_card,v -> new NextEventViewHolder<>(v,this::onItemClick)));
+        adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Event.class,R.layout.card_next_events,v -> new NextEventViewHolder<>(v,this::onItemClick)));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
