@@ -13,12 +13,12 @@
 6. [Butter Knife](http://jakewharton.github.io/butterknife/)
 7. [Dagger](https://google.github.io/dagger/)
 8. [Project Lombok](https://projectlombok.org/)
-9 [Nucleus](https://github.com/konmik/nucleus)
-10 [Icepick](https://github.com/frankiesardo/icepick)
-11[Picasso](http://square.github.io/picasso/)
-12 [diagonal-imageview](https://github.com/santalu/diagonal-imageview)
-13 [SpaceTabLayout](https://github.com/long1eu/SpaceTabLayout)
-14 [RecyclerViewHeader](https://github.com/blipinsk/RecyclerViewHeader)
+9. [Nucleus](https://github.com/konmik/nucleus)
+10. [Icepick](https://github.com/frankiesardo/icepick)
+11. [Picasso](http://square.github.io/picasso/)
+12. [diagonal-imageview](https://github.com/santalu/diagonal-imageview)
+13. [SpaceTabLayout](https://github.com/long1eu/SpaceTabLayout)
+14. [RecyclerViewHeader](https://github.com/blipinsk/RecyclerViewHeader)
 
 ## Free APIs
 1. [TheSportsDB](http://www.thesportsdb.com)
