@@ -68,9 +68,6 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
     compile "com.google.dagger:dagger:$dagger_version"
 
-    //Super Toasts
-    compile 'com.github.johnpersano:supertoasts:2.0'
-
     //Butter Knife
     compile "com.jakewharton:butterknife:$butter_knife_version"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butter_knife_version"

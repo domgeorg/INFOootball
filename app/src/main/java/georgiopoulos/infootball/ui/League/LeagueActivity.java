@@ -19,6 +19,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -62,6 +63,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
     @BindDrawable(R.drawable.ic_arrow_primary_color_24dp) Drawable primaryColorArrow;
     @BindDrawable(R.drawable.ic_arrow_white_24dp) Drawable whiteColorArrow;
     @BindColor(R.color.colorPrimary) int colorPrimary;
+    @BindView(R.id.activity_league_coordinator_layout) CoordinatorLayout coordinatorLayout;
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -96,7 +98,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
     }
 
     void onNetworkError(Throwable throwable){
-        toaster(throwable.getMessage());
+        newsFlash(throwable.getMessage(),collapsingToolbarLayout);
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu){

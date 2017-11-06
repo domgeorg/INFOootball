@@ -18,6 +18,7 @@ package georgiopoulos.infootball.ui.SoccerLeagues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -47,6 +48,7 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.header_image) ImageView headerImageView;
     @BindView(R.id.app_bar_soccer_leagues) AppBarLayout appBarLayout;
+    @BindView(R.id.activity_soccer_leagues_coordinator_layout) CoordinatorLayout coordinatorLayout;
     private SimpleListAdapter<Country> adapter;
     @State boolean isShow = false;
     private int scrollRange;
@@ -76,13 +78,13 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
             runLayoutAnimation(recyclerView,R.anim.layout_animation_from_right);
             adapter.set(leagues.getCountrys());
         }
-        else toaster("Server does not provide data right now...try again later");
+        else newsFlash("Server does not provide data right now...try again later",coordinatorLayout);
     }
 
     void onNetworkError(Throwable throwable){
         adapter.hideProgress();
-        toaster(throwable.getMessage());
-      }
+        newsFlash(throwable.getMessage(),coordinatorLayout);
+    }
 
     private void onItemClick(Country country){
         startActivity(new Intent(this, LeagueActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("leagueId",country.getIdLeague()).putExtra("leagueBadge",country.getStrBadge()).putExtra("league",country.getStrLeague()).putExtra("trophy",country.getStrTrophy()));

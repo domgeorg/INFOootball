@@ -16,15 +16,12 @@
 package georgiopoulos.infootball.ui.Base;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
-import com.github.johnpersano.supertoasts.library.Style;
-import com.github.johnpersano.supertoasts.library.SuperToast;
-import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
-
-import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.util.injection.Injector;
 import icepick.Icepick;
 import nucleus.factory.PresenterFactory;
@@ -51,8 +48,8 @@ public class BaseActivity <P extends Presenter> extends NucleusAppCompatActivity
         Icepick.saveInstanceState(this, bundle);
     }
 
-    public void toaster(final String message){
-        new SuperToast(this).setText(message).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+    public void newsFlash(final String message, final View viewId){
+        Snackbar.make(viewId,message,Snackbar.LENGTH_SHORT).show();
     }
 
     public void runLayoutAnimation(final RecyclerView recyclerView, final int layoutAnimator){

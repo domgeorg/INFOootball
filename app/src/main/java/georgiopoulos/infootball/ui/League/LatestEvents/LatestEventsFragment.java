@@ -23,10 +23,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.johnpersano.supertoasts.library.Style;
-import com.github.johnpersano.supertoasts.library.SuperToast;
-import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
-
 import butterknife.BindView;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.Event;
@@ -67,14 +63,18 @@ public class LatestEventsFragment extends BaseFragment<LatestEventsPresenter>{
 
     void onEvents(@Nullable Events events){
         adapter.hideProgress();
-        if (events.getEvents()==null) toaster("Server does not provide info about latest events");
-        else {
+        if (events.getEvents()==null) newsFlash("Server does not provide info about latest events",recyclerView);
+        else{
             runLayoutAnimation(recyclerView,R.anim.layout_animation_from_bottom);
             adapter.set(events.getEvents());
         }
     }
 
-    void onItemClick(Event event){
-        new SuperToast(getActivity()).setText(event.getStrFilename()).setTextSize(R.dimen.toastTextSize).setTextColor(PaletteUtils.getSolidColor(PaletteUtils.WHITE)).setDuration(Style.DURATION_SHORT).setFrame(Style.FRAME_STANDARD).setColor(getResources().getColor(R.color.colorAccent)).setAnimations(Style.ANIMATIONS_SCALE).show();
+    void onNetworkError(Throwable throwable){
+        adapter.hideProgress();
+        newsFlash(throwable.getMessage(),recyclerView);
     }
+
+    void onItemClick(Event event){
+        newsFlash(event.getStrFilename(),recyclerView);}
 }
