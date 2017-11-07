@@ -10,14 +10,14 @@
     tools:context="georgiopoulos.infootball.ui.League.LeagueActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar_league"
+        android:id="@+id/activity_league_app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height_image_view"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar_layout_league"
+            android:id="@+id/activity_league_collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -26,7 +26,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/header_image_league_logo"
+                android:id="@+id/activity_league_header_image"
                 android:layout_width="@dimen/team_activity_logo"
                 android:layout_height="@dimen/team_activity_logo"
                 android:layout_gravity="center"
@@ -39,7 +39,7 @@
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar_league"
+                android:id="@+id/activity_league_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
@@ -49,25 +49,25 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager_league"
+        android:id="@+id/activity_league_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <eu.long1.spacetablayout.SpaceTabLayout
-        android:id="@+id/tab_layout_league"
+        android:id="@+id/activity_league_tab_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:number_of_tabs="three"
-        app:icon_one="@drawable/ic_league_tab_main"
-        app:icon_two="@drawable/ic_tab2_league"
-        app:icon_three="@drawable/ic_tab3_league"
-        app:text_one="@string/tab1_league"
-        app:text_two="@string/tab2_league"
-        app:text_three="@string/tab3_league"
+        app:icon_one="@drawable/ic_league_tab_main_white"
+        app:icon_two="@drawable/ic_tab2_league_white"
+        app:icon_three="@drawable/ic_tab3_league_white"
         app:tab_color="@color/colorPrimary"
         app:button_color="@color/colorAccent"
+        app:text_one=" "
+        app:text_two=" "
+        app:text_three=" "
         app:layout_behavior="eu.long1.spacetablayout.SpaceTabLayoutBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

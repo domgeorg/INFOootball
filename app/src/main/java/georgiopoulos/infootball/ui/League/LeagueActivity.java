@@ -49,21 +49,21 @@ import nucleus.factory.RequiresPresenter;
 @RequiresPresenter(LeaguePresenter.class)
 public class LeagueActivity extends BaseActivity<LeaguePresenter> implements AppBarLayout.OnOffsetChangedListener{
 
-    private String callbackId;
-    @State String league;
-    @State String trophy;
-    private int scrollRange;
-    @State boolean isShow = false;
-    @BindView(R.id.app_bar_league) AppBarLayout appBarLayout;
-    @BindView(R.id.collapsing_toolbar_layout_league) CollapsingToolbarLayout collapsingToolbarLayout;
-    @BindView(R.id.toolbar_league) Toolbar toolbar;
-    @BindView(R.id.header_image_league_logo) ImageView headerImageView;
-    @BindView(R.id.view_pager_league) ViewPager viewPager;
-    @BindView(R.id.tab_layout_league) SpaceTabLayout tabLayout;
+
+    @BindView(R.id.activity_league_coordinator_layout) CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.activity_league_app_bar_layout) AppBarLayout appBarLayout;
+    @BindView(R.id.activity_league_collapsing_toolbar_layout) CollapsingToolbarLayout collapsingToolbarLayout;
+    @BindView(R.id.activity_league_header_image) ImageView headerImageView;
+    @BindView(R.id.activity_league_toolbar) Toolbar toolbar;
+    @BindView(R.id.activity_league_view_pager) ViewPager viewPager;
+    @BindView(R.id.activity_league_tab_layout) SpaceTabLayout tabLayout;
     @BindDrawable(R.drawable.ic_arrow_primary_color_24dp) Drawable primaryColorArrow;
     @BindDrawable(R.drawable.ic_arrow_white_24dp) Drawable whiteColorArrow;
     @BindColor(R.color.colorPrimary) int colorPrimary;
-    @BindView(R.id.activity_league_coordinator_layout) CoordinatorLayout coordinatorLayout;
+    @State String league;
+    @State String trophy;
+    @State boolean isShow = false;
+    private int scrollRange;
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -93,9 +93,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         tabLayout.initialize(viewPager,getSupportFragmentManager(),fragmentList,savedInstanceState);
     }
 
-    void onTeams(TeamsDetails teamsDetails){
-        callbackId = teamsDetails.getTeams().get(0).getIdLeague();
-    }
+    void onTeams(TeamsDetails teamsDetails){}
 
     void onNetworkError(Throwable throwable){
         newsFlash(throwable.getMessage(),collapsingToolbarLayout);
