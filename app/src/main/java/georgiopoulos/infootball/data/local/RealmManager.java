@@ -134,4 +134,17 @@ public class RealmManager implements LocalData{
             }}
         return (events);
     }
+
+    @Override
+    @NonNull
+    public String getLeagueBadgeUrl(String leagueName){
+        try(Realm realm = realmProvider.get()){
+            LeagueRealm leagueRealm = realm.where(LeagueRealm.class).equalTo("strLeague",leagueName).findFirst();
+            if(leagueRealm!=null){
+                if(leagueRealm.getStrBadge()!=null && !leagueRealm.getStrBadge().isEmpty()) return leagueRealm.getStrBadge();
+                else if(leagueRealm.getStrLogo() != null && ! leagueRealm.getStrLogo().isEmpty()) return leagueRealm.getStrLogo();
+                else if(leagueRealm.getStrTrophy() != null && ! leagueRealm.getStrTrophy().isEmpty()) return leagueRealm.getStrTrophy();
+            }return "https://www.flaticon.com/free-icon/champion_344213";
+        }
+    }
 }

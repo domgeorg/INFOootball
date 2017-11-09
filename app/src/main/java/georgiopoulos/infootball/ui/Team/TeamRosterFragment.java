@@ -35,7 +35,7 @@ import nucleus.factory.RequiresPresenter;
 @RequiresPresenter(TeamRosterPresenter.class)
 public class TeamRosterFragment extends BaseFragment<TeamRosterPresenter>{
 
-    @BindView(R.id.league_recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.recycler_view) RecyclerView recyclerView;
     private SimpleListAdapter<Player> adapter;
 
     public static TeamRosterFragment create(String teamId){
@@ -64,7 +64,7 @@ public class TeamRosterFragment extends BaseFragment<TeamRosterPresenter>{
         adapter.hideProgress();
         if (teamPlayers.getPlayer()==null) newsFlash("Server does not provide info about players",recyclerView);
         else {
-            runLayoutAnimation(recyclerView,R.anim.layout_animation_from_bottom);
+            runLayoutAnimation(recyclerView);
             adapter.set(teamPlayers.getPlayer());}
     }
 

@@ -36,7 +36,7 @@ import nucleus.factory.RequiresPresenter;
 @RequiresPresenter(LatestEventsPresenter.class)
 public class LatestEventsFragment extends BaseFragment<LatestEventsPresenter>{
 
-    @BindView(R.id.league_recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.recycler_view) RecyclerView recyclerView;
     private SimpleListAdapter<Event> adapter;
 
     public static LatestEventsFragment create(String leagueId){
@@ -65,7 +65,7 @@ public class LatestEventsFragment extends BaseFragment<LatestEventsPresenter>{
         adapter.hideProgress();
         if (events.getEvents()==null) newsFlash("Server does not provide info about latest events",recyclerView);
         else{
-            runLayoutAnimation(recyclerView,R.anim.layout_animation_from_bottom);
+            runLayoutAnimation(recyclerView);
             adapter.set(events.getEvents());
         }
     }

@@ -36,13 +36,13 @@ public class PlayerViewHolder<T extends Player> extends BaseViewHolder<T>{
     @Inject LocalData localData;
     private T player;
     private View view;
-    @BindView(R.id.PlayerCutout) ImageView playerCutoutImageView;
-    @BindView(R.id.playerName) TextView playerNameTextView;
-    @BindView(R.id.playerNationality) TextView playerNationalityTextView;
-    @BindView(R.id.playerPosition) TextView playerPositionTextView;
-    @BindView(R.id.playerHeight) TextView playerHeightTextView;
-    @BindView(R.id.playerWeight) TextView playerWeightTextView;
-    @BindView(R.id.playerDateBorn) TextView playerDateBornTextView;
+    @BindView(R.id.card_player_cutout) ImageView playerCutoutImageView;
+    @BindView(R.id.card_player_name) TextView playerNameTextView;
+    @BindView(R.id.card_player_nationality) TextView playerNationalityTextView;
+    @BindView(R.id.card_player_position) TextView playerPositionTextView;
+    @BindView(R.id.card_player_height) TextView playerHeightTextView;
+    @BindView(R.id.card_player_weight) TextView playerWeightTextView;
+    @BindView(R.id.card_player_birthday) TextView playerDateBornTextView;
 
     public PlayerViewHolder(View view,Action1<T> onClick){
         super(view);
@@ -61,7 +61,7 @@ public class PlayerViewHolder<T extends Player> extends BaseViewHolder<T>{
         playerWeightTextView.setText("Weight: "+ player.getStrWeight());
         playerDateBornTextView.setText("Birthday: "+ player.getDateBorn());
         //TODO: Make Realm Player
-        String playerPhoto="http://freevector.co/wp-content/uploads/2013/02/22453-football-player-shape-simbolo-de-la-interfaz-de-ios-71.png";
+        String playerPhoto="https://www.flaticon.com/free-icon/football-player_344170";
         if(player.getStrCutout()!=null) playerPhoto=player.getStrCutout();
         else if (player.getStrThumb()!=null)playerPhoto=player.getStrThumb();
         Picasso.with(view.getContext()).load(playerPhoto).into(playerCutoutImageView);

@@ -40,17 +40,17 @@ import icepick.State;
 
 public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implements AppBarLayout.OnOffsetChangedListener{
 
-    private String teamId;
-    @State String teamName;
-    @Inject LocalData localData;
-    @State boolean  isShow = false;
-    private int scrollRange;
-    @BindView(R.id.app_bar_team_details) AppBarLayout appBarLayout;
-    @BindView(R.id.collapsing_toolbar_layout_team_details) CollapsingToolbarLayout collapsingToolbarLayout;
-    @BindView(R.id.toolbar_team) Toolbar toolbar;
-    @BindView(R.id.teamBadge) ImageView teamBadgeImageView;
+    @BindView(R.id.activity_team_roaster_app_bar_layout) AppBarLayout appBarLayout;
+    @BindView(R.id.activity_team_roaster_collapsing_toolbar_layout) CollapsingToolbarLayout collapsingToolbarLayout;
+    @BindView(R.id.activity_team_roaster_team_badge) ImageView teamBadgeImageView;
+    @BindView(R.id.activity_team_roaster_toolbar) Toolbar toolbar;
     @BindDrawable(R.drawable.ic_arrow_primary_color_24dp) Drawable primaryColorArrow;
     @BindDrawable(R.drawable.ic_arrow_white_24dp) Drawable whiteColorArrow;
+    @Inject LocalData localData;
+    @State String teamName;
+    @State boolean  isShow = false;
+    private int scrollRange;
+    private String teamId;
 
     @Override public void onCreate(Bundle bundle){
         ((Injector)getApplication()).inject(this);
@@ -59,7 +59,7 @@ public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implem
         ButterKnife.bind(this);
 
         teamId = getIntent().getStringExtra("teamId");
-        teamName=getIntent().getStringExtra("team");
+        teamName = getIntent().getStringExtra("team");
 
         setSupportActionBar(toolbar);
         appBarLayout.addOnOffsetChangedListener(this);
@@ -71,16 +71,16 @@ public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implem
         if(!isShow)getSupportActionBar().setHomeAsUpIndicator(primaryColorArrow);
         else getSupportActionBar().setHomeAsUpIndicator(whiteColorArrow);
 
-        if (bundle == null) getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, TeamRosterFragment.create(teamId)).commit();
+        if (bundle == null) getSupportFragmentManager().beginTransaction().replace(R.id.activity_team_roaster_fragment_container, TeamRosterFragment.create(teamId)).commit();
     }
 
     public void push(Fragment fragment){
-        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragment_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.activity_team_roaster_fragment_container, fragment).commit();
     }
 
     public void replace(Fragment fragment){
         getSupportFragmentManager().popBackStackImmediate(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_team_roaster_fragment_container, fragment).commit();
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item){

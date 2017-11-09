@@ -72,10 +72,11 @@ public class NextEventsFragment extends BaseFragment<NextEventsPresenter>{
 
     void onEvents(@Nullable Events events){
         adapter.hideProgress();
-        if(events.getEvents() != null) {
-            runLayoutAnimation(recyclerView,R.anim.layout_animation_from_bottom);
-            adapter.set(events.getEvents());}
-        else newsFlash("Server does not provide info about next events",recyclerView);
+        if(events.getEvents() == null) newsFlash("Server does not provide info about next events",recyclerView);
+        else{
+            runLayoutAnimation(recyclerView);
+            adapter.set(events.getEvents());
+        }
     }
 
     void onNetworkError(Throwable throwable){

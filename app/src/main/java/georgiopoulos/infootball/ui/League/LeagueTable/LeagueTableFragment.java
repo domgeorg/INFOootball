@@ -38,7 +38,7 @@ import nucleus.factory.RequiresPresenter;
 @RequiresPresenter(LeagueTablePresenter.class)
 public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
 
-    @BindView(R.id.league_recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.recycler_view) RecyclerView recyclerView;
     private SimpleListAdapter<Table> adapter;
 
     public static LeagueTableFragment create(String leagueId){
@@ -67,7 +67,7 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
         adapter.hideProgress();
         if (leagueTable.getTable()==null) newsFlash("Server does not provide info about standings",recyclerView);
         else {
-            runLayoutAnimation(recyclerView,R.anim.layout_animation_fall_down);
+            runLayoutAnimation(recyclerView);
             adapter.set(leagueTable.getTable());}
     }
 

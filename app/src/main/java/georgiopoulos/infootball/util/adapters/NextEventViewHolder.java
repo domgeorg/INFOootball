@@ -33,15 +33,15 @@ import rx.functions.Action1;
 
 public class NextEventViewHolder<T extends Event> extends BaseViewHolder<T>{
 
-    @Inject LocalData localData;
-    private T event;
-    private View view;
     @BindView(R.id.homeTeamJersey) ImageView homeTeamLogoImageView;
     @BindView(R.id.awayTeamJersey) ImageView awayTeamLogoImageView;
     @BindView(R.id.next_event) TextView eventTextView;
     @BindView(R.id.next_event_date) TextView dateTextView;
     @BindView(R.id.next_event_time) TextView timeTextView;
     @BindView(R.id.next_event_stadium) TextView stadiumTextView;
+    @Inject LocalData localData;
+    private T event;
+    private View view;
 
     public NextEventViewHolder(View view,Action1<T> onClick){
         super(view);

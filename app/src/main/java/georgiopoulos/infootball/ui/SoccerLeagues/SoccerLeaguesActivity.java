@@ -19,11 +19,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -42,15 +44,16 @@ import icepick.State;
 import nucleus.factory.RequiresPresenter;
 
 @RequiresPresenter(SoccerLeaguesPresenter.class)
-public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> implements AppBarLayout.OnOffsetChangedListener{
+public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> implements AppBarLayout.OnOffsetChangedListener, FloatingActionButton.OnClickListener{
 
-    @BindView(R.id.main_recycler_view) RecyclerView recyclerView;
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.header_image) ImageView headerImageView;
-    @BindView(R.id.app_bar_soccer_leagues) AppBarLayout appBarLayout;
     @BindView(R.id.activity_soccer_leagues_coordinator_layout) CoordinatorLayout coordinatorLayout;
-    private SimpleListAdapter<Country> adapter;
+    @BindView(R.id.activity_soccer_leagues_app_bar_layout) AppBarLayout appBarLayout;
+    @BindView(R.id.activity_soccer_leagues_header_image) ImageView headerImageView;
+    @BindView(R.id.activity_soccer_leagues_toolbar) Toolbar toolbar;
+    @BindView(R.id.activity_soccer_leagues_recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.activity_soccer_leagues_floating_action_button) FloatingActionButton floatingActionButton;
     @State boolean isShow = false;
+    private SimpleListAdapter<Country> adapter;
     private int scrollRange;
 
     @Override public void onCreate(Bundle savedInstanceState){
@@ -60,7 +63,7 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
         setSupportActionBar(toolbar);
         if (getSupportActionBar()!=null) getSupportActionBar().setTitle(R.string.action_bar_title_soccer_leagues);
         Picasso.with(this).load(R.drawable.grass).into(headerImageView);
-
+        floatingActionButton.setOnClickListener(this);
         appBarLayout.addOnOffsetChangedListener(this);
         scrollRange = -1;
         appBarLayout.setExpanded(!isShow);
@@ -73,7 +76,6 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
 
     void onLeagues(Leagues leagues){
         adapter.hideProgress();
-
         if(leagues!=null){
             runLayoutAnimation(recyclerView,R.anim.layout_animation_from_right);
             adapter.set(leagues.getCountrys());
@@ -90,18 +92,12 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
         startActivity(new Intent(this, LeagueActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("leagueId",country.getIdLeague()).putExtra("leagueBadge",country.getStrBadge()).putExtra("league",country.getStrLeague()).putExtra("trophy",country.getStrTrophy()));
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_league_table,menu);
-        return true;
-    }
-
-    @Override public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
-    }
-
     @Override public void onOffsetChanged(AppBarLayout appBarLayout,int verticalOffset){
         if (scrollRange == -1) scrollRange = appBarLayout.getTotalScrollRange();
         isShow=(Math.abs(scrollRange+verticalOffset)<10);
+    }
+
+    @Override public void onClick(View view){
+
     }
 }

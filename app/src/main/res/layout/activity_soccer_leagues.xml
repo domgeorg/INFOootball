@@ -10,14 +10,14 @@
     tools:context="georgiopoulos.infootball.ui.SoccerLeagues.SoccerLeaguesActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar_soccer_leagues"
+        android:id="@+id/activity_soccer_leagues_app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height_image_view"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar_layout"
+            android:id="@+id/activity_soccer_leagues_collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -31,7 +31,7 @@
                 android:background="@drawable/activity_soccer_leagues_shadow_header" />
 
             <ImageView
-                android:id="@+id/header_image"
+                android:id="@+id/activity_soccer_leagues_header_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
@@ -45,7 +45,7 @@
                 android:background="@drawable/shadow"/>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/activity_soccer_leagues_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
@@ -56,7 +56,7 @@
 
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/main_recycler_view"
+        android:id="@+id/activity_soccer_leagues_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="@dimen/zero_horizontal_margin_big_activity"
@@ -64,5 +64,14 @@
         android:background="@color/activity_background"
         android:layoutAnimation="@anim/layout_animation_from_right"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/activity_soccer_leagues_floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="bottom|end"
+        app:srcCompat="@drawable/ic_live_scores_white"
+        app:layout_behavior="georgiopoulos.infootball.util.FloatingActionButtonBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

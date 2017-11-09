@@ -18,10 +18,10 @@ package georgiopoulos.infootball.ui.LiveScores;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -31,45 +31,58 @@ import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.ui.Base.BaseActivity;
 import icepick.State;
-import nucleus.factory.RequiresPresenter;
 
-@RequiresPresenter(LiveScoresPresenter.class)
-public class LiveScoresActivity extends BaseActivity<LiveScoresPresenter> implements AppBarLayout.OnOffsetChangedListener, SwipeRefreshLayout.OnRefreshListener{
+public class LiveScoresActivity extends BaseActivity<LiveScoresPresenter> implements AppBarLayout.OnOffsetChangedListener{
 
-    @BindView(R.id.activity_live_scores_recycler_view) RecyclerView recyclerView;
-    @BindView(R.id.activity_live_scores_coordinator_layout) CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.activity_live_scores_swipe_refresh_layout) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.activity_live_scores_app_bar_layout) AppBarLayout appBarLayout;
     @BindView(R.id.activity_live_scores_collapsing_toolbar_layout) CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.activity_live_scores_header_image) ImageView imageView;
     @BindView(R.id.activity_live_scores_toolbar) Toolbar toolbar;
-    @BindView(R.id.activity_live_scores_app_bar_layout) AppBarLayout appBarLayout;
     @State boolean isShow = false;
     private int scrollRange;
 
-    @Override public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
+    @Override public void onCreate(Bundle bundle){
+        super.onCreate(bundle);
         setContentView(R.layout.activity_live_scores);
         ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
-        if (getSupportActionBar()!=null) getSupportActionBar().setTitle(R.string.activity_live_scores_tool_bar_title);
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().setTitle(R.string.activity_live_scores_tool_bar_title);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         Picasso.with(this).load(R.drawable.grass).into(imageView);
 
         appBarLayout.addOnOffsetChangedListener(this);
         scrollRange = -1;
         appBarLayout.setExpanded(!isShow);
 
-        swipeRefreshLayout.setOnRefreshListener(this);
-
+        if (bundle == null) getSupportFragmentManager().beginTransaction().replace(R.id.activity_team_roaster_fragment_container, new LiveScoresFragment()).commit();
     }
 
-    @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout,int verticalOffset){
-
+    public void push(Fragment fragment){
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.activity_team_roaster_fragment_container, fragment).commit();
     }
 
-    @Override
-    public void onRefresh(){
-
+    public void replace(Fragment fragment){
+        getSupportFragmentManager().popBackStackImmediate(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_team_roaster_fragment_container, fragment).commit();
     }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        switch(id){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
+    }
+
+    @Override public void onOffsetChanged(AppBarLayout appBarLayout,int verticalOffset){
+        if (scrollRange == -1) scrollRange = appBarLayout.getTotalScrollRange();
+        isShow=(Math.abs(scrollRange+verticalOffset)<10);
+    }
+
 }
 

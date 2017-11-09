@@ -31,4 +31,5 @@ public interface LocalData{
     Boolean findLeagueInRealm(Realm realm, String leagueId);
     Leagues writeLeaguesToRealm(Leagues leagues);
     Events writeRoundToRealm(Events events);
+    String getLeagueBadgeUrl(String leagueName);
 }

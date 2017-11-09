@@ -45,5 +45,7 @@
     <dimen name="shadow">160dp</dimen>
 
     <dimen name="recycler_view_margin_land">24dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

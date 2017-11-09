@@ -16,12 +16,14 @@
 package georgiopoulos.infootball.data.local.realmObjects;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
 
 public class LeagueRealm extends RealmObject{
 
     @PrimaryKey
     private String idLeague;
+    @Index
     private String strLeague;
     private String strCountry;
     private String strWebsite;

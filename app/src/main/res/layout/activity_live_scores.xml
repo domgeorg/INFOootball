@@ -54,22 +54,10 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/activity_live_scores_swipe_refresh_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/activity_live_scores_recycler_view"
+    <FrameLayout
+        android:id="@+id/activity_live_scores_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="@dimen/zero_horizontal_margin_big_activity"
-        android:paddingEnd="@dimen/zero_horizontal_margin_big_activity"
-        android:background="@color/activity_background"
-        android:layoutAnimation="@anim/layout_animation_from_right"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
 </android.support.design.widget.CoordinatorLayout>

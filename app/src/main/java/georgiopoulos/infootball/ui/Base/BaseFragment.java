@@ -25,6 +25,7 @@ import android.view.animation.LayoutAnimationController;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.util.injection.Injector;
 import icepick.Icepick;
 import nucleus.factory.PresenterFactory;
@@ -65,8 +66,8 @@ public abstract class BaseFragment<P extends Presenter> extends NucleusSupportFr
         Snackbar.make(viewId,message,Snackbar.LENGTH_SHORT).show();
     }
 
-    public void runLayoutAnimation(final RecyclerView recyclerView,final int layoutAnimator){
-        final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getActivity(),layoutAnimator);
+    public void runLayoutAnimation(final RecyclerView recyclerView){
+        final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getActivity(),R.anim.layout_animation_from_bottom);
         recyclerView.setLayoutAnimation(controller);
         recyclerView.scheduleLayoutAnimation();
     }
