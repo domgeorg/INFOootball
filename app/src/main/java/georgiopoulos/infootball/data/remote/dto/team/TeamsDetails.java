@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package georgiopoulos.infootball.data.remote.dto;
+package georgiopoulos.infootball.data.remote.dto.team;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import georgiopoulos.infootball.data.remote.dto.league.Team;
 
 public class TeamsDetails {
 

@@ -1,9 +1,10 @@
 
-package georgiopoulos.infootball.data.remote.dto;
+package georgiopoulos.infootball.data.remote.dto.league;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 /**
  *  Copyright 2017 georgiopoulos kyriakos
  *

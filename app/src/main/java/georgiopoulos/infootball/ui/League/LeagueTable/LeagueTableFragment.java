@@ -26,8 +26,8 @@ import android.view.ViewGroup;
 
 import butterknife.BindView;
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.LeagueTable;
-import georgiopoulos.infootball.data.remote.dto.Table;
+import georgiopoulos.infootball.data.remote.dto.league.LeagueTable;
+import georgiopoulos.infootball.data.remote.dto.league.Table;
 import georgiopoulos.infootball.ui.Base.BaseFragment;
 import georgiopoulos.infootball.ui.Team.TeamRosterActivity;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
@@ -55,11 +55,11 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        getPresenter().request(getArguments().getString("leagueId"));
         adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Table.class,R.layout.card_league_table,v -> new LeagueTableTeamViewHolder<>(v,this::onItemClick)));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        getPresenter().request(getArguments().getString("leagueId"));
         adapter.showProgress();
     }
 

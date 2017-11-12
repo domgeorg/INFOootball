@@ -25,8 +25,8 @@ import android.view.ViewGroup;
 
 import butterknife.BindView;
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.Event;
-import georgiopoulos.infootball.data.remote.dto.Events;
+import georgiopoulos.infootball.data.remote.dto.league.Event;
+import georgiopoulos.infootball.data.remote.dto.league.Events;
 import georgiopoulos.infootball.ui.Base.BaseFragment;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import georgiopoulos.infootball.util.adapters.LatestEventViewHolder;
@@ -53,11 +53,11 @@ public class LatestEventsFragment extends BaseFragment<LatestEventsPresenter>{
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        getPresenter().request(getArguments().getString("leagueId"));
         adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Event.class,R.layout.card_latest_events,v -> new LatestEventViewHolder<>(v,this::onItemClick)));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        getPresenter().request(getArguments().getString("leagueId"));
         adapter.showProgress();
     }
 

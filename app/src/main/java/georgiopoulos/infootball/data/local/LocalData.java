@@ -15,9 +15,9 @@
  */
 package georgiopoulos.infootball.data.local;
 
-import georgiopoulos.infootball.data.remote.dto.Events;
-import georgiopoulos.infootball.data.remote.dto.Leagues;
-import georgiopoulos.infootball.data.remote.dto.TeamsDetails;
+import georgiopoulos.infootball.data.remote.dto.league.Events;
+import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Leagues;
+import georgiopoulos.infootball.data.remote.dto.team.TeamsDetails;
 import io.realm.Realm;
 
 public interface LocalData{
@@ -31,5 +31,4 @@ public interface LocalData{
     Boolean findLeagueInRealm(Realm realm, String leagueId);
     Leagues writeLeaguesToRealm(Leagues leagues);
     Events writeRoundToRealm(Events events);
-    String getLeagueBadgeUrl(String leagueName);
 }

@@ -31,6 +31,9 @@
         <activity
             android:name=".ui.Team.TeamRosterActivity"
             android:theme="@style/AppTheme.NoActionBar_StatusBar" />
+        <activity
+        android:name=".ui.LiveScores.LiveScoresActivity"
+        android:theme="@style/AppTheme.NoActionBar_StatusBar" />
     </application>
 
 </manifest>

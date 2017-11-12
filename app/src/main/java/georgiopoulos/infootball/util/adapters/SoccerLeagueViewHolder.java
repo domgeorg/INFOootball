@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.Country;
+import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Country;
 import georgiopoulos.infootball.util.adapters.base.BaseViewHolder;
 import rx.functions.Action1;
 

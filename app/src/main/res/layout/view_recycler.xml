@@ -7,5 +7,6 @@
     android:layout_height="match_parent"
     android:paddingStart="@dimen/zero_horizontal_margin_big_activity"
     android:paddingEnd="@dimen/zero_horizontal_margin_big_activity"
+    android:clickable="true"
     android:layoutAnimation="@anim/layout_animation_from_bottom"
     android:background="@color/activity_background"/>

@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.local.realmObjects.TeamRealm;
-import georgiopoulos.infootball.data.remote.dto.Event;
+import georgiopoulos.infootball.data.remote.dto.league.Event;
 import georgiopoulos.infootball.util.adapters.base.BaseViewHolder;
 import io.realm.Realm;
 import rx.functions.Action1;

@@ -38,7 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.long1.spacetablayout.SpaceTabLayout;
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.TeamsDetails;
+import georgiopoulos.infootball.data.remote.dto.team.TeamsDetails;
 import georgiopoulos.infootball.ui.Base.BaseActivity;
 import georgiopoulos.infootball.ui.League.LatestEvents.LatestEventsFragment;
 import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTableFragment;

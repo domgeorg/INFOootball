@@ -57,16 +57,16 @@ public class LiveScoresActivity extends BaseActivity<LiveScoresPresenter> implem
         scrollRange = -1;
         appBarLayout.setExpanded(!isShow);
 
-        if (bundle == null) getSupportFragmentManager().beginTransaction().replace(R.id.activity_team_roaster_fragment_container, new LiveScoresFragment()).commit();
+        if (bundle == null) getSupportFragmentManager().beginTransaction().replace(R.id.activity_live_scores_fragment_container, new LiveScoresFragment()).commit();
     }
 
     public void push(Fragment fragment){
-        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.activity_team_roaster_fragment_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.activity_live_scores_fragment_container, fragment).commit();
     }
 
     public void replace(Fragment fragment){
         getSupportFragmentManager().popBackStackImmediate(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_team_roaster_fragment_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_live_scores_fragment_container, fragment).commit();
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item){

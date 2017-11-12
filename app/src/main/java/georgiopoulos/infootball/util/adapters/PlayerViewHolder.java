@@ -15,6 +15,7 @@
  */
 package georgiopoulos.infootball.util.adapters;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,11 +24,12 @@ import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.local.LocalData;
-import georgiopoulos.infootball.data.remote.dto.Player;
+import georgiopoulos.infootball.data.remote.dto.team.Player;
 import georgiopoulos.infootball.util.adapters.base.BaseViewHolder;
 import rx.functions.Action1;
 
@@ -43,6 +45,7 @@ public class PlayerViewHolder<T extends Player> extends BaseViewHolder<T>{
     @BindView(R.id.card_player_height) TextView playerHeightTextView;
     @BindView(R.id.card_player_weight) TextView playerWeightTextView;
     @BindView(R.id.card_player_birthday) TextView playerDateBornTextView;
+    @BindDrawable(R.drawable.ic_player) Drawable playerDrawable;
 
     public PlayerViewHolder(View view,Action1<T> onClick){
         super(view);
@@ -61,7 +64,7 @@ public class PlayerViewHolder<T extends Player> extends BaseViewHolder<T>{
         playerWeightTextView.setText("Weight: "+ player.getStrWeight());
         playerDateBornTextView.setText("Birthday: "+ player.getDateBorn());
         //TODO: Make Realm Player
-        String playerPhoto="https://www.flaticon.com/free-icon/football-player_344170";
+        String playerPhoto="https://image.flaticon.com/icons/png/128/166/166344.png";
         if(player.getStrCutout()!=null) playerPhoto=player.getStrCutout();
         else if (player.getStrThumb()!=null)playerPhoto=player.getStrThumb();
         Picasso.with(view.getContext()).load(playerPhoto).into(playerCutoutImageView);

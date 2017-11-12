@@ -15,87 +15,117 @@
     card_view:cardCornerRadius="@dimen/card_recycler_corner_radius"
     card_view:cardElevation="@dimen/card_recycler_elevation">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/text_margin">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <com.santalu.diagonalimageview.DiagonalImageView
-            android:id="@+id/card_live_scores_league_badge_diagonal_image_view"
-            android:layout_width="@dimen/league_badge_card_live_scores_diagonal_image_view"
-            android:layout_height="@dimen/league_badge_card_live_scores_diagonal_image_view"
-            android:layout_marginRight="@dimen/text_margin_very_small"
-            android:layout_centerInParent="true"
-            android:layout_alignParentLeft="true"
-            android:contentDescription="@string/league_badge"
-            android:src="@drawable/premier_league_badge"
-            app:di_borderEnabled="false"
-            app:di_direction="top"
-            app:di_overlap="0dp"
-            app:di_position="right" />
+        <TextView
+            android:id="@+id/card_live_scores_league_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/primary_text"
+            android:layout_marginTop="@dimen/text_margin_very_small"
+            android:text="Premier League"/>
+
+        <TextView
+            android:id="@+id/card_live_scores_match_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Everton vs Arsenal"
+            android:textAlignment="center"
+            android:layout_marginTop="@dimen/text_margin_small"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/primary_text" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@id/card_live_scores_league_badge_diagonal_image_view"
-            android:layout_alignParentRight="true"
-            android:gravity="center">
+            android:layout_height="match_parent"
+            android:padding="@dimen/text_margin">
 
-            <TextView
-                android:id="@+id/card_live_scores_league_name"
+
+            <ImageView
+                android:id="@+id/card_live_scores_home_team_badge"
+                android:layout_width="@dimen/badge"
+                android:layout_height="@dimen/badge"
+                android:layout_marginRight="@dimen/text_margin_very_small" />
+
+            <LinearLayout
+                android:id="@+id/card_live_scores_contents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/primary_text"
-                android:text="Premier League"/>
+                android:layout_toEndOf="@id/card_live_scores_home_team_badge"
+                android:layout_toStartOf="@+id/card_live_scores_away_team_badge"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/card_live_scores_match_name"
-                android:layout_below="@id/card_live_scores_league_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_marginTop="@dimen/text_margin_small"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/primary_text"
-                android:text="Man City VS Arsenal"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/text_margin_very_small"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/card_live_scores_match_score"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/card_live_scores_match_name"
-                android:layout_marginTop="@dimen/text_margin_small"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/primary_text"
-                android:text="0-1"/>
+                    <TextView
+                        android:id="@+id/card_live_scores_home_team_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/text_margin_very_small"
+                        android:text="2"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/primary_text" />
 
-            <TextView
-                android:id="@+id/card_live_scores_match_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/card_live_scores_match_score"
-                android:layout_marginTop="@dimen/text_margin_very_small"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/primary_text"
-                android:text="Halftime"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/text_margin_small"
+                        android:layout_marginRight="@dimen/text_margin_small"
+                        android:text="-"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/secondary_text" />
 
-            <TextView
-                android:id="@+id/card_live_scores_match_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/card_live_scores_match_time"
-                android:layout_marginTop="@dimen/text_margin_very_small"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/secondary_text"
-                android:text="São Januário"/>
+                    <TextView
+                        android:id="@+id/card_live_scores_away_team_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/text_margin_small"
+                        android:text="5"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/primary_text" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/card_live_scores_match_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/text_margin_very_small"
+                    android:text="-"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/secondary_text" />
+
+                <TextView
+                    android:id="@+id/card_live_scores_match_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/text_margin_very_small"
+                    android:text="-"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/secondary_text" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/card_live_scores_away_team_badge"
+                android:layout_width="@dimen/badge"
+                android:layout_height="@dimen/badge"
+                android:layout_alignParentEnd="false"
+                android:layout_marginLeft="@dimen/text_margin_very_small"
+                android:layout_alignParentRight="true" />
 
         </RelativeLayout>
-    </RelativeLayout>
+    </LinearLayout>
 </android.support.v7.widget.CardView>

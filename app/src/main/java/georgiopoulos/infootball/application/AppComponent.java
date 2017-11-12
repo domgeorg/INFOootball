@@ -25,11 +25,11 @@ import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.local.LocalDataModule;
 import georgiopoulos.infootball.data.remote.api.NetworkModule;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
-import georgiopoulos.infootball.data.remote.dto.Country;
-import georgiopoulos.infootball.data.remote.dto.Event;
-import georgiopoulos.infootball.data.remote.dto.Player;
-import georgiopoulos.infootball.data.remote.dto.Table;
-import georgiopoulos.infootball.data.remote.dto.livescores.LiveScores;
+import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Country;
+import georgiopoulos.infootball.data.remote.dto.league.Event;
+import georgiopoulos.infootball.data.remote.dto.team.Player;
+import georgiopoulos.infootball.data.remote.dto.league.Table;
+import georgiopoulos.infootball.data.remote.dto.livescores.Match;
 import georgiopoulos.infootball.ui.League.LatestEvents.LatestEventsPresenter;
 import georgiopoulos.infootball.ui.League.LeaguePresenter;
 import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTablePresenter;
@@ -57,6 +57,7 @@ public interface AppComponent{
     Context appContext();
     LocalData localData();
 
+    //Presenters
     void inject(LeagueTablePresenter leagueTablePresenter);
     void inject(SoccerLeaguesPresenter soccerLeaguesPresenter);
     void inject(LeaguePresenter leaguePresenter);
@@ -64,12 +65,16 @@ public interface AppComponent{
     void inject(NextEventsPresenter nextEventsPresenter);
     void inject(TeamRosterPresenter teamRosterPresenter);
     void inject(LiveScoresPresenter liveScoresPresenter);
+
+    //ViewHolders
     void inject(LatestEventViewHolder<Event> latestEventViewHolder);
     void inject(NextEventViewHolder<Event> nextEventViewHolder);
     void inject(EmptyViewHolder emptyViewHolder);
     void inject(SoccerLeagueViewHolder<Country> soccerLeagueViewHolder);
     void inject(LeagueTableTeamViewHolder<Table> leagueTableTeamViewHolder);
     void inject(PlayerViewHolder<Player> playerPlayerViewHolder);
-    void inject(LiveScoresViewHolder<LiveScores> liveScoresLiveScoresViewHolder);
+    void inject(LiveScoresViewHolder<Match> liveScoresLiveScoresViewHolder);
+
+    //Activities
     void inject(TeamRosterActivity teamRosterActivity);
 }

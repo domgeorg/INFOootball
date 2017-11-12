@@ -25,12 +25,12 @@ import javax.inject.Provider;
 import georgiopoulos.infootball.data.local.realmObjects.LeagueRealm;
 import georgiopoulos.infootball.data.local.realmObjects.LeagueRoundRealm;
 import georgiopoulos.infootball.data.local.realmObjects.TeamRealm;
-import georgiopoulos.infootball.data.remote.dto.Country;
-import georgiopoulos.infootball.data.remote.dto.Event;
-import georgiopoulos.infootball.data.remote.dto.Events;
-import georgiopoulos.infootball.data.remote.dto.Leagues;
-import georgiopoulos.infootball.data.remote.dto.Team;
-import georgiopoulos.infootball.data.remote.dto.TeamsDetails;
+import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Country;
+import georgiopoulos.infootball.data.remote.dto.league.Event;
+import georgiopoulos.infootball.data.remote.dto.league.Events;
+import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Leagues;
+import georgiopoulos.infootball.data.remote.dto.league.Team;
+import georgiopoulos.infootball.data.remote.dto.team.TeamsDetails;
 import io.realm.Realm;
 @SuppressLint("NewApi") // try-with-resources is back-ported by retrolambda
 public class RealmManager implements LocalData{
@@ -68,7 +68,7 @@ public class RealmManager implements LocalData{
                     return teamRealm.getStrTeamLogo();
                 else if(teamRealm.getStrTeamJersey() != null && ! teamRealm.getStrTeamJersey().isEmpty())
                     return teamRealm.getStrTeamJersey();
-            }return "http://www.thesportsdb.com/images/team-icon.png";
+            }return "http://www.wunapps.com/2015/lg/padres_lg/images/lg-team-badge-08.png";
         }
     }
 
@@ -133,18 +133,5 @@ public class RealmManager implements LocalData{
                 });
             }}
         return (events);
-    }
-
-    @Override
-    @NonNull
-    public String getLeagueBadgeUrl(String leagueName){
-        try(Realm realm = realmProvider.get()){
-            LeagueRealm leagueRealm = realm.where(LeagueRealm.class).equalTo("strLeague",leagueName).findFirst();
-            if(leagueRealm!=null){
-                if(leagueRealm.getStrBadge()!=null && !leagueRealm.getStrBadge().isEmpty()) return leagueRealm.getStrBadge();
-                else if(leagueRealm.getStrLogo() != null && ! leagueRealm.getStrLogo().isEmpty()) return leagueRealm.getStrLogo();
-                else if(leagueRealm.getStrTrophy() != null && ! leagueRealm.getStrTrophy().isEmpty()) return leagueRealm.getStrTrophy();
-            }return "https://www.flaticon.com/free-icon/champion_344213";
-        }
     }
 }

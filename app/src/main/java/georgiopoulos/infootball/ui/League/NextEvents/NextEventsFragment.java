@@ -29,8 +29,8 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.Event;
-import georgiopoulos.infootball.data.remote.dto.Events;
+import georgiopoulos.infootball.data.remote.dto.league.Event;
+import georgiopoulos.infootball.data.remote.dto.league.Events;
 import georgiopoulos.infootball.ui.Base.BaseFragment;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import georgiopoulos.infootball.util.adapters.NextEventViewHolder;

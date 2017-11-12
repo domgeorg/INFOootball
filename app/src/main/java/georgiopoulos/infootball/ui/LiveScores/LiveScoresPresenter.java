@@ -15,6 +15,53 @@
  */
 package georgiopoulos.infootball.ui.LiveScores;
 
-import georgiopoulos.infootball.ui.Base.BasePresenter;
+import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-public class LiveScoresPresenter extends BasePresenter<LiveScoresActivity>{}
+import java.util.List;
+
+import javax.inject.Inject;
+
+import georgiopoulos.infootball.data.local.LocalData;
+import georgiopoulos.infootball.data.remote.api.ServerAPI;
+import georgiopoulos.infootball.data.remote.dto.livescores.LiveScores;
+import georgiopoulos.infootball.data.remote.dto.livescores.Match;
+import georgiopoulos.infootball.ui.Base.BasePresenter;
+import rx.Scheduler;
+import rx.schedulers.Schedulers;
+
+import static rx.android.schedulers.AndroidSchedulers.mainThread;
+
+public class LiveScoresPresenter extends BasePresenter<LiveScoresFragment>{
+
+    private static final int REQUEST_LIVE_SCORES = 1;
+    @Inject ServerAPI api;
+    @Inject LocalData localData;
+
+    public void request(){
+        restartableLatestCache(REQUEST_LIVE_SCORES,
+                               ()-> api.getLiveScores()
+                                            .subscribeOn(Schedulers.io())
+                                            .observeOn(mainThread()),
+                               LiveScoresFragment::onLiveScores,
+                               LiveScoresFragment::onNetworkError
+                              );
+        start(REQUEST_LIVE_SCORES);
+    }
+
+    public void requestLiveMatchesPersistence(@NonNull List<Match> liveMatches){
+        for(Match match:liveMatches){
+            teamDetailsPersistence(match.getAwayTeamId());
+            teamDetailsPersistence(match.getHomeTeamId());
+        }
+    }
+
+    private void teamDetailsPersistence(String teamId){
+        if(!(teamId.isEmpty() || teamId==null)){
+            api.getTeamDetails(teamId)
+                    .subscribeOn(Schedulers.immediate())
+                    .map(teamsDetails -> localData.writeTeamDetailsToRealm(teamsDetails));
+        }
+    }
+}

@@ -22,7 +22,6 @@
  */
 package georgiopoulos.infootball.ui.League;
 
-import android.os.Bundle;
 import javax.inject.Inject;
 
 import georgiopoulos.infootball.data.local.LocalData;

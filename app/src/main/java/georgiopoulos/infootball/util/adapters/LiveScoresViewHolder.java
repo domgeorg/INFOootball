@@ -16,30 +16,30 @@
 package georgiopoulos.infootball.util.adapters;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.santalu.diagonalimageview.DiagonalImageView;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
 import butterknife.BindColor;
-import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.local.LocalData;
-import georgiopoulos.infootball.data.remote.dto.livescores.LiveScores;
 import georgiopoulos.infootball.data.remote.dto.livescores.Match;
 import georgiopoulos.infootball.util.adapters.base.BaseViewHolder;
 import rx.functions.Action1;
 
 public class LiveScoresViewHolder<T extends Match> extends BaseViewHolder<T>{
 
-    @BindView(R.id.card_live_scores_league_badge_diagonal_image_view) DiagonalImageView imageView;
+    @BindView(R.id.card_live_scores_home_team_badge) ImageView homeTeamBadgeImageView;
+    @BindView(R.id.card_live_scores_away_team_badge) ImageView awayTeamBadgeImageView;
     @BindView(R.id.card_live_scores_league_name) TextView leagueNameTextView;
     @BindView(R.id.card_live_scores_match_name) TextView matchNameTextView;
-    @BindView(R.id.card_live_scores_match_score) TextView matchScoreTextView;
+    @BindView(R.id.card_live_scores_home_team_score) TextView homeTeamScoreTextView;
+    @BindView(R.id.card_live_scores_away_team_score) TextView awayTeamScoreTextView;
     @BindView(R.id.card_live_scores_match_time) TextView matchTimeTextView;
     @BindView(R.id.card_live_scores_match_location) TextView matchLocationTextView;
     @BindColor(R.color.card_live_scores_red_match_time_text_color) int red;
@@ -59,19 +59,25 @@ public class LiveScoresViewHolder<T extends Match> extends BaseViewHolder<T>{
 
     @Override public void bind(T item){
         match=item;
+        Picasso.with(view.getContext()).load(localData.getBadgeUrl(match.getHomeTeamId())).into(homeTeamBadgeImageView);
+        Picasso.with(view.getContext()).load(localData.getBadgeUrl(match.getAwayTeamId())).into(awayTeamBadgeImageView);
         leagueNameTextView.setText(match.getLeague());
         matchNameTextView.setText(match.getHomeTeam()+" vs "+match.getAwayTeam());
-        matchScoreTextView.setText(match.getHomeGoals()+" - "+match.getAwayGoals());
-        matchTimeTextView.setText(match.getTime());
-        matchTimeTextView.setTextColor(matchTimeTextColor(match.getTime()));
+        homeTeamScoreTextView.setText(match.getHomeGoals());
+        awayTeamScoreTextView.setText(match.getAwayGoals());
+        if (match.getTime()!=null){
+            matchTimeTextView.setText(match.getTime());
+            matchTimeTextView.setTextColor(matchTimeTextColor(match.getTime()));
+        }
         matchLocationTextView.setText(match.getLocation());
-        Picasso.with(view.getContext()).load(localData.getLeagueBadgeUrl(match.getLeague()));
     }
 
     private int matchTimeTextColor(String time){
         switch(time){
+            case "Halftime": return yellow;
             case "Not started": return yellow;
             case "Finished": return red;
+            case "Canceled": return red;
             default: return green;
         }
     }

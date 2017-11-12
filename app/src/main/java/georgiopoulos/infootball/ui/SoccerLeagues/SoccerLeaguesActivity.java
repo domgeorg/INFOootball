@@ -23,8 +23,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -33,10 +31,11 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.Country;
-import georgiopoulos.infootball.data.remote.dto.Leagues;
+import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Country;
+import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Leagues;
 import georgiopoulos.infootball.ui.Base.BaseActivity;
 import georgiopoulos.infootball.ui.League.LeagueActivity;
+import georgiopoulos.infootball.ui.LiveScores.LiveScoresActivity;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import georgiopoulos.infootball.util.adapters.SoccerLeagueViewHolder;
@@ -98,6 +97,6 @@ public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> 
     }
 
     @Override public void onClick(View view){
-
+        startActivity(new Intent(this, LiveScoresActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 }

@@ -24,8 +24,8 @@ import android.view.ViewGroup;
 
 import butterknife.BindView;
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.Player;
-import georgiopoulos.infootball.data.remote.dto.TeamPlayers;
+import georgiopoulos.infootball.data.remote.dto.team.Player;
+import georgiopoulos.infootball.data.remote.dto.team.TeamPlayers;
 import georgiopoulos.infootball.ui.Base.BaseFragment;
 import georgiopoulos.infootball.util.adapters.PlayerViewHolder;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
@@ -46,17 +46,17 @@ public class TeamRosterFragment extends BaseFragment<TeamRosterPresenter>{
         return fragment;
     }
 
-    @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
+    @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle bundle){
         return inflater.inflate(R.layout.view_recycler,container,false);
     }
 
-    @Override public void onViewCreated(View view, Bundle savedInstanceState){
-        super.onViewCreated(view, savedInstanceState);
-        getPresenter().request(getArguments().getString("teamId"));
+    @Override public void onViewCreated(View view, Bundle bundle){
+        super.onViewCreated(view, bundle);
         adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Player.class,R.layout.card_player,v -> new PlayerViewHolder<>(v,this::onItemClick)));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false);
         recyclerView.setAdapter(adapter);
+        getPresenter().request(getArguments().getString("teamId"));
         adapter.showProgress();
     }
 
