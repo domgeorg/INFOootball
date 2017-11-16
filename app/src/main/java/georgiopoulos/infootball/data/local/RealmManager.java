@@ -25,14 +25,15 @@ import javax.inject.Provider;
 import georgiopoulos.infootball.data.local.realmObjects.LeagueRealm;
 import georgiopoulos.infootball.data.local.realmObjects.LeagueRoundRealm;
 import georgiopoulos.infootball.data.local.realmObjects.TeamRealm;
-import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Country;
 import georgiopoulos.infootball.data.remote.dto.league.Event;
 import georgiopoulos.infootball.data.remote.dto.league.Events;
-import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Leagues;
 import georgiopoulos.infootball.data.remote.dto.league.Team;
+import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Country;
+import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Leagues;
 import georgiopoulos.infootball.data.remote.dto.team.TeamsDetails;
 import io.realm.Realm;
-@SuppressLint("NewApi") // try-with-resources is back-ported by retrolambda
+
+@SuppressLint("NewApi")
 public class RealmManager implements LocalData{
 
     private final Provider<Realm> realmProvider;
@@ -55,6 +56,48 @@ public class RealmManager implements LocalData{
                     return teamRealm.getStrTeamLogo();
             }
         } return "https://fm-view.net/forum/uploads/monthly_2017_09/NO-BRAND-73.png.cf70c74cd066c59d9ce14992f0bdedfc.png";
+    }
+
+    @NonNull
+    public String getTrophyUrl(String idLeague){
+        try(Realm realm = realmProvider.get()){
+            LeagueRealm leagueRealm = realm.where(LeagueRealm.class).equalTo("idLeague",idLeague)
+                                              .findFirst();
+            if(leagueRealm != null)
+                if(leagueRealm.getStrTrophy() != null && ! leagueRealm.getStrTrophy().isEmpty())
+                    return leagueRealm.getStrTrophy();
+        } return "http://www.trophypartner.com/images/product/large/2616.jpg";
+    }
+
+    @NonNull
+    public String getLeagueName(String idLeague){
+        try(Realm realm = realmProvider.get()){
+            LeagueRealm leagueRealm = realm.where(LeagueRealm.class).equalTo("idLeague",idLeague)
+                                              .findFirst();
+            if(leagueRealm != null)
+                if(leagueRealm.getStrLeague() != null && ! leagueRealm.getStrLeague().isEmpty())
+                    return leagueRealm.getStrLeague();
+        } return "Unknown league";
+    }
+
+    @NonNull
+    public String getLeagueBadge(String idLeague){
+        try(Realm realm = realmProvider.get()){
+            LeagueRealm leagueRealm = realm.where(LeagueRealm.class).equalTo("idLeague",idLeague)
+                                              .findFirst();
+            if(leagueRealm != null){
+                if((leagueRealm.getStrBadge()) != null && ! leagueRealm.getStrBadge().isEmpty())
+                    return leagueRealm.getStrBadge();
+                else if(leagueRealm.getStrLogo() != null && ! leagueRealm.getStrLogo().isEmpty())
+                    return leagueRealm.getStrLogo();
+                else if(leagueRealm.getStrBanner() != null && ! leagueRealm.getStrBanner()
+                                                                        .isEmpty())
+                    return leagueRealm.getStrBanner();
+                else if(leagueRealm.getStrPoster() != null && ! leagueRealm.getStrPoster()
+                                                                        .isEmpty())
+                    return leagueRealm.getStrPoster();
+            }
+        } return "http://cdn1.bloguin.com/wp-content/uploads/sites/92/2015/06/european-leagues.jpg";
     }
 
     @NonNull

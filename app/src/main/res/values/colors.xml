@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3e7319</color>
-    <color name="colorPrimaryTransparent">#963e7319</color>
-    <color name="colorPrimaryDark">#0c4700</color>
-    <color name="colorAccent">#df2029</color>
-    <color name="primary_text">#212121</color>
-    <color name="secondary_text">#757575</color>
-    <color name="icons">#fff</color>
+    <color name="colorPrimary">#009600</color>
+    <color name="colorPrimaryTransparent">#9643c43b</color>
+    <color name="colorPrimaryDark">#006600</color>
+    <color name="colorAccent">#002100</color>
+    <color name="primary_text">#000e00</color>
+    <color name="secondary_text">#325c31</color>
+    <color name="icons">#ffffff</color>
     <color name="divider">#bdbdbd</color>
-    <color name="activity_background">#fcfafb</color>
+    <color name="activity_background">#fcfcfc</color>
     <color name="card_live_scores_red_match_time_text_color">#f44336</color>
     <color name="card_live_scores_yellow_match_time_text_color">#fbc02d</color>
     <color name="card_live_scores_green_match_time_text_color">#8bc34a</color>

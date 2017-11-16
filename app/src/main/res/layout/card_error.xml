@@ -23,9 +23,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Title" />
 
         <ImageView
@@ -36,7 +36,7 @@
             android:adjustViewBounds="true"
             android:cropToPadding="false"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_football_network_error" />
+            app:srcCompat="@drawable/ic_network_error" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

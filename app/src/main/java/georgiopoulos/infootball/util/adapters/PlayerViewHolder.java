@@ -15,7 +15,6 @@
  */
 package georgiopoulos.infootball.util.adapters;
 
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,7 +23,6 @@ import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
-import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
@@ -36,8 +34,6 @@ import rx.functions.Action1;
 public class PlayerViewHolder<T extends Player> extends BaseViewHolder<T>{
 
     @Inject LocalData localData;
-    private T player;
-    private View view;
     @BindView(R.id.card_player_cutout) ImageView playerCutoutImageView;
     @BindView(R.id.card_player_name) TextView playerNameTextView;
     @BindView(R.id.card_player_nationality) TextView playerNationalityTextView;
@@ -45,7 +41,8 @@ public class PlayerViewHolder<T extends Player> extends BaseViewHolder<T>{
     @BindView(R.id.card_player_height) TextView playerHeightTextView;
     @BindView(R.id.card_player_weight) TextView playerWeightTextView;
     @BindView(R.id.card_player_birthday) TextView playerDateBornTextView;
-    @BindDrawable(R.drawable.ic_player) Drawable playerDrawable;
+    private T player;
+    private View view;
 
     public PlayerViewHolder(View view,Action1<T> onClick){
         super(view);

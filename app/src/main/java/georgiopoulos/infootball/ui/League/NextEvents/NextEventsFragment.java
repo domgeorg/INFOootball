@@ -24,7 +24,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -32,16 +31,18 @@ import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.league.Event;
 import georgiopoulos.infootball.data.remote.dto.league.Events;
 import georgiopoulos.infootball.ui.Base.BaseFragment;
-import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
+import georgiopoulos.infootball.util.RecyclerViewHeadline;
 import georgiopoulos.infootball.util.adapters.NextEventViewHolder;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
+import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import nucleus.factory.RequiresPresenter;
 
 @RequiresPresenter(NextEventsPresenter.class)
 public class NextEventsFragment extends BaseFragment<NextEventsPresenter>{
 
     @BindView(R.id.next_event_recycler_view) RecyclerView recyclerView;
-    @BindView(R.id.recycler_view_header) RecyclerViewHeader recyclerViewHeader;
+    @BindView(R.id.recycler_view_header)
+    RecyclerViewHeadline recyclerViewHeadline;
     @BindView(R.id.leagueTrophy) ImageView trophyImageView;
     private SimpleListAdapter<Event> adapter;
 
@@ -55,7 +56,7 @@ public class NextEventsFragment extends BaseFragment<NextEventsPresenter>{
     }
 
     @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-        return inflater.inflate(R.layout.view_recycler_next_events_with_header,container,false);
+        return inflater.inflate(R.layout.view_recycler_next_events_with_headeline,container,false);
     }
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState){
@@ -63,8 +64,7 @@ public class NextEventsFragment extends BaseFragment<NextEventsPresenter>{
         adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Event.class,R.layout.card_next_events,v -> new NextEventViewHolder<>(v,this::onItemClick)));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
-        recyclerViewHeader.attachTo(recyclerView);
+        recyclerView.setAdapter(adapter); recyclerViewHeadline.attachTo(recyclerView);
         Picasso.with(getContext()).load(getArguments().getString("trophy")).into(trophyImageView);
         getPresenter().request(getArguments().getString("leagueId"));
         adapter.showProgress();
@@ -80,6 +80,7 @@ public class NextEventsFragment extends BaseFragment<NextEventsPresenter>{
     }
 
     void onNetworkError(Throwable throwable){
+        throwable.printStackTrace();
         adapter.hideProgress();
         newsFlash(throwable.getMessage(),recyclerView);
     }

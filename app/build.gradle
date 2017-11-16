@@ -100,18 +100,21 @@ dependencies {
     //diagonal-imageview
     compile 'com.github.santalu:diagonal-imageview:1.0.2'
 
-    //RecyclerViewHeader
-    compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
-
     //SpaceTabLayout
     compile 'eu.long1:spacetablayout:1.0.4'
 
     // Required if generating equals, hashCode, or toString methods
     compile 'commons-lang:commons-lang:2.6'
 
+    // Joda-Time
+    compile 'joda-time:joda-time:2.9.9'
+
     compile 'com.android.support:multidex:1.0.0'
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+}
+repositories {
+    mavenCentral()
 }

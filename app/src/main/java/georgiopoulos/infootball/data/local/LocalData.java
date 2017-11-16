@@ -25,10 +25,16 @@ public interface LocalData{
     String getJerseyUrl(String idTeam);
     String getBadgeUrl(String idTeam);
     String getStadium(String idTeam);
+
+    String getTrophyUrl(String idLeague);
     Boolean findTeamInRealm(Realm realm,String idTeam);
     TeamsDetails writeTeamDetailsToRealm(TeamsDetails teamsDetails);
     String getRoundFromRealm(String leagueId);
     Boolean findLeagueInRealm(Realm realm, String leagueId);
     Leagues writeLeaguesToRealm(Leagues leagues);
     Events writeRoundToRealm(Events events);
+
+    String getLeagueName(String idLeague);
+
+    String getLeagueBadge(String idLeague);
 }

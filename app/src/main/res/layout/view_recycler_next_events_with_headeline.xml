@@ -3,9 +3,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="@dimen/zero_horizontal_margin_big_activity"
+    android:background="@color/activity_background"
     android:paddingEnd="@dimen/zero_horizontal_margin_big_activity"
-    android:background="@color/activity_background">
+    android:paddingStart="@dimen/zero_horizontal_margin_big_activity">
 
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,15 +14,14 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal|top"/>
 
-    <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+    <georgiopoulos.infootball.util.RecyclerViewHeadline
         android:id="@+id/recycler_view_header"
-        android:layout_gravity="center_horizontal|top"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/recycler_header_height">
+        android:layout_height="@dimen/recycler_header_height"
+        android:layout_gravity="center_horizontal|top">
 
-      <include layout="@layout/card_header_next_events"/>
+        <include layout="@layout/card_header_next_events" />
 
-    </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
-
+    </georgiopoulos.infootball.util.RecyclerViewHeadline>
 
 </FrameLayout>
