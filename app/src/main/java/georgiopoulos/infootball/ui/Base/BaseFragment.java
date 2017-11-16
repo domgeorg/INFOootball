@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
@@ -63,6 +64,7 @@ public abstract class BaseFragment<P extends Presenter> extends NucleusSupportFr
     }
 
     public void newsFlash(final String message, final View viewId){
+        Log.e("-> MESSAGE <-",message);
         Snackbar.make(viewId,message,Snackbar.LENGTH_SHORT).show();
     }
 
