@@ -18,7 +18,6 @@
 11. [Picasso](http://square.github.io/picasso/)
 12. [diagonal-imageview](https://github.com/santalu/diagonal-imageview)
 13. [SpaceTabLayout](https://github.com/long1eu/SpaceTabLayout)
-14. [RecyclerViewHeader](https://github.com/blipinsk/RecyclerViewHeader)
 
 ## Free APIs
 1. [TheSportsDB](http://www.thesportsdb.com)
