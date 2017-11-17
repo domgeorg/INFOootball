@@ -9,5 +9,6 @@
     <string name="league_badge">league badge</string>
     <string name="activity_soccer_leagues_menu_search">Search</string>
     <string name="activity_soccer_leagues_menu_live_scores">Live scores</string>
+    <string name="latest_events_fragment_error_message">Server does not provide info about latest events</string>
 
 </resources>

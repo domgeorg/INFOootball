@@ -17,27 +17,19 @@ package georgiopoulos.infootball.ui.League.LatestEvents;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
-import butterknife.BindView;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.league.Event;
 import georgiopoulos.infootball.data.remote.dto.league.Events;
-import georgiopoulos.infootball.ui.Base.BaseFragment;
-import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
+import georgiopoulos.infootball.ui.Base.LoadingContentErrorFragment;
 import georgiopoulos.infootball.util.adapters.LatestEventViewHolder;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
+import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import nucleus.factory.RequiresPresenter;
 
 @RequiresPresenter(LatestEventsPresenter.class)
-public class LatestEventsFragment extends BaseFragment<LatestEventsPresenter>{
-
-    @BindView(R.id.recycler_view) RecyclerView recyclerView;
-    private SimpleListAdapter<Event> adapter;
+public class LatestEventsFragment extends LoadingContentErrorFragment<Event,LatestEventsPresenter>{
 
     public static LatestEventsFragment create(String leagueId){
         Bundle bundle = new Bundle();
@@ -47,34 +39,22 @@ public class LatestEventsFragment extends BaseFragment<LatestEventsPresenter>{
         return fragment;
     }
 
-    @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-        return inflater.inflate(R.layout.view_recycler,container,false);
+    @Override
+    public void onViewCreated(View view,Bundle bundle){
+        setAdapter(new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Event.class,R.layout.card_latest_events,v -> new LatestEventViewHolder<>(v,this::onItemClick))));
+        super.onViewCreated(view,bundle); this.onRefresh();
     }
 
-    @Override public void onViewCreated(View view, Bundle savedInstanceState){
-        super.onViewCreated(view, savedInstanceState);
-        adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Event.class,R.layout.card_latest_events,v -> new LatestEventViewHolder<>(v,this::onItemClick)));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
+    @Override
+    public void onRefresh(){
+        super.onRefresh();
         getPresenter().request(getArguments().getString("leagueId"));
-        adapter.showProgress();
     }
 
-    void onEvents(@Nullable Events events){
-        adapter.hideProgress();
-        if (events.getEvents()==null) newsFlash("Server does not provide info about latest events",recyclerView);
-        else{
-            runLayoutAnimation(recyclerView);
-            adapter.set(events.getEvents());
-        }
+    protected void onEvents(@Nullable Events events){
+        onResults(events.getEvents(),getString(R.string.latest_events_fragment_error_message),R.drawable.ic_error_next_events_fragment,R.anim.layout_animation_from_right);
     }
 
-    void onNetworkError(Throwable throwable){
-        adapter.hideProgress();
-        newsFlash(throwable.getMessage(),recyclerView);
-    }
-
-    void onItemClick(Event event){
-        newsFlash(event.getStrFilename(),recyclerView);}
+    @Override
+    public void onItemClick(Event event){}
 }

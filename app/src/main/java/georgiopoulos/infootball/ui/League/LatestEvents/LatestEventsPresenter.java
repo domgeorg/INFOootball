@@ -16,13 +16,14 @@
 package georgiopoulos.infootball.ui.League.LatestEvents;
 
 
+import android.os.Bundle;
+
 import javax.inject.Inject;
 
 import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
 import georgiopoulos.infootball.ui.Base.BasePresenter;
 import icepick.State;
-import io.realm.Realm;
 import rx.schedulers.Schedulers;
 
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
@@ -31,21 +32,18 @@ public class LatestEventsPresenter extends BasePresenter<LatestEventsFragment>{
 
     private static final int REQUEST_LATEST_EVENTS = 1;
     @Inject ServerAPI api;
-    @State String leagueId;
     @Inject LocalData localData;
+    @State
+    String leagueId;
 
-    public void request(String leagueId){
-        this.leagueId = leagueId;
+    @Override
+    public void onCreate(Bundle savedState){
+        super.onCreate(savedState);
+        restartableLatestCache(REQUEST_LATEST_EVENTS,() -> api.getLatestEvents(leagueId).subscribeOn(Schedulers.io()).observeOn(Schedulers.computation()).map(events -> localData.writeRoundToRealm(events)).observeOn(mainThread()),LatestEventsFragment::onEvents,LatestEventsFragment::onNetworkError);
+    }
 
-        restartableLatestCache(REQUEST_LATEST_EVENTS,
-                               () -> api.getLatestEvents(leagueId)
-                                             .subscribeOn(Schedulers.io())
-                                             .observeOn(Schedulers.computation())
-                                             .map(events -> localData.writeRoundToRealm(events))
-                                             .observeOn(mainThread()),
-                               LatestEventsFragment::onEvents,LatestEventsFragment::onNetworkError);
-
-        start(REQUEST_LATEST_EVENTS);
+    protected void request(String leagueId){
+        this.leagueId = leagueId; start(REQUEST_LATEST_EVENTS);
     }
 
 }

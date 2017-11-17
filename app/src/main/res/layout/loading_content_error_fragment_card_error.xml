@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
-    android:id="@+id/card_error"
+    android:id="@+id/loading_content_error_fragment_card_error"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="@dimen/card_margin_vertical_big_activity"
@@ -21,15 +21,17 @@
         android:padding="@dimen/text_margin">
 
         <TextView
+            android:id="@+id/loading_content_error_fragment_card_error_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/text_margin_small"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Title" />
 
         <ImageView
-            android:id="@+id/card_error_image"
+            android:id="@+id/loading_content_error_fragment_card_error_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
