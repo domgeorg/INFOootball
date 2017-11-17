@@ -15,7 +15,6 @@
  */
 package georgiopoulos.infootball.ui.League.LatestEvents;
 
-
 import android.os.Bundle;
 
 import javax.inject.Inject;
@@ -37,8 +36,8 @@ public class LatestEventsPresenter extends BasePresenter<LatestEventsFragment>{
     String leagueId;
 
     @Override
-    public void onCreate(Bundle savedState){
-        super.onCreate(savedState);
+    public void onCreate(Bundle bundle){
+        super.onCreate(bundle);
         restartableLatestCache(REQUEST_LATEST_EVENTS,() -> api.getLatestEvents(leagueId).subscribeOn(Schedulers.io()).observeOn(Schedulers.computation()).map(events -> localData.writeRoundToRealm(events)).observeOn(mainThread()),LatestEventsFragment::onEvents,LatestEventsFragment::onNetworkError);
     }
 

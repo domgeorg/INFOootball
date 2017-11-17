@@ -18,28 +18,20 @@ package georgiopoulos.infootball.ui.League.LeagueTable;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
-import butterknife.BindView;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.league.LeagueTable;
 import georgiopoulos.infootball.data.remote.dto.league.Table;
-import georgiopoulos.infootball.ui.Base.BaseFragment;
+import georgiopoulos.infootball.ui.Base.LoadingContentErrorFragment;
 import georgiopoulos.infootball.ui.Team.TeamRosterActivity;
-import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import georgiopoulos.infootball.util.adapters.LeagueTableTeamViewHolder;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
+import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import nucleus.factory.RequiresPresenter;
 
 @RequiresPresenter(LeagueTablePresenter.class)
-public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
-
-    @BindView(R.id.recycler_view) RecyclerView recyclerView;
-    private SimpleListAdapter<Table> adapter;
+public class LeagueTableFragment extends LoadingContentErrorFragment<Table,LeagueTablePresenter>{
 
     public static LeagueTableFragment create(String leagueId){
         Bundle bundle = new Bundle();
@@ -49,34 +41,24 @@ public class LeagueTableFragment extends BaseFragment<LeagueTablePresenter>{
         return fragment;
     }
 
-    @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-        return inflater.inflate(R.layout.view_recycler,container,false);
+    @Override
+    public void onViewCreated(View view,Bundle savedInstanceState){
+        setAdapter(new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Table.class,R.layout.card_league_table,v -> new LeagueTableTeamViewHolder<>(v,this::onItemClick))));
+        super.onViewCreated(view, savedInstanceState); this.onRefresh();
     }
 
-    @Override public void onViewCreated(View view, Bundle savedInstanceState){
-        super.onViewCreated(view, savedInstanceState);
-        adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Table.class,R.layout.card_league_table,v -> new LeagueTableTeamViewHolder<>(v,this::onItemClick)));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
-        getPresenter().request(getArguments().getString("leagueId"));
-        adapter.showProgress();
+    @Override
+    public void onRefresh(){
+        super.onRefresh(); getPresenter().request(getArguments().getString("leagueId"));
     }
 
-    void onTable(@Nullable LeagueTable leagueTable){
-        adapter.hideProgress();
-        if (leagueTable.getTable()==null) newsFlash("Server does not provide info about standings",recyclerView);
-        else {
-            runLayoutAnimation(recyclerView);
-            adapter.set(leagueTable.getTable());}
+    protected void onTable(@Nullable LeagueTable leagueTable){
+        onResults(leagueTable.getTable(),getString(R.string.league_table_fragment_error_message),
+                  R.drawable.ic_error_league_table_fragment,R.anim.layout_animation_fall_down);
     }
 
-    void onNetworkError(Throwable throwable){
-        adapter.hideProgress();
-        newsFlash(throwable.getMessage(),recyclerView);
-    }
-
-    private void onItemClick(Table team){
+    @Override
+    public void onItemClick(Table team){
        startActivity(new Intent(getActivity(),TeamRosterActivity.class).putExtra("teamId",team.getTeamid()).putExtra("team", team.getName()));
     }
 

@@ -52,7 +52,7 @@ public class LatestEventsFragment extends LoadingContentErrorFragment<Event,Late
     }
 
     protected void onEvents(@Nullable Events events){
-        onResults(events.getEvents(),getString(R.string.latest_events_fragment_error_message),R.drawable.ic_error_next_events_fragment,R.anim.layout_animation_from_right);
+        onResults(events.getEvents(),getString(R.string.latest_events_fragment_error_message),R.drawable.ic_error_latest_events_fragment,R.anim.layout_animation_from_right);
     }
 
     @Override

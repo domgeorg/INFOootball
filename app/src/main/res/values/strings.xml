@@ -10,5 +10,5 @@
     <string name="activity_soccer_leagues_menu_search">Search</string>
     <string name="activity_soccer_leagues_menu_live_scores">Live scores</string>
     <string name="latest_events_fragment_error_message">Server does not provide info about latest events</string>
-
+    <string name="league_table_fragment_error_message">Server does not provide info about standings</string>
 </resources>

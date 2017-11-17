@@ -36,17 +36,16 @@ public class LeagueTablePresenter extends BasePresenter<LeagueTableFragment>{
     @State String leagueId;
     @State String season="1718";
 
-    public void request(String leagueId){
+    @Override
+    public void onCreate(Bundle savedState){
+        super.onCreate(savedState);
+        restartableLatestCache(REQUEST_LEAGUE_TABLE,() -> api.getLeagueTable(leagueId,season)
+                                                                  .subscribeOn(Schedulers.io())
+                                                                  .observeOn(mainThread()),
+                               LeagueTableFragment::onTable,LeagueTableFragment::onNetworkError);
+    }
 
-        this.leagueId = leagueId;
-
-        restartableLatestCache(REQUEST_LEAGUE_TABLE,
-                               () -> api.getLeagueTable(leagueId,season)
-                                             .subscribeOn(Schedulers.io())
-                                             .observeOn(mainThread()),
-                               LeagueTableFragment::onTable,
-                               LeagueTableFragment::onNetworkError);
-
-        start(REQUEST_LEAGUE_TABLE);
+    protected void request(String leagueId){
+        this.leagueId = leagueId; start(REQUEST_LEAGUE_TABLE);
     }
 }
