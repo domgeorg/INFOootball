@@ -36,21 +36,28 @@ import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Leagues;
 import georgiopoulos.infootball.ui.Base.BaseActivity;
 import georgiopoulos.infootball.ui.League.LeagueActivity;
 import georgiopoulos.infootball.ui.LiveScores.LiveScoresActivity;
-import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import georgiopoulos.infootball.util.adapters.SoccerLeagueViewHolder;
+import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import icepick.State;
 import nucleus.factory.RequiresPresenter;
 
-@RequiresPresenter(SoccerLeaguesPresenter.class)
-public class SoccerLeaguesActivity extends BaseActivity<SoccerLeaguesPresenter> implements AppBarLayout.OnOffsetChangedListener, FloatingActionButton.OnClickListener{
+@RequiresPresenter(LeaguesPresenter.class)
+public class SoccerLeaguesActivity extends BaseActivity<LeaguesPresenter> implements AppBarLayout
+                                                                                             .OnOffsetChangedListener, FloatingActionButton.OnClickListener{
 
-    @BindView(R.id.activity_soccer_leagues_coordinator_layout) CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.activity_soccer_leagues_app_bar_layout) AppBarLayout appBarLayout;
-    @BindView(R.id.activity_soccer_leagues_header_image) ImageView headerImageView;
-    @BindView(R.id.activity_soccer_leagues_toolbar) Toolbar toolbar;
-    @BindView(R.id.activity_soccer_leagues_recycler_view) RecyclerView recyclerView;
-    @BindView(R.id.activity_soccer_leagues_floating_action_button) FloatingActionButton floatingActionButton;
+    @BindView(R.id.activity_soccer_leagues_coordinator_layout)
+    CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.activity_soccer_leagues_app_bar_layout)
+    AppBarLayout appBarLayout;
+    @BindView(R.id.activity_soccer_leagues_header_image)
+    ImageView headerImageView;
+    @BindView(R.id.activity_soccer_leagues_toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.activity_soccer_leagues_recycler_view)
+    RecyclerView recyclerView;
+    @BindView(R.id.activity_soccer_leagues_floating_action_button)
+    FloatingActionButton floatingActionButton;
     @State boolean isShow = false;
     private SimpleListAdapter<Country> adapter;
     private int scrollRange;

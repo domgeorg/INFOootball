@@ -12,4 +12,5 @@
     <string name="latest_events_fragment_error_message">Server does not provide info about latest events</string>
     <string name="league_table_fragment_error_message">Server does not provide info about standings</string>
     <string name="next_events_fragment_error_message">Server does not provide info about next events</string>
+    <string name="leagues_fragment_error_message">Server does not provide data right now...try again later</string>
 </resources>

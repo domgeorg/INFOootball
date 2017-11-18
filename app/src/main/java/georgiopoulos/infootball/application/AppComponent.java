@@ -36,7 +36,7 @@ import georgiopoulos.infootball.ui.League.LeaguePresenter;
 import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTablePresenter;
 import georgiopoulos.infootball.ui.League.NextEvents.NextEventsPresenter;
 import georgiopoulos.infootball.ui.LiveScores.LiveScoresPresenter;
-import georgiopoulos.infootball.ui.SoccerLeagues.SoccerLeaguesPresenter;
+import georgiopoulos.infootball.ui.SoccerLeagues.LeaguesPresenter;
 import georgiopoulos.infootball.ui.Team.TeamRosterActivity;
 import georgiopoulos.infootball.ui.Team.TeamRosterPresenter;
 import georgiopoulos.infootball.util.adapters.EventViewHolder;
@@ -60,7 +60,8 @@ public interface AppComponent{
 
     //Presenters
     void inject(LeagueTablePresenter leagueTablePresenter);
-    void inject(SoccerLeaguesPresenter soccerLeaguesPresenter);
+
+    void inject(LeaguesPresenter leaguesPresenter);
     void inject(LeaguePresenter leaguePresenter);
     void inject(LatestEventsPresenter latestEventsPresenter);
     void inject(NextEventsPresenter nextEventsPresenter);

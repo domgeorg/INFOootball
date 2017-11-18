@@ -145,8 +145,7 @@ public class RealmManager implements LocalData{
         try(Realm realm = realmProvider.get()){
             LeagueRoundRealm leagueRoundRealm = realm.where(LeagueRoundRealm.class).equalTo("leagueId",leagueId).findFirst();
             if(leagueRoundRealm != null) round = leagueRoundRealm.getRound();
-            int r = Integer.valueOf(round)+1;
-            return String.valueOf(r);
+            if(round != null) return String.valueOf(Integer.valueOf(round) + 1); return "0";
         }
     }
 
