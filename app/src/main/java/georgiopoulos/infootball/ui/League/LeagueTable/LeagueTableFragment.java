@@ -42,9 +42,9 @@ public class LeagueTableFragment extends LoadingContentErrorFragment<Table,Leagu
     }
 
     @Override
-    public void onViewCreated(View view,Bundle savedInstanceState){
+    public void onViewCreated(View view,Bundle bundle){
         setAdapter(new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Table.class,R.layout.card_league_table,v -> new LeagueTableTeamViewHolder<>(v,this::onItemClick))));
-        super.onViewCreated(view, savedInstanceState); this.onRefresh();
+        super.onViewCreated(view,bundle); this.onRefresh();
     }
 
     @Override

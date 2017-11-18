@@ -23,7 +23,7 @@ import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.league.Event;
 import georgiopoulos.infootball.data.remote.dto.league.Events;
 import georgiopoulos.infootball.ui.Base.LoadingContentErrorFragment;
-import georgiopoulos.infootball.util.adapters.LatestEventViewHolder;
+import georgiopoulos.infootball.util.adapters.EventViewHolder;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import nucleus.factory.RequiresPresenter;
@@ -41,7 +41,7 @@ public class LatestEventsFragment extends LoadingContentErrorFragment<Event,Late
 
     @Override
     public void onViewCreated(View view,Bundle bundle){
-        setAdapter(new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Event.class,R.layout.card_latest_events,v -> new LatestEventViewHolder<>(v,this::onItemClick))));
+        setAdapter(new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Event.class,R.layout.view_holder_event,v -> new EventViewHolder<>(v,this::onItemClick))));
         super.onViewCreated(view,bundle); this.onRefresh();
     }
 

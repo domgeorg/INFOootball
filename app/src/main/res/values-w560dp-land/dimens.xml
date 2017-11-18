@@ -6,6 +6,7 @@
     <dimen name="activity_horizontal_margin">64dp</dimen>
 
     <dimen name="team_activity_logo">86dp</dimen>
+    <dimen name="size_loading_content_error_fragment_card_error_image">156dp</dimen>
 
     <dimen name="card_margin_horizontal">64dp</dimen>
     <dimen name="card_margin_vertical_big_activity">4dp</dimen>

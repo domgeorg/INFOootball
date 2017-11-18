@@ -43,11 +43,13 @@ import georgiopoulos.infootball.ui.Base.BaseActivity;
 import georgiopoulos.infootball.ui.League.LatestEvents.LatestEventsFragment;
 import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTableFragment;
 import georgiopoulos.infootball.ui.League.NextEvents.NextEventsFragment;
+import georgiopoulos.infootball.util.injection.Injector;
 import icepick.State;
 import nucleus.factory.RequiresPresenter;
 
 @RequiresPresenter(LeaguePresenter.class)
-public class LeagueActivity extends BaseActivity<LeaguePresenter> implements AppBarLayout.OnOffsetChangedListener{
+public class LeagueActivity extends BaseActivity<LeaguePresenter> implements AppBarLayout
+                                                                                     .OnOffsetChangedListener{
 
 
     @BindView(R.id.activity_league_coordinator_layout) CoordinatorLayout coordinatorLayout;
@@ -66,6 +68,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
     private int scrollRange;
 
     @Override public void onCreate(Bundle savedInstanceState){
+        ((Injector)getApplication()).inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_league);
         ButterKnife.bind(this);
@@ -89,7 +92,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(LatestEventsFragment.create(getIntent().getStringExtra("leagueId")));
         fragmentList.add(LeagueTableFragment.create(getIntent().getStringExtra("leagueId")));
-        fragmentList.add(NextEventsFragment.create(getIntent().getStringExtra("leagueId"),trophy));
+        fragmentList.add(NextEventsFragment.create(getIntent().getStringExtra("leagueId")));
         tabLayout.initialize(viewPager,getSupportFragmentManager(),fragmentList,savedInstanceState);
     }
 

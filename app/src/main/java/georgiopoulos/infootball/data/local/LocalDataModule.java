@@ -17,7 +17,6 @@ package georgiopoulos.infootball.data.local;
 
 import dagger.Binds;
 import dagger.Module;
-import georgiopoulos.infootball.util.adapters.LatestEventViewHolder;
 
 @Module public abstract class LocalDataModule{
     @Binds abstract LocalData localData(RealmManager realmManager);

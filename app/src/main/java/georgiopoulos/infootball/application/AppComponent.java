@@ -25,12 +25,13 @@ import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.local.LocalDataModule;
 import georgiopoulos.infootball.data.remote.api.NetworkModule;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
-import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Country;
 import georgiopoulos.infootball.data.remote.dto.league.Event;
-import georgiopoulos.infootball.data.remote.dto.team.Player;
 import georgiopoulos.infootball.data.remote.dto.league.Table;
 import georgiopoulos.infootball.data.remote.dto.livescores.Match;
+import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Country;
+import georgiopoulos.infootball.data.remote.dto.team.Player;
 import georgiopoulos.infootball.ui.League.LatestEvents.LatestEventsPresenter;
+import georgiopoulos.infootball.ui.League.LeagueActivity;
 import georgiopoulos.infootball.ui.League.LeaguePresenter;
 import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTablePresenter;
 import georgiopoulos.infootball.ui.League.NextEvents.NextEventsPresenter;
@@ -38,13 +39,13 @@ import georgiopoulos.infootball.ui.LiveScores.LiveScoresPresenter;
 import georgiopoulos.infootball.ui.SoccerLeagues.SoccerLeaguesPresenter;
 import georgiopoulos.infootball.ui.Team.TeamRosterActivity;
 import georgiopoulos.infootball.ui.Team.TeamRosterPresenter;
-import georgiopoulos.infootball.util.adapters.LiveScoresViewHolder;
-import georgiopoulos.infootball.util.adapters.PlayerViewHolder;
-import georgiopoulos.infootball.util.adapters.base.EmptyViewHolder;
-import georgiopoulos.infootball.util.adapters.LatestEventViewHolder;
+import georgiopoulos.infootball.util.adapters.EventViewHolder;
 import georgiopoulos.infootball.util.adapters.LeagueTableTeamViewHolder;
+import georgiopoulos.infootball.util.adapters.LiveScoresViewHolder;
 import georgiopoulos.infootball.util.adapters.NextEventViewHolder;
+import georgiopoulos.infootball.util.adapters.PlayerViewHolder;
 import georgiopoulos.infootball.util.adapters.SoccerLeagueViewHolder;
+import georgiopoulos.infootball.util.adapters.base.EmptyViewHolder;
 import io.realm.Realm;
 
 @Singleton
@@ -67,7 +68,7 @@ public interface AppComponent{
     void inject(LiveScoresPresenter liveScoresPresenter);
 
     //ViewHolders
-    void inject(LatestEventViewHolder<Event> latestEventViewHolder);
+    void inject(EventViewHolder<Event> EventViewHolder);
     void inject(NextEventViewHolder<Event> nextEventViewHolder);
     void inject(EmptyViewHolder emptyViewHolder);
     void inject(SoccerLeagueViewHolder<Country> soccerLeagueViewHolder);
@@ -77,4 +78,6 @@ public interface AppComponent{
 
     //Activities
     void inject(TeamRosterActivity teamRosterActivity);
+
+    void inject(LeagueActivity leagueActivity);
 }

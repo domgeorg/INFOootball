@@ -38,7 +38,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.util.RecyclerViewHeadline;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import georgiopoulos.infootball.util.injection.Injector;
 import icepick.Icepick;
@@ -59,13 +58,11 @@ public abstract class LoadingContentErrorFragment<T,P extends Presenter> extends
     SwipeRefreshLayout swipeRefreshLayoutLoading;
     @BindView(R.id.loading_content_error_fragment_recycler_view)
     RecyclerView recyclerViewContent;
-    @BindView(R.id.loading_content_error_fragment_recycler_view_headline)
-    RecyclerViewHeadline recyclerViewHeadlineContent;
 
     private Unbinder unbinder;
     private SimpleListAdapter<T> adapter;
 
-    //LoadingContentErrorFragment Lifecycle --------------------------------------------------------
+    //Loading - Content - Error Base-Fragment Lifecycle --------------------------------------------
     @Override
     public void onCreate(Bundle bundle){
 
@@ -89,7 +86,7 @@ public abstract class LoadingContentErrorFragment<T,P extends Presenter> extends
         super.onViewCreated(view,bundle); unbinder = ButterKnife.bind(this,view);
 
         //Prepare view for general purpose content
-        cardViewError.setVisibility(View.GONE); enableRecyclerViewHeadline(false);
+        cardViewError.setVisibility(View.GONE);
         enableSwipeRefreshLayout(false);
         setRecyclerViewContent(new LinearLayoutManager(getActivity()),false);
     }
@@ -115,11 +112,10 @@ public abstract class LoadingContentErrorFragment<T,P extends Presenter> extends
 
     //Content
     public void onResults(@Nullable List<T> items,String errorMessage,int errorDrawable,int animation){
-        adapter.hideProgress(); if(items != null){
-            if(items.isEmpty()) onError(errorMessage,errorDrawable);
-            else{
-                runLayoutAnimation(animation); adapter.set(items);
-            }
+        adapter.hideProgress();
+        if(items == null || items.isEmpty()) onError(errorMessage,errorDrawable);
+        else{
+            adapter.set(items); runLayoutAnimation(animation);
         }
     }
 
@@ -139,6 +135,18 @@ public abstract class LoadingContentErrorFragment<T,P extends Presenter> extends
 
     //View -----------------------------------------------------------------------------------------
 
+    public void enableSwipeRefreshLayout(boolean enabled){
+        if(enabled){
+            swipeRefreshLayoutLoading.setOnRefreshListener(this);
+            swipeRefreshLayoutLoading.setEnabled(true);
+        }else swipeRefreshLayoutLoading.setEnabled(false);
+    }
+
+    public void setRecyclerViewContent(RecyclerView.LayoutManager layoutManager,boolean fixedSize){
+        recyclerViewContent.setLayoutManager(layoutManager);
+        recyclerViewContent.setHasFixedSize(fixedSize); recyclerViewContent.setAdapter(adapter);
+    }
+
     @NonNull
     public SimpleListAdapter<T> getAdapter(){
         return adapter;
@@ -154,22 +162,5 @@ public abstract class LoadingContentErrorFragment<T,P extends Presenter> extends
                                                                              animation);
         recyclerViewContent.setLayoutAnimation(controller);
         recyclerViewContent.scheduleLayoutAnimation();
-    }
-
-    public void enableRecyclerViewHeadline(boolean enabled){
-        if(enabled) recyclerViewHeadlineContent.setVisibility(View.VISIBLE);
-        else recyclerViewHeadlineContent.setVisibility(View.GONE);
-    }
-
-    public void enableSwipeRefreshLayout(boolean enabled){
-        if(enabled){
-            swipeRefreshLayoutLoading.setOnRefreshListener(this);
-            swipeRefreshLayoutLoading.setEnabled(true);
-        }else swipeRefreshLayoutLoading.setEnabled(false);
-    }
-
-    public void setRecyclerViewContent(RecyclerView.LayoutManager layoutManager,boolean fixedSize){
-        recyclerViewContent.setLayoutManager(layoutManager);
-        recyclerViewContent.setHasFixedSize(fixedSize); recyclerViewContent.setAdapter(adapter);
     }
 }

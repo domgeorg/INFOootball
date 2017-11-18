@@ -31,15 +31,15 @@ import nucleus.view.NucleusAppCompatActivity;
 public class BaseActivity <P extends Presenter> extends NucleusAppCompatActivity<P>{
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle bundle){
         final PresenterFactory<P> superFactory = super.getPresenterFactory();
         setPresenterFactory(superFactory == null ? null : (PresenterFactory<P>) () -> {
             P presenter = superFactory.createPresenter();
             ((Injector)getApplication()).inject(presenter);
             return presenter;
         });
-        super.onCreate(savedInstanceState);
-        Icepick.restoreInstanceState(this,savedInstanceState);
+
+        super.onCreate(bundle); Icepick.restoreInstanceState(this,bundle);
     }
 
     @Override

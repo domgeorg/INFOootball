@@ -17,74 +17,46 @@ package georgiopoulos.infootball.ui.League.NextEvents;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
-import butterknife.BindView;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.league.Event;
 import georgiopoulos.infootball.data.remote.dto.league.Events;
-import georgiopoulos.infootball.ui.Base.BaseFragment;
-import georgiopoulos.infootball.util.RecyclerViewHeadline;
+import georgiopoulos.infootball.ui.Base.LoadingContentErrorFragment;
 import georgiopoulos.infootball.util.adapters.NextEventViewHolder;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import nucleus.factory.RequiresPresenter;
 
 @RequiresPresenter(NextEventsPresenter.class)
-public class NextEventsFragment extends BaseFragment<NextEventsPresenter>{
+public class NextEventsFragment extends LoadingContentErrorFragment<Event,NextEventsPresenter>{
 
-    @BindView(R.id.next_event_recycler_view) RecyclerView recyclerView;
-    @BindView(R.id.recycler_view_header)
-    RecyclerViewHeadline recyclerViewHeadline;
-    @BindView(R.id.leagueTrophy) ImageView trophyImageView;
-    private SimpleListAdapter<Event> adapter;
+    protected String leagueId;
 
-    public static NextEventsFragment create(String leagueId,String trophy){
+    public static NextEventsFragment create(String leagueId){
         Bundle bundle = new Bundle();
         bundle.putString("leagueId",leagueId);
-        bundle.putString("trophy",trophy);
         NextEventsFragment fragment = new NextEventsFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-        return inflater.inflate(R.layout.view_recycler_next_events_with_headeline,container,false);
+    @Override
+    public void onViewCreated(View view,Bundle bundle){
+        leagueId = getArguments().getString("leagueId");
+        setAdapter(new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Event.class,R.layout.card_next_events,v -> new NextEventViewHolder<>(v,this::onItemClick))));
+        super.onViewCreated(view,bundle); this.onRefresh();
     }
 
-    @Override public void onViewCreated(View view, Bundle savedInstanceState){
-        super.onViewCreated(view, savedInstanceState);
-        adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Event.class,R.layout.card_next_events,v -> new NextEventViewHolder<>(v,this::onItemClick)));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter); recyclerViewHeadline.attachTo(recyclerView);
-        Picasso.with(getContext()).load(getArguments().getString("trophy")).into(trophyImageView);
-        getPresenter().request(getArguments().getString("leagueId"));
-        adapter.showProgress();
+    @Override
+    public void onRefresh(){
+        super.onRefresh(); getPresenter().request(leagueId);
     }
 
-    void onEvents(@Nullable Events events){
-        adapter.hideProgress();
-        if(events.getEvents() == null) newsFlash("Server does not provide info about next events",recyclerView);
-        else{
-            runLayoutAnimation(recyclerView);
-            adapter.set(events.getEvents());
-        }
+    protected void onEvents(@Nullable Events events){
+        onResults(events.getEvents(),getString(R.string.next_events_fragment_error_message),R.drawable.ic_error_next_events_fragment,R.anim.layout_animation_from_right);
     }
 
-    void onNetworkError(Throwable throwable){
-        throwable.printStackTrace();
-        adapter.hideProgress();
-        newsFlash(throwable.getMessage(),recyclerView);
-    }
-
-    void onItemClick(Event event){
-       newsFlash(event.getStrFilename(),recyclerView);}
+    @Override
+    public void onItemClick(Event event){}
 }

@@ -27,25 +27,30 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.local.LocalData;
-import georgiopoulos.infootball.data.local.realmObjects.TeamRealm;
 import georgiopoulos.infootball.data.remote.dto.league.Event;
 import georgiopoulos.infootball.util.adapters.base.BaseViewHolder;
-import io.realm.Realm;
 import rx.functions.Action1;
 
-public class LatestEventViewHolder<T extends Event> extends BaseViewHolder<T>{
+public class EventViewHolder<T extends Event> extends BaseViewHolder<T>{
+
+    @BindView(R.id.card_event_home_team_badge)
+    ImageView homeTeamBadgeImageView;
+    @BindView(R.id.card_event_away_team_badge)
+    ImageView awayTeamBadgeImageView;
+    @BindView(R.id.card_event_match_name)
+    TextView matchNameTextView;
+    @BindView(R.id.card_event_home_team_score)
+    TextView homeTeamScoreTextView;
+    @BindView(R.id.card_event_away_team_score)
+    TextView awayTeamScoreTextView;
+    @BindView(R.id.card_event_match_date)
+    TextView matchDateTextView;
 
     @Inject LocalData localData;
     private T event;
     private View view;
-    @BindView(R.id.homeTeamBadge) ImageView homeTeamBadgeImageView;
-    @BindView(R.id.awayTeamBadge) ImageView awayTeamBadgeImageView;
-    @BindView(R.id.event) TextView eventTextView;
-    @BindView(R.id.homeScore) TextView homeScoreTextView;
-    @BindView(R.id.awayScore) TextView awayScoreTextView;
-    @BindView(R.id.date) TextView dateTextView;
 
-    public LatestEventViewHolder(View view,Action1<T> onClick){
+    public EventViewHolder(View view,Action1<T> onClick){
         super(view);
         this.view=view;
         ButterKnife.bind(this,view);
@@ -55,26 +60,11 @@ public class LatestEventViewHolder<T extends Event> extends BaseViewHolder<T>{
     @Override
     public void bind(T item){
         this.event=item;
-        eventTextView.setText(event.getStrEvent());
-        homeScoreTextView.setText(event.getIntHomeScore());
-        awayScoreTextView.setText(event.getIntAwayScore());
-        dateTextView.setText(event.getStrDate());
         Picasso.with(view.getContext()).load(localData.getBadgeUrl(event.getIdHomeTeam())).into(homeTeamBadgeImageView);
         Picasso.with(view.getContext()).load(localData.getBadgeUrl(event.getIdAwayTeam())).into(awayTeamBadgeImageView);
-    }
-
-    private String getBadgeUrl(String idTeam){
-        try(Realm realm = Realm.getDefaultInstance()){
-            TeamRealm teamRealm = realm.where(TeamRealm.class).equalTo("idTeam",idTeam).findFirst();
-            if(teamRealm!=null){
-                if(teamRealm.getStrTeamBadge() != null && ! teamRealm.getStrTeamBadge().isEmpty())
-                    return teamRealm.getStrTeamBadge();
-                else if(teamRealm.getStrTeamLogo() != null && ! teamRealm.getStrTeamLogo().isEmpty())
-                    return teamRealm.getStrTeamLogo();
-                else if(teamRealm.getStrTeamJersey() != null && ! teamRealm.getStrTeamJersey().isEmpty())
-                    return teamRealm.getStrTeamJersey();
-            }return "http://www.thesportsdb.com/images/team-icon.png";
-        }
-
+        matchNameTextView.setText(event.getStrEvent());
+        homeTeamScoreTextView.setText(event.getIntHomeScore());
+        awayTeamScoreTextView.setText(event.getIntAwayScore());
+        matchDateTextView.setText(event.getStrDate());
     }
 }

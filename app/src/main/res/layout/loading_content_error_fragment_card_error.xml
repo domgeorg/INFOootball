@@ -26,15 +26,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/text_margin_small"
+            android:layout_marginBottom="@dimen/text_margin"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Title" />
 
         <ImageView
             android:id="@+id/loading_content_error_fragment_card_error_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_width="@dimen/size_loading_content_error_fragment_card_error_image"
+            android:layout_height="@dimen/size_loading_content_error_fragment_card_error_image"
+            android:layout_below="@+id/loading_content_error_fragment_card_error_text_view"
+            android:layout_centerHorizontal="true"
             android:adjustViewBounds="true"
             android:cropToPadding="false"
             android:scaleType="fitCenter"

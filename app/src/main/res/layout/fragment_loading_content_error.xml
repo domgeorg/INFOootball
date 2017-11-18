@@ -21,18 +21,6 @@
             android:paddingEnd="@dimen/zero_horizontal_margin_big_activity"
             android:paddingStart="@dimen/zero_horizontal_margin_big_activity" />
 
-        <georgiopoulos.infootball.util.RecyclerViewHeadline
-            android:id="@+id/loading_content_error_fragment_recycler_view_headline"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/recycler_header_height"
-            android:layout_gravity="center_horizontal|top">
-
-            <include
-                android:id="@+id/loading_content_error_fragment_headline"
-                layout="@layout/loading_content_error_fragment_headline" />
-
-        </georgiopoulos.infootball.util.RecyclerViewHeadline>
-
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </FrameLayout>

@@ -15,6 +15,7 @@
  */
 package georgiopoulos.infootball.ui.League.NextEvents;
 
+import android.os.Bundle;
 
 import javax.inject.Inject;
 
@@ -35,21 +36,17 @@ public class NextEventsPresenter extends BasePresenter<NextEventsFragment>{
     @State String round;
 
     @Override
-    public void onTakeView(NextEventsFragment view){
-        super.onTakeView(view);
+    public void onCreate(Bundle bundle){
+        super.onCreate(bundle);
+        restartableLatestCache(REQUEST_NEXT_EVENTS,() -> api.getNextEvents(leagueId,round)
+                                                                 .subscribeOn(Schedulers.io())
+                                                                 .observeOn(mainThread()),
+                               NextEventsFragment::onEvents,NextEventsFragment::onNetworkError);
     }
 
     public void request(String leagueId){
         this.leagueId = leagueId;
         this.round=localData.getRoundFromRealm(leagueId);
-
-        restartableLatestCache(REQUEST_NEXT_EVENTS,
-                               () -> api.getNextEvents(leagueId,round)
-                                             .subscribeOn(Schedulers.io())
-                                             .observeOn(mainThread()),
-                               NextEventsFragment::onEvents,
-                               NextEventsFragment::onNetworkError);
-
         start(REQUEST_NEXT_EVENTS);
     }
 
