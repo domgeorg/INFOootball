@@ -59,8 +59,8 @@ public class CoreActivity extends AppCompatActivity implements AppBarLayout.OnOf
     @Override
     public void onCreate(Bundle bundle){
         super.onCreate(bundle); Icepick.restoreInstanceState(this,bundle);
-        setContentView(R.layout.activity_core); ButterKnife.bind(this); if(bundle == null)
-            getSupportFragmentManager().beginTransaction().replace(R.id.activity_core_fragment_container,new LeaguesFragment()).commit();
+        setContentView(R.layout.activity_core); ButterKnife.bind(this);
+        if(bundle == null) getSupportFragmentManager().beginTransaction().replace(R.id.activity_core_fragment_container,new LeaguesFragment()).commit();
         scrollRange = - 1;
     }
 
@@ -74,20 +74,16 @@ public class CoreActivity extends AppCompatActivity implements AppBarLayout.OnOf
     }
 
     public void replace(Fragment fragment){
-        getSupportFragmentManager().popBackStackImmediate(null,FragmentManager
-                                                                       .POP_BACK_STACK_INCLUSIVE);
+        getSupportFragmentManager().popBackStackImmediate(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_core_fragment_container,fragment).commit();
     }
 
-    public void setAppBarLayout(@NonNull String title,@NonNull boolean expanded,@NonNull boolean
-                                                                                        displayHomeAsUpEnabled,@Nullable Drawable expandedIndicator,@Nullable Drawable collapsedIndicator){
+    public void setAppBarLayout(@NonNull String title,@NonNull boolean expanded,@NonNull boolean displayHomeAsUpEnabled,@Nullable Drawable expandedIndicator,@Nullable Drawable collapsedIndicator){
 
         this.title = title;
     }
 
-    public void setHeaderImageView(boolean isDrawable,@Nullable Drawable drawable,@Nullable
-                                                                                          String
-                                                                                          url){
+    public void setHeaderImageView(boolean isDrawable,@Nullable Drawable drawable,@Nullable String url){
         if(Objects.requireNonNull(isDrawable)) headerImageView.setImageDrawable(drawable);
         else Picasso.with(this).load(url).into(headerImageView);
 
