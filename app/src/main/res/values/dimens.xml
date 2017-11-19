@@ -1,4 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- app_bar_layout_core_activity -->
+    <dimen name="core_activity_header_image">106dp</dimen>
+    <dimen name="core_activity_app_bar_layout_height">200dp</dimen>
+
     <dimen name="badge">68dp</dimen>
     <dimen name="toastTextSize">18sp</dimen>
 
@@ -11,7 +16,6 @@
     <dimen name="teamLogoWidth">100dp</dimen>
     <dimen name="teamLogoHeight">68dp</dimen>
     <dimen name="teamLogoPadding">34dp</dimen>
-    <dimen name="recycler_header_height">100dp</dimen>
 
     <dimen name="league_badge_card_live_scores_diagonal_image_view">110dp</dimen>
     <dimen name="relative_layout_contents_card_live_score">94dp</dimen>

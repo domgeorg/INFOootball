@@ -38,7 +38,8 @@ import georgiopoulos.infootball.ui.Base.BaseActivity;
 import georgiopoulos.infootball.util.injection.Injector;
 import icepick.State;
 
-public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implements AppBarLayout.OnOffsetChangedListener{
+public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implements AppBarLayout
+                                                                                             .OnOffsetChangedListener{
 
     @BindView(R.id.activity_team_roaster_app_bar_layout) AppBarLayout appBarLayout;
     @BindView(R.id.activity_team_roaster_collapsing_toolbar_layout) CollapsingToolbarLayout collapsingToolbarLayout;

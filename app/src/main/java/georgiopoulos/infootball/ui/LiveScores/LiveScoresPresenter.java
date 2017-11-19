@@ -1,12 +1,12 @@
 /**
- *  Copyright 2017 georgiopoulos kyriakos
- *
+ * Copyright 2017 georgiopoulos kyriakos
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,9 +15,8 @@
  */
 package georgiopoulos.infootball.ui.LiveScores;
 
-import android.support.annotation.MainThread;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -25,10 +24,8 @@ import javax.inject.Inject;
 
 import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
-import georgiopoulos.infootball.data.remote.dto.livescores.LiveScores;
 import georgiopoulos.infootball.data.remote.dto.livescores.Match;
 import georgiopoulos.infootball.ui.Base.BasePresenter;
-import rx.Scheduler;
 import rx.schedulers.Schedulers;
 
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
@@ -39,14 +36,15 @@ public class LiveScoresPresenter extends BasePresenter<LiveScoresFragment>{
     @Inject ServerAPI api;
     @Inject LocalData localData;
 
+    @Override
+    public void onCreate(Bundle bundle){
+        super.onCreate(bundle);
+        restartableLatestCache(REQUEST_LIVE_SCORES,() -> api.getLiveScores().subscribeOn
+                                                                                     (Schedulers
+                                                                                              .io()).observeOn(mainThread()),LiveScoresFragment::onLiveScores,LiveScoresFragment::onNetworkError);
+    }
+
     public void request(){
-        restartableLatestCache(REQUEST_LIVE_SCORES,
-                               ()-> api.getLiveScores()
-                                            .subscribeOn(Schedulers.io())
-                                            .observeOn(mainThread()),
-                               LiveScoresFragment::onLiveScores,
-                               LiveScoresFragment::onNetworkError
-                              );
         start(REQUEST_LIVE_SCORES);
     }
 
@@ -58,10 +56,8 @@ public class LiveScoresPresenter extends BasePresenter<LiveScoresFragment>{
     }
 
     private void teamDetailsPersistence(String teamId){
-        if(!(teamId.isEmpty() || teamId==null)){
-            api.getTeamDetails(teamId)
-                    .subscribeOn(Schedulers.immediate())
-                    .map(teamsDetails -> localData.writeTeamDetailsToRealm(teamsDetails));
-        }
+        if(! (teamId.isEmpty() || teamId == null))
+            api.getTeamDetails(teamId).subscribeOn(Schedulers.immediate()).map(teamsDetails -> localData.writeTeamDetailsToRealm(teamsDetails));
+
     }
 }

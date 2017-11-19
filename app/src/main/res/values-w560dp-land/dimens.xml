@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- app_bar_layout_core_activity -->
+    <dimen name="core_activity_header_image">86dp</dimen>
+    <dimen name="core_activity_app_bar_layout_height">160dp</dimen>
 
     <dimen name="app_bar_height_image_view">170dp</dimen>
 
     <dimen name="activity_horizontal_margin">64dp</dimen>
-
     <dimen name="team_activity_logo">86dp</dimen>
     <dimen name="size_loading_content_error_fragment_card_error_image">156dp</dimen>
 

@@ -16,27 +16,19 @@
 package georgiopoulos.infootball.ui.Team;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
-import butterknife.BindView;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.remote.dto.team.Player;
 import georgiopoulos.infootball.data.remote.dto.team.TeamPlayers;
-import georgiopoulos.infootball.ui.Base.BaseFragment;
+import georgiopoulos.infootball.ui.Base.LoadingContentErrorFragment;
 import georgiopoulos.infootball.util.adapters.PlayerViewHolder;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
 import nucleus.factory.RequiresPresenter;
 
 @RequiresPresenter(TeamRosterPresenter.class)
-public class TeamRosterFragment extends BaseFragment<TeamRosterPresenter>{
-
-    @BindView(R.id.recycler_view) RecyclerView recyclerView;
-    private SimpleListAdapter<Player> adapter;
+public class TeamRosterFragment extends LoadingContentErrorFragment<Player,TeamRosterPresenter>{
 
     public static TeamRosterFragment create(String teamId){
         Bundle bundle = new Bundle();
@@ -46,32 +38,23 @@ public class TeamRosterFragment extends BaseFragment<TeamRosterPresenter>{
         return fragment;
     }
 
-    @Override public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle bundle){
-        return inflater.inflate(R.layout.view_recycler,container,false);
+    @Override
+    public void onViewCreated(View view,Bundle bundle){
+        setAdapter(new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Player.class,R.layout.card_player,v -> new PlayerViewHolder<>(v,this::onItemClick))));
+        super.onViewCreated(view,bundle); this.onRefresh();
     }
 
-    @Override public void onViewCreated(View view, Bundle bundle){
-        super.onViewCreated(view, bundle);
-        adapter = new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Player.class,R.layout.card_player,v -> new PlayerViewHolder<>(v,this::onItemClick)));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setAdapter(adapter);
+    @Override
+    public void onRefresh(){
+        super.onRefresh();
         getPresenter().request(getArguments().getString("teamId"));
-        adapter.showProgress();
     }
 
     void onPlayers(TeamPlayers teamPlayers){
-        adapter.hideProgress();
-        if (teamPlayers.getPlayer()==null) newsFlash("Server does not provide info about players",recyclerView);
-        else {
-            runLayoutAnimation(recyclerView);
-            adapter.set(teamPlayers.getPlayer());}
+        onResults(teamPlayers.getPlayer(),getString(R.string.team_roster_fragment_error_message),
+                  R.drawable.ic_error_team_roster_fragment,R.anim.layout_animation_from_bottom);
     }
 
-    void onNetworkError(Throwable throwable){
-        newsFlash(throwable.getMessage(),recyclerView);
-    }
-
-    private void onItemClick(Player player){
-        newsFlash(player.getStrPlayer(),recyclerView);}
+    @Override
+    public void onItemClick(Player player){}
 }

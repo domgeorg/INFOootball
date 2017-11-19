@@ -157,9 +157,7 @@ public abstract class LoadingContentErrorFragment<T,P extends Presenter> extends
     }
 
     private void runLayoutAnimation(int animation){
-        final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation
-                                                                            (getActivity(),
-                                                                             animation);
+        final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getActivity(),animation);
         recyclerViewContent.setLayoutAnimation(controller);
         recyclerViewContent.scheduleLayoutAnimation();
     }
