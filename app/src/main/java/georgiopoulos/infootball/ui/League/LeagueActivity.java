@@ -38,18 +38,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.long1.spacetablayout.SpaceTabLayout;
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.team.TeamsDetails;
 import georgiopoulos.infootball.ui.Base.BaseActivity;
 import georgiopoulos.infootball.ui.League.LatestEvents.LatestEventsFragment;
+import georgiopoulos.infootball.ui.League.LatestEvents.LatestEventsPresenter;
 import georgiopoulos.infootball.ui.League.LeagueTable.LeagueTableFragment;
 import georgiopoulos.infootball.ui.League.NextEvents.NextEventsFragment;
 import georgiopoulos.infootball.util.injection.Injector;
 import icepick.State;
-import nucleus.factory.RequiresPresenter;
 
-@RequiresPresenter(LeaguePresenter.class)
-public class LeagueActivity extends BaseActivity<LeaguePresenter> implements AppBarLayout
-                                                                                     .OnOffsetChangedListener{
+public class LeagueActivity
+        extends BaseActivity<LatestEventsPresenter>
+        implements AppBarLayout.OnOffsetChangedListener{
 
 
     @BindView(R.id.activity_league_coordinator_layout) CoordinatorLayout coordinatorLayout;
@@ -86,8 +85,6 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         else getSupportActionBar().setHomeAsUpIndicator(whiteColorArrow);
         Picasso.with(this).load(getIntent().getStringExtra("leagueBadge")).into(headerImageView);
 
-        getPresenter().request(getIntent().getStringExtra("leagueId"));
-
         tabLayout.setTabColor(colorPrimary);
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(LatestEventsFragment.create(getIntent().getStringExtra("leagueId")));
@@ -95,8 +92,6 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         fragmentList.add(NextEventsFragment.create(getIntent().getStringExtra("leagueId")));
         tabLayout.initialize(viewPager,getSupportFragmentManager(),fragmentList,savedInstanceState);
     }
-
-    void onTeams(TeamsDetails teamsDetails){}
 
     void onNetworkError(Throwable throwable){
         newsFlash(throwable.getMessage(),collapsingToolbarLayout);
@@ -117,7 +112,8 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
-    @Override public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset){
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset){
         if (scrollRange == -1) scrollRange = appBarLayout.getTotalScrollRange();
         if (Math.abs(scrollRange+verticalOffset)<10){
             collapsingToolbarLayout.setTitle(league);
@@ -130,7 +126,8 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements App
         }
     }
 
-    @Override public void onSaveInstanceState(Bundle bundle){
+    @Override
+    public void onSaveInstanceState(Bundle bundle){
         tabLayout.saveState(bundle);
         super.onSaveInstanceState(bundle);
     }

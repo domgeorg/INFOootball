@@ -34,8 +34,7 @@ public class LeaguesFragment extends LoadingContentErrorFragment<Country,Leagues
 
     @Override
     public void onViewCreated(View view,Bundle bundle){
-        setAdapter(new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>
-                                                                         (Country.class,R.layout.card_soccer_league,v -> new SoccerLeagueViewHolder<>(v,this::onItemClick))));
+        setAdapter(new SimpleListAdapter<>(R.layout.view_loading,new ClassViewHolderType<>(Country.class,R.layout.card_soccer_league,v -> new SoccerLeagueViewHolder<>(v,this::onItemClick))));
         super.onViewCreated(view,bundle); onRefresh();
     }
 

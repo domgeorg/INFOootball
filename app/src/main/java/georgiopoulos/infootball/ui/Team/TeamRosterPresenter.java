@@ -35,8 +35,7 @@ public class TeamRosterPresenter extends BasePresenter<TeamRosterFragment>{
     @Override
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
-        restartableLatestCache(REQUEST_PLAYERS,() -> api.getTeamPlayers(teamId).subscribeOn
-                                                                                        (Schedulers.io()).observeOn(mainThread()),TeamRosterFragment::onPlayers,TeamRosterFragment::onNetworkError);
+        restartableLatestCache(REQUEST_PLAYERS,() -> api.getTeamPlayers(teamId).subscribeOn(Schedulers.io()).observeOn(mainThread()),TeamRosterFragment::onPlayers,TeamRosterFragment::onNetworkError);
     }
 
     public void request(String teamId){

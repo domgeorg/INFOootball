@@ -45,8 +45,9 @@ import nucleus.factory.PresenterFactory;
 import nucleus.presenter.Presenter;
 import nucleus.view.NucleusSupportFragment;
 
-public abstract class LoadingContentErrorFragment<T,P extends Presenter> extends
-                                                                         NucleusSupportFragment<P> implements SwipeRefreshLayout.OnRefreshListener{
+public abstract class LoadingContentErrorFragment<T,P extends Presenter>
+        extends NucleusSupportFragment<P>
+        implements SwipeRefreshLayout.OnRefreshListener{
 
     @BindView(R.id.loading_content_error_fragment_card_error)
     CardView cardViewError;
@@ -73,7 +74,10 @@ public abstract class LoadingContentErrorFragment<T,P extends Presenter> extends
             ((Injector)getActivity().getApplication()).inject(presenter); return presenter;
         });
 
-        super.onCreate(bundle); Icepick.restoreInstanceState(this,bundle);
+       // ((Injector)getActivity().getApplicationContext()).inject(this);
+
+        super.onCreate(bundle);
+        Icepick.restoreInstanceState(this,bundle);
     }
 
     @Override

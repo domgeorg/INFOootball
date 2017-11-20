@@ -1,12 +1,12 @@
 /**
- *  Copyright 2017 georgiopoulos kyriakos
- *
+ * Copyright 2017 georgiopoulos kyriakos
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,20 +15,36 @@
  */
 package georgiopoulos.infootball.ui.Team;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
+import javax.inject.Inject;
+
+import butterknife.BindDrawable;
 import georgiopoulos.infootball.R;
+import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.remote.dto.team.Player;
 import georgiopoulos.infootball.data.remote.dto.team.TeamPlayers;
+import georgiopoulos.infootball.ui.Base.CoreActivityFacet;
 import georgiopoulos.infootball.ui.Base.LoadingContentErrorFragment;
 import georgiopoulos.infootball.util.adapters.PlayerViewHolder;
 import georgiopoulos.infootball.util.adapters.SimpleListAdapter;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
+import georgiopoulos.infootball.util.injection.Injector;
 import nucleus.factory.RequiresPresenter;
 
 @RequiresPresenter(TeamRosterPresenter.class)
-public class TeamRosterFragment extends LoadingContentErrorFragment<Player,TeamRosterPresenter>{
+public class TeamRosterFragment
+        extends LoadingContentErrorFragment<Player,TeamRosterPresenter>{
+
+    @Inject
+    CoreActivityFacet activityFacet;
+    @Inject
+    LocalData localData;
+
+    @BindDrawable(R.drawable.ic_arrow_primary_color_24dp) Drawable primaryColorArrow;
+    @BindDrawable(R.drawable.ic_arrow_white_24dp) Drawable whiteColorArrow;
 
     public static TeamRosterFragment create(String teamId){
         Bundle bundle = new Bundle();
@@ -36,6 +52,14 @@ public class TeamRosterFragment extends LoadingContentErrorFragment<Player,TeamR
         TeamRosterFragment fragment = new TeamRosterFragment();
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle bundle){
+        ((Injector)getActivity().getApplicationContext()).inject(this);
+        super.onCreate(bundle);
+
+
     }
 
     @Override

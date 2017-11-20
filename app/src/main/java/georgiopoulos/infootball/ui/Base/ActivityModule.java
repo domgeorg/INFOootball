@@ -13,20 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package georgiopoulos.infootball.ui;
+package georgiopoulos.infootball.ui.Base;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import dagger.Binds;
+import dagger.Module;
 
-import georgiopoulos.infootball.ui.SoccerLeagues.SoccerLeaguesActivity;
-
-public class SplashActivity extends AppCompatActivity{
-
-    @Override
-    protected void onCreate(Bundle bundle){
-        super.onCreate(bundle);
-        startActivity(new Intent(this,SoccerLeaguesActivity.class));
-        finish();
-    }
+@Module
+public abstract class  ActivityModule{
+    @Binds abstract CoreActivityFacet facet (CoreActivity activity);
 }

@@ -39,7 +39,8 @@ public class BaseActivity <P extends Presenter> extends NucleusAppCompatActivity
             return presenter;
         });
 
-        super.onCreate(bundle); Icepick.restoreInstanceState(this,bundle);
+        super.onCreate(bundle);
+        Icepick.restoreInstanceState(this,bundle);
     }
 
     @Override

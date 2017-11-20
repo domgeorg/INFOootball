@@ -84,7 +84,8 @@ public class TeamRosterActivity extends BaseActivity<TeamRosterPresenter> implem
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_team_roaster_fragment_container, fragment).commit();
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item){
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         switch(id){
             case android.R.id.home:

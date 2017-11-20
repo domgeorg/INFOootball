@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_core_linear_layout"
@@ -9,12 +10,16 @@
     android:orientation="vertical"
     tools:context=".ui.Base.CoreActivity">
 
-    <include layout="@layout/app_bar_layout_core_activity" />
+    <include layout="@layout/app_bar_layout_core_activity"/>
 
     <FrameLayout
         android:id="@+id/activity_core_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-</LinearLayout>
+    <include layout="@layout/floating_action_button_core_activity"/>
+
+</android.support.design.widget.CoordinatorLayout>

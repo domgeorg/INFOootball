@@ -18,6 +18,7 @@ package georgiopoulos.infootball.data.local;
 import dagger.Binds;
 import dagger.Module;
 
-@Module public abstract class LocalDataModule{
+@Module
+public abstract class LocalDataModule{
     @Binds abstract LocalData localData(RealmManager realmManager);
 }
