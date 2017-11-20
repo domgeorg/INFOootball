@@ -25,9 +25,8 @@
 
 ## Under Construction football info app
 
-![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-19-193625.png)
 
-![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-19-193919.png)
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-19-193625.png) ![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-19-193919.png)
 
 ![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155204.jpg)
 
