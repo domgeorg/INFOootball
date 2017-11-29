@@ -102,8 +102,8 @@ dependencies {
     //diagonal-imageview
     compile 'com.github.santalu:diagonal-imageview:1.0.2'
 
-    //SpaceTabLayout
-    compile 'eu.long1:spacetablayout:1.0.4'
+    //NavigationTabBar
+    compile 'devlight.io:navigationtabbar:1.2.5'
 
     // Required if generating equals, hashCode, or toString methods
     compile 'commons-lang:commons-lang:2.6'

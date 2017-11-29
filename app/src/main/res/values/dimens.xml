@@ -1,56 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- app_bar_layout_core_activity -->
-    <dimen name="core_activity_header_image">106dp</dimen>
-    <dimen name="core_activity_app_bar_layout_height">200dp</dimen>
 
-    <dimen name="badge">68dp</dimen>
-    <dimen name="toastTextSize">18sp</dimen>
-
-    <dimen name="app_bar_height_image_view">220dp</dimen>
-    <dimen name="shadow_league">8dp</dimen>
-
-    <dimen name="team_activity_logo">106dp</dimen>
     <dimen name="size_loading_content_error_fragment_card_error_image">200dp</dimen>
 
-    <dimen name="teamLogoWidth">100dp</dimen>
-    <dimen name="teamLogoHeight">68dp</dimen>
-    <dimen name="teamLogoPadding">34dp</dimen>
-
-    <dimen name="league_badge_card_live_scores_diagonal_image_view">110dp</dimen>
-    <dimen name="relative_layout_contents_card_live_score">94dp</dimen>
-
-    <dimen name="card_margin_horizontal">8dp</dimen>
-    <dimen name="card_margin_vertical">8dp</dimen>
     <dimen name="card_margin_horizontal_big_activity">8dp</dimen>
     <dimen name="card_margin_vertical_big_activity">4dp</dimen>
     <dimen name="card_recycler_corner_radius">2dp</dimen>
     <dimen name="card_recycler_elevation">2dp</dimen>
 
-    <dimen name="big_activity_margin_vertical">96dp</dimen>
-    <dimen name="big_activity_margin_horizontal">72dp</dimen>
-    <dimen name="big_activity_fab_margin">16dp</dimen>
-    <dimen name="big_activity_text_margin">16dp</dimen>
-
-    <dimen name="zero_horizontal_margin">0dp</dimen>
-    <dimen name="zero_horizontal_margin_big_activity">0dp</dimen>
-
-    <dimen name="loading_view_padding">8dp</dimen>
-
+    <!-- Content with text -->
     <dimen name="text_margin">16dp</dimen>
     <dimen name="text_margin_small">8dp</dimen>
     <dimen name="text_margin_very_small">4dp</dimen>
 
-    <dimen name="team_card_margin_horizontal">8dp</dimen>
-    <dimen name="team_card_margin_vertical">8dp</dimen>
-    <dimen name="team_card_margin_horizontal_big_activity">8dp</dimen>
-    <dimen name="card_title_margin">16dp</dimen>
-    <dimen name="card_button_margin">8dp</dimen>
+    <!--news image -->
+    <dimen name="news_image_width">200dp</dimen>
+    <dimen name="news_image_height">100dp</dimen>
 
-    <dimen name="shadow">160dp</dimen>
+    <!--Progress Bar -->
+    <dimen name="loading_view_padding">8dp</dimen>
 
-    <dimen name="recycler_view_margin_land">24dp</dimen>
-    <dimen name="app_bar_height">180dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+    <!-- Card Badge -->
+    <dimen name="badge">68dp</dimen>
+
+    <!-- NavigationTabBar -->
+    <dimen name="navigation_tab_bar_height">66dp</dimen>
+    <dimen name="navigation_tab_bar_elevation">4dp</dimen>
+
+    <!-- ActionBar -->
+    <dimen name="action_bar_height">56dp</dimen>
+
+    <dimen name="zero_horizontal_margin_big_activity">0dp</dimen>
 
 </resources>

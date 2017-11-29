@@ -3,11 +3,10 @@
     <color name="colorPrimary">#009600</color>
     <color name="colorPrimaryTransparent">#9643c43b</color>
     <color name="colorPrimaryDark">#006600</color>
-    <color name="colorAccent">#002100</color>
+    <color name="colorAccent">#002600</color>
     <color name="primary_text">#000e00</color>
     <color name="secondary_text">#325c31</color>
     <color name="icons">#ffffff</color>
-    <color name="divider">#bdbdbd</color>
     <color name="activity_background">#fcfcfc</color>
     <color name="card_live_scores_red_match_time_text_color">#f44336</color>
     <color name="card_live_scores_yellow_match_time_text_color">#fbc02d</color>

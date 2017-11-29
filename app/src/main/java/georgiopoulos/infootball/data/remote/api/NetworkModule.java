@@ -1,17 +1,17 @@
-/**
- *  Copyright 2017 georgiopoulos kyriakos
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+  Copyright 2017 georgiopoulos kyriakos
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  */
 package georgiopoulos.infootball.data.remote.api;
 
@@ -32,12 +32,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class NetworkModule{
 
-    private static final String baseUrl="http://www.thesportsdb.com/api/v1/json/1/";
+    private static final String BASE_URL="http://www.thesportsdb.com/api/v1/json/4012826/";
+    private static final String NEWS_URL="https://newsapi.org/v2/";
 
     @Provides
     @Singleton
     public Gson provideGson(){
-        return new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setLenient().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+        return new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                       .setLenient().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                       .create();
     }
 
     @Provides
@@ -51,19 +54,23 @@ public class NetworkModule{
 
     @Provides
     @Singleton
-    public Retrofit provideRetrofit(Gson gson,OkHttpClient okHttpClient){
-        Retrofit retrofit = new Retrofit.Builder()
-                                    .addConverterFactory(GsonConverterFactory.create(gson))
-                                    .baseUrl(baseUrl)
-                                    .client(okHttpClient)
-                                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                                    .build();
-        return retrofit;
+    public ServerAPI provideServerApi(Gson gson,OkHttpClient okHttpClient){
+        return new Retrofit.Builder()
+                       .addConverterFactory(GsonConverterFactory.create(gson))
+                       .baseUrl(BASE_URL)
+                       .client(okHttpClient)
+                       .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                       .build().create(ServerAPI.class);
     }
 
     @Provides
     @Singleton
-    public ServerAPI provideServerApi(Retrofit retrofit){
-        return retrofit.create(ServerAPI.class);
+    public NewsAPI provideNewsApi(Gson gson,OkHttpClient okHttpClient){
+        return new Retrofit.Builder()
+                       .addConverterFactory(GsonConverterFactory.create(gson))
+                       .baseUrl(NEWS_URL)
+                       .client(okHttpClient)
+                       .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                       .build().create(NewsAPI.class);
     }
 }

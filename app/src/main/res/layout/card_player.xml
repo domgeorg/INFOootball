@@ -22,7 +22,8 @@
             android:id="@+id/card_player_cutout"
             android:layout_width="@dimen/badge"
             android:layout_height="@dimen/badge"
-            android:layout_marginEnd="@dimen/text_margin" />
+            android:layout_marginEnd="@dimen/text_margin"
+            android:contentDescription="@string/player_cutout" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +35,6 @@
                 android:id="@+id/card_player_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cristiano Ronaldo"
                 android:textColor="@color/primary_text"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -43,7 +43,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_margin_small"
-                android:text="Nationality: Portugal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/secondary_text" />
 
@@ -52,7 +51,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_margin_small"
-                android:text="Position: Forward"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/secondary_text" />
 
@@ -61,7 +59,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_margin_small"
-                android:text="Height: 1,85"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/secondary_text" />
 
@@ -70,7 +67,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_margin_small"
-                android:text="Weight: 83,9"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/secondary_text" />
 
@@ -79,7 +75,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_margin_small"
-                android:text="Birthday: 1992-02-23"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/secondary_text" />
             </LinearLayout>

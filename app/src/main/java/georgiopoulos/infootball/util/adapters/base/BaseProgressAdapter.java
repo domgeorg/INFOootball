@@ -3,7 +3,9 @@ package georgiopoulos.infootball.util.adapters.base;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-public abstract class BaseProgressAdapter extends BaseRecyclerViewAdapter {
+import georgiopoulos.infootball.util.adapters.EmptyViewHolder;
+
+public abstract class BaseProgressAdapter extends BaseRecyclerViewAdapter{
 
     private final int progressViewId;
     private boolean progress;
@@ -13,9 +15,9 @@ public abstract class BaseProgressAdapter extends BaseRecyclerViewAdapter {
         this.progressViewId = progressViewId;
     }
 
-    @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return viewType == progressViewId ?
-            new EmptyViewHolder(LayoutInflater.from(parent.getContext()).inflate(progressViewId, parent, false)) :
+    @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
+        return viewType == progressViewId?
+            new EmptyViewHolder(LayoutInflater.from(parent.getContext()).inflate(progressViewId,parent,false)) :
             super.onCreateViewHolder(parent, viewType);
     }
 
