@@ -48,7 +48,6 @@ public class LiveScoresPresenter extends BasePresenter<LiveScoresFragment>{
                               .subscribeOn(Schedulers.io())
                               .map(LiveScores::getTeams)
                               .map(Teams::getMatch)
-                              .filter(list -> list!=null)
                               .doOnNext(this::requestPersistence)
                               .subscribeOn(Schedulers.computation())
                               .observeOn(mainThread()),
@@ -60,6 +59,7 @@ public class LiveScoresPresenter extends BasePresenter<LiveScoresFragment>{
     protected void request(){start(REQUEST_LIVE_SCORES);}
 
     protected void requestPersistence(List<Match> matches){
+        if(! (matches.isEmpty() || matches == null))
         for(Match match:matches){
             teamDetailsPersistence(match.getHomeTeamId());
             teamDetailsPersistence(match.getAwayTeamId());
