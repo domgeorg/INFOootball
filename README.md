@@ -28,9 +28,8 @@
 
 ![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-19-193625.png) ![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-19-193919.png)
 
-![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155204.jpg)
-
-![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155238.png)
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-21-011536.png)
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-21-011650.png)
 
 ![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155252.png)
 
