@@ -17,10 +17,11 @@
 10. [Icepick](https://github.com/frankiesardo/icepick)
 11. [Picasso](http://square.github.io/picasso/)
 12. [diagonal-imageview](https://github.com/santalu/diagonal-imageview)
-13. [SpaceTabLayout](https://github.com/long1eu/SpaceTabLayout)
+13. [NavigationTabBar](https://github.com/Devlight/NavigationTabBar)
 
 ## Free APIs
 1. [TheSportsDB](http://www.thesportsdb.com)
+2. [newsapi.org](https://newsapi.org/s/the-sport-bible-api)
 
 
 ## Under Construction football info app
@@ -28,20 +29,17 @@
 
 ![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-19-193625.png) ![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-19-193919.png)
 
-![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-21-011536.png)
-![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-21-011650.png)
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-30-004039.png)
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-30-004922.png)
 
 ![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155252.png)
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-30-005429.png)
 
-![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171026-155318.png)
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-30-005657.png)
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-30-005739.png)
 
-![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171028-144339.png)
-
-![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171028-144409.png)
-
-![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171029-212102.png)
-
-![](https://github.com/domgeorg/INFOotball/blob/master/infootball/Screenshot_20171029-211906.png)
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-30-005937.png)
+![](https://github.com/domgeorg/INFOotball/blob/master/infootball/device-2017-11-30-010017.png)
 
 
 ![](http://www.ptiwebtech.com.au/images/slider-snap.png)
