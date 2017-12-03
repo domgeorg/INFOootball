@@ -15,12 +15,12 @@
  */
 package georgiopoulos.infootball.data.remote.api;
 
-import georgiopoulos.infootball.data.remote.dto.league.Events;
-import georgiopoulos.infootball.data.remote.dto.league.LeagueTable;
-import georgiopoulos.infootball.data.remote.dto.livescores.LiveScores;
-import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Leagues;
-import georgiopoulos.infootball.data.remote.dto.team.TeamPlayers;
-import georgiopoulos.infootball.data.remote.dto.team.TeamsDetails;
+import georgiopoulos.infootball.data.remote.dto.events.Events;
+import georgiopoulos.infootball.data.remote.dto.leagueTable.LeagueTable;
+import georgiopoulos.infootball.data.remote.dto.leagues.Leagues;
+import georgiopoulos.infootball.data.remote.dto.liveScores.LiveScores;
+import georgiopoulos.infootball.data.remote.dto.teamPlayers.TeamPlayers;
+import georgiopoulos.infootball.data.remote.dto.teamsDetails.TeamsDetails;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;

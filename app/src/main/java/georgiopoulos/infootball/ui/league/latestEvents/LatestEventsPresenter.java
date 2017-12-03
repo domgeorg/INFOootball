@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
-import georgiopoulos.infootball.data.remote.dto.league.Events;
+import georgiopoulos.infootball.data.remote.dto.events.Events;
 import georgiopoulos.infootball.ui.base.BasePresenter;
 import icepick.State;
 import rx.schedulers.Schedulers;

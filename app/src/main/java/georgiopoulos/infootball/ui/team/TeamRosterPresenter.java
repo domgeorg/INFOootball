@@ -20,7 +20,7 @@ import android.os.Bundle;
 import javax.inject.Inject;
 
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
-import georgiopoulos.infootball.data.remote.dto.team.TeamPlayers;
+import georgiopoulos.infootball.data.remote.dto.teamPlayers.TeamPlayers;
 import georgiopoulos.infootball.ui.base.BasePresenter;
 import icepick.State;
 import rx.schedulers.Schedulers;

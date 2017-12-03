@@ -28,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.local.LocalData;
-import georgiopoulos.infootball.data.remote.dto.team.Player;
+import georgiopoulos.infootball.data.remote.dto.teamPlayers.Player;
 import georgiopoulos.infootball.util.adapters.base.BaseViewHolder;
 import rx.functions.Action1;
 

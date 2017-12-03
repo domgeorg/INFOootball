@@ -22,7 +22,7 @@ import android.view.View;
 import java.util.List;
 
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.league.Event;
+import georgiopoulos.infootball.data.remote.dto.events.Event;
 import georgiopoulos.infootball.ui.base.BaseFragment;
 import georgiopoulos.infootball.util.adapters.EventViewHolder;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
@@ -51,7 +51,7 @@ public class LatestEventsFragment extends BaseFragment<Event,LatestEventsPresent
     }
 
     protected void onEvents(@Nullable List<Event> list){
-        if(isNullOrEmpty(list)) displayError(R.string.latest_events_fragment_error_message,R.drawable.ic_error_fragment_next_events);
+        if(isNullOrEmpty(list)) displayError(R.string.latest_events_fragment_error_message,R.drawable.ic_error_fragment_latest_events);
         else displayList(list,R.anim.layout_animation_fall_down);
     }
 

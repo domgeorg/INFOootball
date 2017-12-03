@@ -13,42 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package georgiopoulos.infootball.data.remote.dto.team;
+package georgiopoulos.infootball.data.remote.dto.leagues;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import georgiopoulos.infootball.data.remote.dto.league.Team;
+import java.util.List;
 
-public class TeamsDetails {
+public class Leagues {
 
-    @SerializedName("teams")
+    @SerializedName("countrys")
     @Expose
-    private List<Team> teams = null;
+    private List<Country> countrys = null;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public TeamsDetails() {
+    public Leagues() {
     }
 
     /**
      * 
-     * @param teams
+     * @param countrys
      */
-    public TeamsDetails(List<Team> teams) {
+    public Leagues(List<Country> countrys) {
         super();
-        this.teams = teams;
+        this.countrys = countrys;
     }
 
-    public List<Team> getTeams() {
-        return teams;
+    public List<Country> getCountrys() {
+        return countrys;
     }
 
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
+    public void setCountrys(List<Country> countrys) {
+        this.countrys = countrys;
     }
 
 }

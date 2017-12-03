@@ -50,7 +50,7 @@ public class NewsFragment extends BaseFragment<Article,NewsPresenter>{
 
     protected void onArticles(@Nullable List<Article> list){
         if(isNullOrEmpty(list)) displayError(R.string.news_fragment_error_message,R.drawable.ic_error_fragment_news);
-        else displayList(list,R.anim.layout_animation_from_bottom);
+        else displayList(list,R.anim.layout_animation_from_right);
     }
 
     @Override

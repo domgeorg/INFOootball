@@ -16,6 +16,7 @@
 package georgiopoulos.infootball.data.local.realmObjects;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
 
 public class TeamRealm extends RealmObject{
@@ -23,6 +24,8 @@ public class TeamRealm extends RealmObject{
     @PrimaryKey private String idTeam;
     private String strTeam;
     private String strLeague;
+    @Index
+    private String idLeague;
     private String strManager;
     private String strStadium;
     private String strStadiumThumb;
@@ -63,6 +66,7 @@ public class TeamRealm extends RealmObject{
         this.idTeam = idTeam;
         this.strTeam = strTeam;
         this.strLeague = strLeague;
+        this.idLeague=idLeague;
         this.strManager = strManager;
         this.strStadium = strStadium;
         this.strStadiumThumb = strStadiumThumb;
@@ -97,6 +101,14 @@ public class TeamRealm extends RealmObject{
 
     public void setStrLeague(String strLeague) {
         this.strLeague = strLeague;
+    }
+
+    public String getIdLeague() {
+        return idLeague;
+    }
+
+    public void setIdLeague(String idLeague) {
+        this.idLeague = idLeague;
     }
 
     public String getStrManager() {

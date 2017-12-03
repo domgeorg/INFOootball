@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import georgiopoulos.infootball.R;
 import georgiopoulos.infootball.data.local.LocalData;
-import georgiopoulos.infootball.data.remote.dto.livescores.Match;
+import georgiopoulos.infootball.data.remote.dto.liveScores.Match;
 import georgiopoulos.infootball.util.adapters.base.BaseViewHolder;
 import rx.functions.Action1;
 

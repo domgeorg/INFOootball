@@ -21,6 +21,15 @@ public class SimpleListAdapter<T> extends BaseProgressAdapter{
         notifyDataSetChanged();
     }
 
+    @Override
+    protected List<T> getItems() {
+        return items;
+    }
+
+    public T get(int position) {
+        return items.get(position);
+    }
+
     public void add(List<T> items) {
         int prevSize = this.items.size();
         List<T> list = new ArrayList<>(prevSize + items.size());
@@ -33,14 +42,5 @@ public class SimpleListAdapter<T> extends BaseProgressAdapter{
     public void clear(){
         items = Collections.emptyList();
         notifyDataSetChanged();
-    }
-
-    @Override
-    protected List<T> getItems() {
-        return items;
-    }
-
-    public T get(int position) {
-        return items.get(position);
     }
 }

@@ -15,11 +15,13 @@
  */
 package georgiopoulos.infootball.ui.main.leagues;
 
+import android.os.Bundle;
+
 import javax.inject.Inject;
 
 import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
-import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Leagues;
+import georgiopoulos.infootball.data.remote.dto.leagues.Leagues;
 import georgiopoulos.infootball.ui.base.BasePresenter;
 import rx.schedulers.Schedulers;
 
@@ -31,20 +33,22 @@ public class LeaguesPresenter extends BasePresenter<LeaguesFragment>{
     @Inject ServerAPI api;
     @Inject LocalData localData;
 
-    protected void request(){
+    @Override
+    public void onCreate(Bundle bundle){
+        super.onCreate(bundle);
 
         restartableLatestCache(
                 REQUEST_SOCCER_LEAGUES,
                 () -> api.getLeagues()
-                              .subscribeOn(Schedulers.io())
-                              .observeOn(Schedulers.computation())
-                              .map(leagues -> localData.writeLeaguesToRealm(leagues))
-                              .map(Leagues::getCountrys)
-                              .observeOn(mainThread()),
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(Schedulers.computation())
+                        .map(leagues -> localData.writeLeaguesToRealm(leagues))
+                        .map(Leagues::getCountrys)
+                        .observeOn(mainThread()),
                 LeaguesFragment::onLeagues,
                 LeaguesFragment::onNetworkError);
-
-        start(REQUEST_SOCCER_LEAGUES);
     }
+
+    protected void requestLeagues(){start(REQUEST_SOCCER_LEAGUES);}
 
 }

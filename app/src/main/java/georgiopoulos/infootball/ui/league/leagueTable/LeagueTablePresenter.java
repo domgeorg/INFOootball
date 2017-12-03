@@ -1,12 +1,9 @@
 /*
   Copyright 2017 georgiopoulos kyriakos
-
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
-
   http://www.apache.org/licenses/LICENSE-2.0
-
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,8 +20,8 @@ import javax.inject.Inject;
 
 import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
-import georgiopoulos.infootball.data.remote.dto.league.LeagueTable;
-import georgiopoulos.infootball.data.remote.dto.league.Table;
+import georgiopoulos.infootball.data.remote.dto.leagueTable.LeagueTable;
+import georgiopoulos.infootball.data.remote.dto.leagueTable.Table;
 import georgiopoulos.infootball.ui.base.BasePresenter;
 import icepick.State;
 import rx.schedulers.Schedulers;
@@ -48,11 +45,11 @@ public class LeagueTablePresenter
         restartableLatestCache(
                 REQUEST_TEAMS,
                 () -> api.getLeagueTeams(leagueId)
-                             .subscribeOn(Schedulers.io())
-                             .observeOn(Schedulers.computation())
-                             .filter(teamsDetails -> teamsDetails!=null)
-                             .map(teamsDetails -> localData.writeTeamDetailsToRealm(teamsDetails))
-                             .observeOn(mainThread()),
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(Schedulers.computation())
+                        .filter(teamsDetails -> teamsDetails!=null)
+                        .map(teamsDetails -> localData.writeTeamDetailsToRealm(teamsDetails))
+                        .observeOn(mainThread()),
                 LeagueTableFragment::onTeams,
                 LeagueTableFragment::onNetworkError);
 
@@ -60,11 +57,11 @@ public class LeagueTablePresenter
         restartableLatestCache(
                 REQUEST_LEAGUE_TABLE,
                 () -> api.getLeagueTable(leagueId,season)
-                              .subscribeOn(Schedulers.io())
-                              .map(LeagueTable::getTable)
-                              .map(this::persistRound)
-                              .subscribeOn(Schedulers.immediate())
-                              .observeOn(mainThread()),
+                        .subscribeOn(Schedulers.io())
+                        .map(LeagueTable::getTable)
+                        .map(this::persistRound)
+                        .subscribeOn(Schedulers.immediate())
+                        .observeOn(mainThread()),
                 LeagueTableFragment::onTable,
                 LeagueTableFragment::onNetworkError);
     }

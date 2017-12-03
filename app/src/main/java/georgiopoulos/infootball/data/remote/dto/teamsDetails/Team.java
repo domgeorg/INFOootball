@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package georgiopoulos.infootball.data.remote.dto.league;
+package georgiopoulos.infootball.data.remote.dto.teamsDetails;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

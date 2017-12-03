@@ -1,4 +1,4 @@
-package georgiopoulos.infootball.data.remote.dto.team;
+package georgiopoulos.infootball.data.remote.dto.teamPlayers;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

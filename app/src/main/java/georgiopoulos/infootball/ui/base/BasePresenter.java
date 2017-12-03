@@ -38,6 +38,8 @@ package georgiopoulos.infootball.ui.base;
 
 import android.os.Bundle;
 
+import java.util.List;
+
 import icepick.Icepick;
 import nucleus.presenter.RxPresenter;
 
@@ -53,5 +55,9 @@ public class BasePresenter<ViewType> extends RxPresenter<ViewType> {
     protected void onSave(Bundle state) {
         super.onSave(state);
         Icepick.saveInstanceState(this, state);
+    }
+
+    public boolean isNullOrEmpty(List<?> list){
+        return (list == null || list.isEmpty());
     }
 }

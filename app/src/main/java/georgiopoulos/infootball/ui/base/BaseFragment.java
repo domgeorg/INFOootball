@@ -112,6 +112,7 @@ public abstract class BaseFragment<T,P extends Presenter>
     public void onRefresh(){
         cardViewError.setVisibility(View.GONE);
         swipeRefreshLayoutLoading.setRefreshing(false);
+        adapter.clear();
         adapter.showProgress();
     }
 
@@ -125,7 +126,8 @@ public abstract class BaseFragment<T,P extends Presenter>
         runLayoutAnimation(animation);
     }
 
-    /**<p>
+    /**
+     * <p>
      * Error
      */
     @SuppressWarnings("deprecation")

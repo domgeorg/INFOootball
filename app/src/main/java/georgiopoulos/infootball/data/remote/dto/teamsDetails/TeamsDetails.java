@@ -1,50 +1,53 @@
 /**
- * Copyright 2017 georgiopoulos kyriakos
- * <p>
+ *  Copyright 2017 georgiopoulos kyriakos
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package georgiopoulos.infootball.data.remote.dto.league;
+package georgiopoulos.infootball.data.remote.dto.teamsDetails;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Events{
+public class TeamsDetails {
 
-    @SerializedName("events")
+    @SerializedName("teams")
     @Expose
-    private List<Event> events = null;
+    private List<Team> teams = null;
 
     /**
      * No args constructor for use in serialization
+     * 
      */
-    public Events(){
+    public TeamsDetails() {
     }
 
     /**
-     * @param events
+     * 
+     * @param teams
      */
-    public Events(List<Event> events){
-        super(); this.events = events;
+    public TeamsDetails(List<Team> teams) {
+        super();
+        this.teams = teams;
     }
 
-    public List<Event> getEvents(){
-        return events;
+    public List<Team> getTeams() {
+        return teams;
     }
 
-    public void setEvents(List<Event> events){
-        this.events = events;
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
 }

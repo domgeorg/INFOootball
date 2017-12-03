@@ -24,10 +24,10 @@ import javax.inject.Provider;
 import georgiopoulos.infootball.data.local.realmObjects.LeagueRealm;
 import georgiopoulos.infootball.data.local.realmObjects.LeagueRoundRealm;
 import georgiopoulos.infootball.data.local.realmObjects.TeamRealm;
-import georgiopoulos.infootball.data.remote.dto.league.Team;
-import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Country;
-import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Leagues;
-import georgiopoulos.infootball.data.remote.dto.team.TeamsDetails;
+import georgiopoulos.infootball.data.remote.dto.leagues.Country;
+import georgiopoulos.infootball.data.remote.dto.leagues.Leagues;
+import georgiopoulos.infootball.data.remote.dto.teamsDetails.Team;
+import georgiopoulos.infootball.data.remote.dto.teamsDetails.TeamsDetails;
 import io.realm.Realm;
 
 @SuppressLint("NewApi")
@@ -51,10 +51,8 @@ public class RealmManager implements LocalData{
                 if(teamRealm.getStrTeamJersey() != null && ! teamRealm.getStrTeamJersey().isEmpty())
                     return teamRealm.getStrTeamJersey();
                 else if(teamRealm.getStrTeamBadge() != null && ! teamRealm.getStrTeamBadge().isEmpty())
-
                     return teamRealm.getStrTeamBadge();
-                else if(teamRealm.getStrTeamLogo() != null && ! teamRealm.getStrTeamLogo()
-                                                                        .isEmpty())
+                else if(teamRealm.getStrTeamLogo() != null && ! teamRealm.getStrTeamLogo().isEmpty())
                     return teamRealm.getStrTeamLogo();
             }
         }
@@ -90,13 +88,6 @@ public class RealmManager implements LocalData{
 
     @Override
     @NonNull
-    public Boolean findTeamInRealm(Realm realm,String idTeam){
-        return (realm.where(TeamRealm.class).equalTo("idTeam",idTeam).findFirst() != null);
-    }
-
-
-    @Override
-    @NonNull
     public String getRoundFromRealm(String leagueId){
         int round=0;
         try(Realm realm = realmProvider.get()){
@@ -107,13 +98,14 @@ public class RealmManager implements LocalData{
     }
 
     @Override
-    @NonNull
-    public Boolean findLeagueInRealm(Realm realm,String leagueId){
-        return (realm.where(LeagueRealm.class).equalTo("idLeague",leagueId).findFirst() != null);
+    public Boolean teamIsStored(String idTeam){
+        try(Realm realm = realmProvider.get()){
+            return (realm.where(TeamRealm.class).equalTo("idTeam",idTeam).findFirst() != null);}
     }
 
-
-    //Write
+    private Boolean findLeagueInRealm(Realm realm,String leagueId){
+        return (realm.where(LeagueRealm.class).equalTo("idLeague",leagueId).findFirst() != null);
+    }
 
     @Override
     @NonNull
@@ -142,9 +134,7 @@ public class RealmManager implements LocalData{
     public TeamsDetails writeTeamDetailsToRealm(TeamsDetails teamsDetails){
         try(Realm realm = realmProvider.get()){
             realm.executeTransaction(t -> {
-                for(Team team : teamsDetails.getTeams())
-                    if(! findTeamInRealm(realm,team.getIdTeam()))
-                        t.insertOrUpdate(new TeamRealm(team.getIdTeam(),team.getStrTeam(),team.getStrLeague(),team.getIdLeague(),team.getStrManager(),team.getStrStadium(),team.getStrStadiumThumb(),team.getStrStadiumDescription(),team.getStrStadiumLocation(),team.getStrWebsite(),team.getStrDescriptionEN(),team.getStrTeamBadge(),team.getStrTeamJersey(),team.getStrTeamLogo()));
+                for(Team team : teamsDetails.getTeams())t.insertOrUpdate(new TeamRealm(team.getIdTeam(),team.getStrTeam(),team.getStrLeague(),team.getIdLeague(),team.getStrManager(),team.getStrStadium(),team.getStrStadiumThumb(),team.getStrStadiumDescription(),team.getStrStadiumLocation(),team.getStrWebsite(),team.getStrDescriptionEN(),team.getStrTeamBadge(),team.getStrTeamJersey(),team.getStrTeamLogo()));
             });
         }
         return (teamsDetails);

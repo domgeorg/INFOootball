@@ -15,24 +15,28 @@ public abstract class BaseProgressAdapter extends BaseRecyclerViewAdapter{
         this.progressViewId = progressViewId;
     }
 
-    @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
+    @Override
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
         return viewType == progressViewId?
             new EmptyViewHolder(LayoutInflater.from(parent.getContext()).inflate(progressViewId,parent,false)) :
             super.onCreateViewHolder(parent, viewType);
     }
 
-    @Override public void onBindViewHolder(BaseViewHolder holder, int position) {
+    @Override
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
         if (position != super.getItemCount()) {
             holder.bind(getItems().get(position));
         }
     }
 
-    @Override public int getItemViewType(int position) {
+    @Override
+    public int getItemViewType(int position) {
         return position == super.getItemCount() ? progressViewId :
             super.getItemViewType(position);
     }
 
-    @Override public int getItemCount() {
+    @Override
+    public int getItemCount() {
         return super.getItemCount() + (progress ? 1 : 0);
     }
 

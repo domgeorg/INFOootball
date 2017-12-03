@@ -15,19 +15,19 @@
  */
 package georgiopoulos.infootball.data.local;
 
-import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Leagues;
-import georgiopoulos.infootball.data.remote.dto.team.TeamsDetails;
-import io.realm.Realm;
+import georgiopoulos.infootball.data.remote.dto.leagues.Leagues;
+import georgiopoulos.infootball.data.remote.dto.teamsDetails.TeamsDetails;
 
 public interface LocalData{
 
     String getJerseyUrl(String idTeam);
     String getBadgeUrl(String idTeam);
     String getStadium(String idTeam);
-    Boolean findTeamInRealm(Realm realm,String idTeam);
-    TeamsDetails writeTeamDetailsToRealm(TeamsDetails teamsDetails);
     String getRoundFromRealm(String leagueId);
-    Boolean findLeagueInRealm(Realm realm, String leagueId);
+
+    Boolean teamIsStored(String idTeam);
+
     Leagues writeLeaguesToRealm(Leagues leagues);
+    TeamsDetails writeTeamDetailsToRealm(TeamsDetails teamsDetails);
     void writeRoundToRealm(String leagueId, int round);
 }

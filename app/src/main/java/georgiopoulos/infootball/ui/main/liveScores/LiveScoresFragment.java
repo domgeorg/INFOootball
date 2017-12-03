@@ -22,8 +22,8 @@ import android.view.View;
 import java.util.List;
 
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.livescores.Match;
-import georgiopoulos.infootball.data.remote.dto.team.TeamsDetails;
+import georgiopoulos.infootball.data.remote.dto.liveScores.Match;
+import georgiopoulos.infootball.data.remote.dto.teamsDetails.TeamsDetails;
 import georgiopoulos.infootball.ui.base.BaseFragment;
 import georgiopoulos.infootball.util.adapters.LiveScoresViewHolder;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;
@@ -49,7 +49,7 @@ public class LiveScoresFragment extends BaseFragment<Match,LiveScoresPresenter>{
 
     protected void onLiveScores(@Nullable List<Match> list){
         if(isNullOrEmpty(list)) displayError(R.string.live_scores_fragment_error_message,R.drawable.ic_error_fragment_live_scores);
-        else displayList(list,R.anim.layout_animation_from_bottom);
+        else displayList(list,R.anim.layout_animation_from_right);
     }
 
     protected void onTeamDetails(@Nullable TeamsDetails teamsDetails){}

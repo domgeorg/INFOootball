@@ -1,54 +1,50 @@
 /**
- *  Copyright 2017 georgiopoulos kyriakos
- *
+ * Copyright 2017 georgiopoulos kyriakos
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package georgiopoulos.infootball.data.remote.dto.soccerLeagues;
+package georgiopoulos.infootball.data.remote.dto.events;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Country;
+import java.util.List;
 
-public class Leagues {
+public class Events{
 
-    @SerializedName("countrys")
+    @SerializedName("events")
     @Expose
-    private List<Country> countrys = null;
+    private List<Event> events = null;
 
     /**
      * No args constructor for use in serialization
-     * 
      */
-    public Leagues() {
+    public Events(){
     }
 
     /**
-     * 
-     * @param countrys
+     * @param events
      */
-    public Leagues(List<Country> countrys) {
-        super();
-        this.countrys = countrys;
+    public Events(List<Event> events){
+        super(); this.events = events;
     }
 
-    public List<Country> getCountrys() {
-        return countrys;
+    public List<Event> getEvents(){
+        return events;
     }
 
-    public void setCountrys(List<Country> countrys) {
-        this.countrys = countrys;
+    public void setEvents(List<Event> events){
+        this.events = events;
     }
 
 }

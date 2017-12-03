@@ -15,6 +15,7 @@
  */
 package georgiopoulos.infootball.ui.main.liveScores;
 
+
 import android.os.Bundle;
 
 import java.util.List;
@@ -23,10 +24,11 @@ import javax.inject.Inject;
 
 import georgiopoulos.infootball.data.local.LocalData;
 import georgiopoulos.infootball.data.remote.api.ServerAPI;
-import georgiopoulos.infootball.data.remote.dto.livescores.LiveScores;
-import georgiopoulos.infootball.data.remote.dto.livescores.Match;
-import georgiopoulos.infootball.data.remote.dto.livescores.Teams;
+import georgiopoulos.infootball.data.remote.dto.liveScores.LiveScores;
+import georgiopoulos.infootball.data.remote.dto.liveScores.Match;
+import georgiopoulos.infootball.data.remote.dto.liveScores.Teams;
 import georgiopoulos.infootball.ui.base.BasePresenter;
+import icepick.State;
 import rx.schedulers.Schedulers;
 
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
@@ -37,6 +39,7 @@ public class LiveScoresPresenter extends BasePresenter<LiveScoresFragment>{
     private static final int REQUEST_PERSISTENCE = 2;
     @Inject ServerAPI api;
     @Inject LocalData localData;
+    @State String teamId;
 
     @Override
     public void onCreate(Bundle bundle){
@@ -45,36 +48,41 @@ public class LiveScoresPresenter extends BasePresenter<LiveScoresFragment>{
         restartableLatestCache(
                 REQUEST_LIVE_SCORES,
                 () -> api.getLiveScores()
-                              .subscribeOn(Schedulers.io())
-                              .map(LiveScores::getTeams)
-                              .map(Teams::getMatch)
-                              .doOnNext(this::requestPersistence)
-                              .subscribeOn(Schedulers.computation())
-                              .observeOn(mainThread()),
+                        .subscribeOn(Schedulers.io())
+                        .map(LiveScores::getTeams)
+                        .map(Teams::getMatch)
+                        .doOnNext(this::requestPersistence)
+                        .subscribeOn(Schedulers.computation())
+                        .observeOn(mainThread()),
                 LiveScoresFragment::onLiveScores,
                 LiveScoresFragment::onNetworkError);
-        start(REQUEST_LIVE_SCORES);
+
+        restartableLatestCache(
+                REQUEST_PERSISTENCE,
+                () -> api.getTeamDetails(teamId)
+                        .subscribeOn(Schedulers.immediate())
+                        .map(teamsDetails -> localData.writeTeamDetailsToRealm(teamsDetails))
+                        .subscribeOn(Schedulers.immediate())
+                        .observeOn(mainThread())
+                ,LiveScoresFragment::onTeamDetails);
     }
 
     protected void request(){start(REQUEST_LIVE_SCORES);}
 
-    protected void requestPersistence(List<Match> matches){
-        if(! (matches.isEmpty() || matches == null))
-        for(Match match:matches){
-            teamDetailsPersistence(match.getHomeTeamId());
-            teamDetailsPersistence(match.getAwayTeamId());
-        }
+    private void requestPersistence(List<Match> matches){
+        if(!isNullOrEmpty(matches))
+            for(Match match:matches){
+                teamDetailsPersistence(match.getHomeTeamId());
+                teamDetailsPersistence(match.getAwayTeamId());
+            }
     }
 
     private void teamDetailsPersistence(String teamId){
-        if(! (teamId.isEmpty() || teamId == null))
-            restartableLatestCache(REQUEST_PERSISTENCE,
-                                   () -> api.getTeamDetails(teamId)
-                                                  .subscribeOn(Schedulers.immediate())
-                                                  .map(teamsDetails -> localData.writeTeamDetailsToRealm(teamsDetails))
-                                                  .observeOn(mainThread())
-                     ,LiveScoresFragment::onTeamDetails);
-        start(REQUEST_PERSISTENCE);
+        if(! (teamId.isEmpty() || teamId == null)){
+            this.teamId=teamId;
+            if (!localData.teamIsStored(teamId))
+                start(REQUEST_PERSISTENCE);
+        }
     }
 
 }

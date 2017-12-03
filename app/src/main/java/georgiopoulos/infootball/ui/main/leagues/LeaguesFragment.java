@@ -23,7 +23,7 @@ import android.view.View;
 import java.util.List;
 
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.soccerLeagues.Country;
+import georgiopoulos.infootball.data.remote.dto.leagues.Country;
 import georgiopoulos.infootball.ui.base.BaseFragment;
 import georgiopoulos.infootball.ui.league.LeagueActivity;
 import georgiopoulos.infootball.util.adapters.LeagueViewHolder;
@@ -44,7 +44,7 @@ public class LeaguesFragment extends BaseFragment<Country,LeaguesPresenter>{
     @Override
     public void onRefresh(){
         super.onRefresh();
-        getPresenter().request();
+        getPresenter().requestLeagues();
     }
 
     protected void onLeagues(@Nullable List<Country> list){

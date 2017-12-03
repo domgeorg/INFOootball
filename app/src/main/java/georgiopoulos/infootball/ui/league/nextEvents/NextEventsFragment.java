@@ -22,7 +22,7 @@ import android.view.View;
 import java.util.List;
 
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.league.Event;
+import georgiopoulos.infootball.data.remote.dto.events.Event;
 import georgiopoulos.infootball.ui.base.BaseFragment;
 import georgiopoulos.infootball.util.adapters.NextEventViewHolder;
 import georgiopoulos.infootball.util.adapters.base.ClassViewHolderType;

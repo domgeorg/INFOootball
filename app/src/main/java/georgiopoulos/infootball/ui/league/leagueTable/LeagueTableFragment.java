@@ -23,8 +23,8 @@ import android.view.View;
 import java.util.List;
 
 import georgiopoulos.infootball.R;
-import georgiopoulos.infootball.data.remote.dto.league.Table;
-import georgiopoulos.infootball.data.remote.dto.team.TeamsDetails;
+import georgiopoulos.infootball.data.remote.dto.leagueTable.Table;
+import georgiopoulos.infootball.data.remote.dto.teamsDetails.TeamsDetails;
 import georgiopoulos.infootball.ui.base.BaseFragment;
 import georgiopoulos.infootball.ui.team.TeamActivity;
 import georgiopoulos.infootball.util.adapters.LeagueTableTeamViewHolder;
@@ -62,10 +62,10 @@ public class LeagueTableFragment extends BaseFragment<Table,LeagueTablePresenter
 
     @Override
     public void onItemClick(Table team){
-       startActivity(new Intent(getActivity(),TeamActivity.class)
-                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                             .putExtra("teamId",team.getTeamid())
-                             .putExtra("teamName",team.getName()));
+        startActivity(new Intent(getActivity(),TeamActivity.class)
+                              .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                              .putExtra("teamId",team.getTeamid())
+                              .putExtra("teamName",team.getName()));
     }
 
 }
