@@ -15,7 +15,6 @@
  */
 package georgiopoulos.infootball.ui.main.liveScores;
 
-
 import android.os.Bundle;
 
 import java.util.List;

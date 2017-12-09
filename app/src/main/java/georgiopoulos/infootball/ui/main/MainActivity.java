@@ -71,6 +71,7 @@ public class MainActivity
     @Override
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
+        setTheme(R.style.AppTheme_NoActionBar_StatusBar);
         setContentView(R.layout.activity_tabs);
         ButterKnife.bind(this);
 
